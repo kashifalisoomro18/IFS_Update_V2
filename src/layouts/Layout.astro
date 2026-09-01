@@ -1,0 +1,50 @@
+---
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import CampusNoticeWidget from '../components/campus-notice/CampusNoticeWidget';
+import WhatsAppHelpdesk from '../components/WhatsAppHelpdesk';
+import '../index.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Isra Foundation School",
+  description = "Isra Foundation Schools (IFS) — Bridging premium international education with value-driven local roots and Islamic ethics in Hyderabad, Sindh."
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+  </head>
+  <body>
+    <div class="min-h-screen bg-slate-50 flex flex-col font-sans selection:bg-primary selection:text-slate-900">
+      <!-- Sticky Premium Header -->
+      <Header currentPath={currentPath} client:load />
+
+      <!-- Main Content View Port -->
+      <main class="flex-1 overflow-hidden">
+        <slot />
+      </main>
+
+      <!-- Premium Educational Footer -->
+      <Footer client:visible />
+
+      <!-- Floating Mascot Notice Widget -->
+      <CampusNoticeWidget client:idle />
+
+      <!-- Floating Live WhatsApp Helpdesk Button (Bottom Right) -->
+      <WhatsAppHelpdesk client:load />
+    </div>
+  </body>
+</html>

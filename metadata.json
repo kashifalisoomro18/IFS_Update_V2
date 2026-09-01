@@ -1,0 +1,6 @@
+{
+  "name": "Isra Foundation Schools",
+  "description": "Premium educational website for Isra Foundation Schools (IFS) in Hyderabad, Sindh, Pakistan. Empowering learners to be productive change agents as future citizens.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
