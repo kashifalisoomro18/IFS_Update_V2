@@ -46,7 +46,7 @@ const trips: Trip[] = [
   {
     label: "Museums",
     icon: Landmark,
-    photos: ["/tour1.jpg", "/g1.jpg", "/g2.jpg"],
+    photos: ["public/trip1.jpg", "public/trip2.jpg", "public/trip3.jpg", "public/trip4.jpg", "public/trip5.jpg", "public/trip6.jpg","public/trip7.jpg", "public/trip8.jpg", "public/trip9.jpg", "public/trip10.jpg", "public/trip11.jpg", "public/trip12.jpg", "public/trip13.jpg", "public/trip14.jpg", "public/trip15.jpg", "public/trip16.jpg", "public/trip17.jpg", "public/trip18.jpg", "public/trip19.jpg", "public/trip20.jpg", "public/trip21.jpg", "public/trip22.jpg", "public/trip23.jpg", "public/trip24.jpg", "public/trip25.jpg", "public/trip26.jpg", "public/trip27.jpg", "public/trip28.jpg", "public/trip29.jpg", "public/trip30.jpg", "public/trip31.jpg"],
     desc: "Discover history and art."
   },
   {
@@ -62,9 +62,9 @@ const trips: Trip[] = [
     desc: "Walk through time."
   },
   {
-    label: "Nature Parks",
+    label: "Outdoor Sports",
     icon: Trees,
-    photos: ["/playground1.jpg", "/play.jpg"],
+    photos: ["public/hydolympic1.jpeg", "public/hydolympic2.jpeg", "public/hydolympic3.jpeg", "public/hydolympic4.jpeg", "public/hydolympic5.jpeg", "public/hydolympic6.jpeg", "public/hydolympic7.jpeg", "public/hydolympic8.jpeg", "public/hydolympic9.jpeg", "public/hydolympic10.jpeg", "public/hydolympic11.jpeg", "public/hydolympic12.jpeg", "public/hydolympic13.jpeg", "public/hydolympics14.jpeg", "public/hydolympics15.jpeg", "public/hydolympics16.jpeg", "public/hydolympics17.jpeg", "public/hydolympics18.jpeg", "public/hydolympics19.jpeg"],
     desc: "Explore the outdoors."
   },
   {

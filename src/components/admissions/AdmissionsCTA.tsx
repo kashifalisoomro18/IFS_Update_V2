@@ -55,7 +55,7 @@ export default function AdmissionsCTA() {
 
                 {/* Google Form Button */}
                 <a 
-                  href="https://forms.gle" 
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSe57M4une4aQYnDUjL12hQN1IfI5s8Kt718syMKnFEvBveVsg/viewform" 
                   target="_blank" 
                   rel="noreferrer" 
                   className="inline-flex items-center justify-center gap-2 font-bold px-6 py-3.5 sm:px-8 sm:py-4 w-full sm:w-auto" 

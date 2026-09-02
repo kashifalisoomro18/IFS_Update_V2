@@ -182,27 +182,11 @@ export default function Header({
   );
 
   // Submenu item: same underline-hover language as top nav, plus a staggered fade/slide entrance
-  const SubNavItem = ({
-    label,
-    onClick,
-    delay = 0,
-    emphasize = false,
-  }: {
-    label: string;
-    onClick: () => void;
-    delay?: number;
-    emphasize?: boolean;
-  }) => (
-    <button
-      onClick={onClick}
-      style={{ transitionDelay: isOpen ? `${delay}ms` : "0ms" }}
-      className={`group relative text-left px-4 py-2.5 text-sm font-medium transition-all duration-300 ease-out ${emphasize ? "text-primary-dark font-semibold" : "text-slate-700"
-        } hover:text-primary-dark ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1.5"
-        }`}
-    >
+  const SubNavItem = ({ label, href, delay = 0, emphasize = false }: { label: string, href: string, delay?: number, emphasize?: boolean }) => (
+    <a href={href} style={{ transitionDelay: isOpen ? `${delay}ms` : "0ms" }} className={`group relative text-left px-4 py-2.5 text-sm font-medium transition-all duration-300 ease-out ${emphasize ? "text-primary-dark font-semibold" : "text-slate-700"} hover:text-primary-dark ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1.5"}`}>
       {label}
       <span className="absolute left-4 bottom-1 h-0.5 bg-primary transition-all duration-300 ease-out w-0 group-hover:w-[calc(100%-2rem)]" />
-    </button>
+    </a>
   );
 
   return (
@@ -252,8 +236,7 @@ export default function Header({
         id="main-header-row"
       >
         {/* Logo and Crest Section */}
-        <div
-          onClick={() => handleNav("home")}
+        <a href="/"
           className="flex items-center gap-3 cursor-pointer select-none group flex-shrink-0"
           id="school-logo-container"
         >
@@ -271,7 +254,7 @@ export default function Header({
               Schools & Academies
             </span>
           </div>
-        </div>
+        </a>
 
         {/* Desktop Navigation */}
         {/* Switched from lg:flex to xl:flex — 11 nav items don't fit at 1024px,
@@ -281,115 +264,95 @@ export default function Header({
           id="desktop-navigation-menu"
         >
           {/* Home Link */}
-          <button
-            onClick={() => handleNav("home")}
+          <a href="/" onClick={() => setMobileMenuOpen(false)}
             className={`group ${navLinkBase} ${navLinkColor("home")}`}
           >
             Home
             <Underline active={activeView === "home"} />
-          </button>
+          </a>
 
           {/* About Us Trigger */}
-          <button
-            onMouseEnter={() => openDropdown("about")}
-            onMouseLeave={closeDropdownDelayed}
-            onClick={() => handleNav("about")}
+          <a href="/about" onMouseEnter={() => openDropdown("about")} onMouseLeave={closeDropdownDelayed} onClick={() => setMobileMenuOpen(false)}
             className={`group ${navLinkBase} ${navLinkColor("about")} flex items-center gap-1`}
           >
             About Us
             <ChevronDown className="w-4 h-4" />
             <Underline active={activeView === "about"} />
-          </button>
+          </a>
 
           {/* Admissions Trigger */}
-          <button
-            onMouseEnter={() => openDropdown("admissions")}
-            onMouseLeave={closeDropdownDelayed}
-            onClick={() => {
-              handleNav("admissions");
-              if (setAdmissionsSubView) setAdmissionsSubView("overview");
-            }}
+          <a href="/admissions" onMouseEnter={() => openDropdown("admissions")} onMouseLeave={closeDropdownDelayed} onClick={() => setMobileMenuOpen(false)}
             className={`group ${navLinkBase} ${navLinkColor("admissions")} flex items-center gap-1`}
           >
             Admissions
             <ChevronDown className="w-4 h-4" />
             <Underline active={activeView === "admissions"} />
-          </button>
+          </a>
 
           {/* Academics Trigger */}
-          <button
-            onMouseEnter={() => openDropdown("academics")}
-            onMouseLeave={closeDropdownDelayed}
-            onClick={() => handleNav("academics")}
+          <a href="/academics" onMouseEnter={() => openDropdown("academics")} onMouseLeave={closeDropdownDelayed} onClick={() => setMobileMenuOpen(false)}
             className={`group ${navLinkBase} ${navLinkColor("academics")} flex items-center gap-1`}
           >
             Academics
             <ChevronDown className="w-4 h-4" />
             <Underline active={activeView === "academics"} />
-          </button>
+          </a>
 
           {/* Facilities Link */}
-          <button
-            onClick={() => handleNav("facilities")}
+          <a href="/facilities" onClick={() => setMobileMenuOpen(false)}
             className={`group ${navLinkBase} ${navLinkColor("facilities")}`}
           >
             Facilities
             <Underline active={activeView === "facilities"} />
-          </button>
+          </a>
 
           {/* ACTIVITIES (Activities) */}
-          <button
-            onClick={() => handleNav("activities")}
+          <a href="/activities" onClick={() => setMobileMenuOpen(false)}
             className={`group ${navLinkBase} ${navLinkColor("activities")}`}
           >
             Activities
             <Underline active={activeView === "activities"} />
-          </button>
+          </a>
 
           {/* News & Events Link */}
-          <button
-            onClick={() => handleNav("news-events")}
+          <a href="/news-events" onClick={() => setMobileMenuOpen(false)}
             className={`group ${navLinkBase} ${navLinkColor("news-events")}`}
           >
             News & Events
             <Underline active={activeView === "news-events"} />
-          </button>
+          </a>
 
           {/* Gallery Link */}
-          <button
-            onClick={() => handleNav("gallery")}
+          <a href="/gallery" onClick={() => setMobileMenuOpen(false)}
             className={`group ${navLinkBase} ${navLinkColor("gallery")}`}
           >
             Gallery
             <Underline active={activeView === "gallery"} />
-          </button>
+          </a>
 
           {/* Policies Link */}
-          <button
-            onClick={() => handleNav("gallery")}
+          <a href="/gallery" onClick={() => setMobileMenuOpen(false)}
             className={`group ${navLinkBase} ${navLinkColor("gallery")}`}
           >
             Policies
             <Underline active={activeView === "gallery"} />
-          </button>
+          </a>
 
           {/* Careers Link */}
-          <button
-            onClick={() => handleNav("careers")}
+          <a href="/careers" onClick={() => setMobileMenuOpen(false)}
             className={`group ${navLinkBase} ${navLinkColor("careers")}`}
           >
             Careers
             <Underline active={activeView === "careers"} />
-          </button>
+          </a>
 
           {/* Contact Link */}
-          <button
-            onClick={() => handleNav("contact")}
+          <a href="/contact" onClick={() => setMobileMenuOpen(false)}
             className={`group ${navLinkBase} ${navLinkColor("contact")}`}
           >
             Contact
             <Underline active={activeView === "contact"} />
-          </button>
+          </a>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -429,12 +392,12 @@ export default function Header({
                   </p>
                 </div>
                 <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <SubNavItem label="Who We Are (Our Story)" onClick={() => handleSubNav("about", "who-we-are")} delay={40} />
-                  <SubNavItem label="Principal's Message" onClick={() => handleSubNav("about", "principal")} delay={80} />
-                  <SubNavItem label="Vision & Mission" onClick={() => handleSubNav("about", "vision-mission")} delay={120} />
-                  <SubNavItem label="Executive Management" onClick={() => handleSubNav("about", "management")} delay={160} />
-                  <SubNavItem label="Faculty & Academic Staff" onClick={() => handleSubNav("about", "faculty")} delay={200} />
-                  {/*<SubNavItem label="Campus Virtual Tour" onClick={() => handleNav("facilities")} delay={240} emphasize />*/}
+                  <SubNavItem label="Who We Are (Our Story)" href="/about#about-story" delay={40} />
+                  <SubNavItem label="Principal's Message" href="/about#principal-message" delay={80} />
+                  <SubNavItem label="Vision & Mission" href="/about#vision-mission" delay={120} />
+                  <SubNavItem label="Executive Management" href="/about#management-board" delay={160} />
+                  <SubNavItem label="Faculty & Academic Staff" href="/about#academic-faculty" delay={200} />
+                  {/*<SubNavItem label="Campus Virtual Tour" href="/facilities" delay={240} emphasize />*/}
                 </div>
               </div>
             )}
@@ -452,12 +415,12 @@ export default function Header({
                   </p>
                 </div>
                 <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  {/*<SubNavItem label="Admissions Overview" onClick={() => handleSubNav("admissions", "overview")} delay={40} />*/}
-                  <SubNavItem label="Admission Process (Step-by-Step)" onClick={() => handleSubNav("admissions", "process")} delay={80} />
-                  <SubNavItem label="Online Registration Form" onClick={() => handleSubNav("admissions", "registration-form")} delay={120} />
-                  <SubNavItem label="Scholarships & Financial Aid" onClick={() => handleSubNav("admissions", "scholarships")} delay={160} />
-                  {/*<SubNavItem label="Fee Structure & Guidelines" onClick={() => handleSubNav("admissions", "process")} delay={200} />*/}
-                  <SubNavItem label="Contact Admissions Team" onClick={() => handleNav("contact")} delay={240} />
+                  {/*<SubNavItem label="Admissions Overview" href="/admissions#admissions-view-container" delay={40} />*/}
+                  <SubNavItem label="Admission Process (Step-by-Step)" href="/admissions#admissions-process" delay={80} />
+                  <SubNavItem label="Online Registration Form" href="/admissions#admissions-registration" delay={120} />
+                  <SubNavItem label="Scholarships & Financial Aid" href="/admissions#admissions-scholarships" delay={160} />
+                  {/*<SubNavItem label="Fee Structure & Guidelines" href="/admissions#admissions-process" delay={200} />*/}
+                  <SubNavItem label="Contact Admissions Team" href="/contact" delay={240} />
                 </div>
               </div>
             )}
@@ -475,12 +438,12 @@ export default function Header({
                   </p>
                 </div>
                 <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <SubNavItem label="Curriculum Overview (ECD to A Levels)" onClick={() => handleSubNav("academics", "curriculum")} delay={40} />
-                  <SubNavItem label="School & Office Timings" onClick={() => handleSubNav("academics", "timings")} delay={80} />
-                  <SubNavItem label="Academic Calendar 2026-27" onClick={() => handleSubNav("academics", "calendar")} delay={120} />
-                  <SubNavItem label="Co-curricular & Sports" onClick={() => handleNav("activities")} delay={160} />
-                  <SubNavItem label="STEM & Science Labs" onClick={() => handleNav("facilities")} delay={200} />
-                  {/*<SubNavItem label="Career & College Counseling" onClick={() => handleNav("careers")} delay={240} emphasize />*/}
+                  <SubNavItem label="Curriculum Overview (ECD to A Levels)" href="/academics#curriculum" delay={40} />
+                  <SubNavItem label="School & Office Timings" href="/academics#timings" delay={80} />
+                  <SubNavItem label="Academic Calendar 2026-27" href="/academics#calendar" delay={120} />
+                  <SubNavItem label="Co-curricular & Sports" href="/activities" delay={160} />
+                  <SubNavItem label="STEM & Science Labs" href="/facilities" delay={200} />
+                  {/*<SubNavItem label="Career & College Counseling" href="/careers" delay={240} emphasize />*/}
                 </div>
               </div>
             )}
@@ -495,13 +458,12 @@ export default function Header({
           id="mobile-drawer-menu"
         >
           {/* Home Mobile Link */}
-          <button
-            onClick={() => handleNav("home")}
+          <a href="/" onClick={() => setMobileMenuOpen(false)}
             className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "home" ? "text-primary-dark bg-slate-50 font-bold" : "text-slate-800 hover:bg-slate-50"
               }`}
           >
             Home
-          </button>
+          </a>
 
           {/* About Section */}
           <div className="border-b border-gray-100 pb-2 mb-2">
@@ -509,31 +471,27 @@ export default function Header({
               About IFS
             </span>
             <div className="mt-1 space-y-1">
-              <button
-                onClick={() => handleSubNav("about", "who-we-are")}
+              <a href="/about#about-story" onClick={() => setMobileMenuOpen(false)}
                 className={`w-full text-left px-6 py-2 text-sm font-medium transition-colors duration-200 ${activeView === "about" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-700 hover:bg-slate-50"
                   }`}
               >
                 Who We Are
-              </button>
-              <button
-                onClick={() => handleSubNav("about", "principal")}
+              </a>
+              <a href="/about#principal-message" onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
               >
                 Principal's Message
-              </button>
-              <button
-                onClick={() => handleSubNav("about", "management")}
+              </a>
+              <a href="/about#management-board" onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
               >
                 Management Team
-              </button>
-              <button
-                onClick={() => handleSubNav("about", "faculty")}
+              </a>
+              <a href="/about#academic-faculty" onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
               >
                 Our Faculty & Staff
-              </button>
+              </a>
             </div>
           </div>
 
@@ -543,24 +501,21 @@ export default function Header({
               Admissions
             </span>
             <div className="mt-1 space-y-1">
-              <button
-                onClick={() => handleSubNav("admissions", "process")}
+              <a href="/admissions#admissions-process" onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
               >
                 Admissions Process
-              </button>
-              <button
-                onClick={() => handleSubNav("admissions", "registration-form")}
+              </a>
+              <a href="/admissions#admissions-registration" onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
               >
                 Online Registration
-              </button>
-              <button
-                onClick={() => handleSubNav("admissions", "scholarships")}
+              </a>
+              <a href="/admissions#admissions-scholarships" onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
               >
                 Scholarships & Grants
-              </button>
+              </a>
             </div>
           </div>
 
@@ -570,70 +525,61 @@ export default function Header({
               Academics
             </span>
             <div className="mt-1 space-y-1">
-              <button
-                onClick={() => handleSubNav("academics", "curriculum")}
+              <a href="/academics#curriculum" onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
               >
                 Curriculum Overview
-              </button>
-              <button
-                onClick={() => handleSubNav("academics", "timings")}
+              </a>
+              <a href="/academics#timings" onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
               >
                 School Timings
-              </button>
-              <button
-                onClick={() => handleSubNav("academics", "calendar")}
+              </a>
+              <a href="/academics#calendar" onClick={() => setMobileMenuOpen(false)}
                 className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
               >
                 Academic Calendar
-              </button>
+              </a>
             </div>
           </div>
 
           {/* General Links */}
-          <button
-            onClick={() => handleNav("facilities")}
+          <a href="/facilities" onClick={() => setMobileMenuOpen(false)}
             className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "facilities" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-800 hover:bg-slate-50"
               }`}
           >
             Facilities
-          </button>
-          <button
-            onClick={() => handleNav("activities")}
+          </a>
+          <a href="/activities" onClick={() => setMobileMenuOpen(false)}
             className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "activities" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-800 hover:bg-slate-50"
               }`}
           >
             Co-curricular
-          </button>
-          <button
-            onClick={() => handleNav("news-events")}
+          </a>
+          <a href="/news-events" onClick={() => setMobileMenuOpen(false)}
             className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "news-events" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-800 hover:bg-slate-50"
               }`}
           >
             News & Events
-          </button>
-          <button
-            onClick={() => handleNav("gallery")}
+          </a>
+          <a href="/gallery" onClick={() => setMobileMenuOpen(false)}
             className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "gallery" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-800 hover:bg-slate-50"
               }`}
           >
             Gallery
-          </button>
-          <button
-            onClick={() => handleNav("careers")}
+          </a>
+          <a href="/careers" onClick={() => setMobileMenuOpen(false)}
             className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "careers" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-800 hover:bg-slate-50"
               }`}
           >
             Careers
-          </button>
-          <button
-            onClick={() => handleNav("contact")}
+          </a>
+          <a href="/contact" onClick={() => setMobileMenuOpen(false)}
             className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "contact" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-800 hover:bg-slate-50"
               }`}
           >
             Contact
-          </button>
+          </a>
 
           {/* Student Portal Mobile */}
           <div className="pt-4">

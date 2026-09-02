@@ -1523,31 +1523,17 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
           </div>
 
           <div className="text-center mt-10">
-            <button
-              className="success-btn"
-              onClick={() => {
-                if (setView) {
-                  setView("news-events");
-                  const scrollToSuccessStories = () => {
-                    const el = document.getElementById("student-success-stories");
-                    if (el) {
-                      const HEADER_HEIGHT = 100;
-                      const top = el.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
-                      window.scrollTo({ top, behavior: "smooth" });
-                    }
-                  };
-                  setTimeout(scrollToSuccessStories, 100);
-                  setTimeout(scrollToSuccessStories, 350);
-                  setTimeout(scrollToSuccessStories, 500);
-                }
-              }}
+            <a
+              href="/news-events#student-success-stories"
+              className="success-btn group cursor-pointer inline-flex relative"
+              style={{ display: "inline-block" }}
             >
               <span className="success-btn-bg"></span>
               <span className="success-btn-content" >
                 Explore Success Stories
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -1739,7 +1725,7 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
             </p>
 
             <div className="flex flex-wrap gap-6 justify-center mt-20">
-              <a href="#admissions-registration" className="success-btn" style={{ textDecoration: 'none' }}>
+              <a href="/admissions" className="success-btn" style={{ textDecoration: 'none' }}>
                 <span className="success-btn-bg"></span>
                 <span className="success-btn-content">
                   Apply Now <ArrowRight className="w-5 h-5" />
@@ -1747,7 +1733,7 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
 
               {/* Google Form Button */}
               <a
-                href="https://forms.gle"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSe57M4une4aQYnDUjL12hQN1IfI5s8Kt718syMKnFEvBveVsg/viewform"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 font-bold px-8 py-4"

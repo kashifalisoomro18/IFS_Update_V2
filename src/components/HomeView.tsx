@@ -582,15 +582,14 @@ export default function HomeView({
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.95 }}
                     >
-                      <button
-                        onClick={handleApplyNow}
+                      <a href="/admissions"
                         className="group relative overflow-hidden inline-flex items-center gap-3 font-bold text-[11.7px] tracking-wide uppercase px-8 py-4 cursor-pointer"
                         style={{ background: heroSlides[activeSlide].accent, color: "#04080c" }}
                       >
                         <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400" style={{ background: "rgba(255,255,255,0.18)" }} />
                         {heroSlides[activeSlide].cta}
                         <ArrowRight size={16} className="transition-transform duration-400 group-hover:translate-x-1.5" />
-                      </button>
+                      </a>
                     </motion.div>
                   </AnimatePresence>
 
@@ -891,8 +890,7 @@ export default function HomeView({
               </p>
 
               <div className="pt-2 flex flex-wrap items-center gap-4">
-                <button
-                  onClick={() => handleSubNav("about", "who-we-are")}
+                <a href="/about#about-story"
                   className="group relative overflow-hidden bg-slate-950 text-white font-bold text-xs uppercase tracking-widest px-6 py-3.5 shadow-md rounded-none transition-transform duration-300 hover:scale-105 active:scale-95 cursor-pointer"
                 >
                   {/* Hover Background */}
@@ -902,10 +900,9 @@ export default function HomeView({
                   <span className="relative z-10 group-hover:text-slate-950 transition-colors duration-300">
                     More About Us
                   </span>
-                </button>
+                </a>
 
-                <button
-                  onClick={handleInquire}
+                <a href="/contact"
                   className="group relative overflow-hidden border-2 border-slate-950 bg-white text-slate-950 font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-none transition-transform duration-300 hover:scale-105 active:scale-95 cursor-pointer"
                 >
                   {/* Hover Background */}
@@ -915,7 +912,7 @@ export default function HomeView({
                   <span className="relative z-10 group-hover:black-white transition-colors duration-300">
                     Inquire Now
                   </span>
-                </button>
+                </a>
 
               </div>
             </motion.div>
@@ -1121,8 +1118,7 @@ export default function HomeView({
                     {item.description}
                   </p>
 
-                  <button
-                    onClick={() => handleSubNav("gallery", "")}
+                  <a href="/gallery"
                     className="learn-more-link group/btn relative inline-flex w-fit  items-center gap-2 overflow-hidden border border-[#020816] px-4 py-2 text-xs font-bold uppercase tracking-widest text-[#020816] transition-all duration-300 cursor-pointer mt-5"
                   >
                     {/* Hover Background */}
@@ -1133,7 +1129,7 @@ export default function HomeView({
                       Learn More
                       <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                     </span>
-                  </button>
+                  </a>
 
                 </motion.div>
               ))}
@@ -1174,15 +1170,14 @@ export default function HomeView({
       Admissions at IFS are <strong className="text-primary font-bold">extremely competitive</strong>. We encourage all applicants to apply as early as possible and to carefully review the admissions page before applying. To visit the admissions page and to apply online please click below.
     </p>
     <div className="pt-4">
-      <button
-        onClick={handleApplyNow}
+      <a href="/admissions"
         className="group relative overflow-hidden bg-white text-slate-950 font-bold text-xs uppercase tracking-widest px-10 py-4 rounded-none shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
       >
         <span className="absolute inset-0 bg-primary origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
         <span className="relative z-10 transition-colors duration-300 group-hover:text-slate-950">
           APPLY NOW
         </span>
-      </button>
+      </a>
     </div>
   </motion.div>
 </section>
@@ -1236,8 +1231,7 @@ export default function HomeView({
 
                   </p>
                   <div className="pt-2">
-                    <button
-                      onClick={() => handleSubNav("academics", "curriculum")}
+                    <a href="/academics#curriculum"
                       className="group relative overflow-hidden bg-white text-slate-700 font-medium text-sm px-7 py-3  shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
                     >
                       {/* Left to Right Background */}
@@ -1247,7 +1241,7 @@ export default function HomeView({
                       <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
                         More Details
                       </span>
-                    </button>
+                    </a>
                   </div>
                 </motion.div>
 
@@ -1395,8 +1389,7 @@ export default function HomeView({
                     At <strong className="text-[#020816] font-extrabold">IFS Elementary</strong>, we nurture the development of each child emotionally, academically, physically, socially, and artistically during their formative years.
                   </p>
                   <div className="pt-2">
-                    <button
-                      onClick={() => handleSubNav("academics", "curriculum")}
+                    <a href="/academics#curriculum"
                       className="group relative overflow-hidden bg-white text-slate-700 font-medium text-sm px-7 py-3  shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
                     >
                       {/* Left to Right Background */}
@@ -1406,7 +1399,7 @@ export default function HomeView({
                       <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
                         More Details
                       </span>
-                    </button>
+                    </a>
                   </div>
                 </motion.div>
 
@@ -1457,8 +1450,7 @@ export default function HomeView({
                     At IFS <strong className="text-[#020816] font-extrabold"> Middle Section (Grades VI–VII) </strong>, students are encouraged to strengthen their academic skills, develop critical thinking, and build confidence as independent learners. Through engaging learning experiences, they are prepared to take on greater challenges and grow into responsible, curious, and capable individuals.
                   </p>
                   <div className="pt-2">
-                    <button
-                      onClick={() => handleSubNav("academics", "curriculum")}
+                    <a href="/academics#curriculum"
                       className="group relative overflow-hidden bg-white text-slate-700 font-medium text-sm px-7 py-3  shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
                     >
                       {/* Left to Right Background */}
@@ -1468,7 +1460,7 @@ export default function HomeView({
                       <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
                         More Details
                       </span>
-                    </button>
+                    </a>
                   </div>
                 </motion.div>
 
@@ -1632,8 +1624,7 @@ export default function HomeView({
                     At IFS <strong className="text-slate-950 font-bold">O Level & A Level</strong> provides students with a balanced and enriching learning experience that combines academic excellence with a vibrant co-curricular program. Our aim is to develop confident, independent, and critical thinkers, equipping students with the knowledge, skills, and confidence they need to succeed in their examinations, university, and beyond.
                   </p>
                   <div className="pt-2">
-                    <button
-                      onClick={() => handleSubNav("academics", "curriculum")}
+                    <a href="/academics#curriculum"
                       className="group relative overflow-hidden bg-white text-slate-700 font-medium text-sm px-7 py-3  shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
                     >
                       {/* Hover Background */}
@@ -1643,7 +1634,7 @@ export default function HomeView({
                       <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
                         More Details
                       </span>
-                    </button>
+                    </a>
                   </div>
                 </motion.div>
 
@@ -1678,13 +1669,12 @@ export default function HomeView({
                 </p>
               </div>
 
-              <button
-                onClick={() => handleSubNav("news-events", "")}
+              <a href="/news-events"
                 className="group inline-flex items-center gap-2 text-xs font-extrabold text-[#0F172A] tracking-widest uppercase pb-1 border-b-2 border-[#F5C330] hover:border-[#60BADC] w-fit cursor-pointer transition-colors duration-300"
               >
                 View All News
                 <ArrowRight className="w-3.5 h-3.5 text-[#0F172A] group-hover:text-[#60BADC] transition-all duration-300 group-hover:translate-x-1" />
-              </button>
+              </a>
             </motion.div>
 
             {/* Grid Structure */}
@@ -1832,13 +1822,12 @@ export default function HomeView({
                 </p>
               </div>
 
-              <button
-                onClick={() => handleSubNav("news-events", "")}
+              <a href="/news-events"
                 className="group inline-flex items-center gap-2 text-xs font-extrabold text-[#0F172A]  tracking-widest uppercase pb-1 border-b-2 border-[#F5C330] hover:border-[#60BADC] w-fit cursor-pointer transition-colors duration-300"
               >
                 View All Events
                 <ArrowRight className="w-3.5 h-3.5 text-[#0F172A] group-hover:text-[#60BADC] transition-all duration-300 group-hover:translate-x-1" />
-              </button>
+              </a>
             </motion.div>
 
             {/* 2x2 Premium Cards Grid */}
@@ -1986,13 +1975,12 @@ export default function HomeView({
 
             </div>
 
-            <button
-              onClick={() => handleSubNav("gallery", "")}
+            <a href="/gallery"
               className="group inline-flex items-center gap-2 text-xs font-extrabold text-[#0F172A] tracking-widest uppercase pb-1 border-b-2 border-[#F5C330] hover:border-[#60BADC] w-fit cursor-pointer transition-colors duration-300"
             >
               View All Photos
               <ArrowRight className="w-3.5 h-3.5 text-[#0F172A] group-hover:text-[#60BADC] transition-all duration-300 group-hover:translate-x-1" />
-            </button>
+            </a>
           </motion.div>
 
           {/* Mosaic/Pristine 2x4 Grid layout showing successful Pakistani Alumni Portraits */}
