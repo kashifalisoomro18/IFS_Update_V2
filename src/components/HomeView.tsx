@@ -1992,11 +1992,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.05 }}
-              onClick={() => setSelectedImage("https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80")}
+              onClick={() => setSelectedImage("public/pintober1 (1).jpeg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80"
+                src="public/pintober1 (1).jpeg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2011,11 +2011,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              onClick={() => setSelectedImage("https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80")}
+              onClick={() => setSelectedImage("public/play1.jpg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm rounded-sm cursor-pointer"
             >
               <img
-                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80"
+                src="public/play1.jpg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2030,11 +2030,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              onClick={() => setSelectedImage("https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80")}
+              onClick={() => setSelectedImage("public/scholarship.jpeg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
+                src="public/scholarship.jpeg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2049,11 +2049,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              onClick={() => setSelectedImage("https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80")}
+              onClick={() => setSelectedImage("public/trip30.jpg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
+                src="public/trip30.jpg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2068,11 +2068,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.25 }}
-              onClick={() => setSelectedImage("https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80")}
+              onClick={() => setSelectedImage("public/playground5.jpg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80"
+                src="public/playground5.jpg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2087,11 +2087,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              onClick={() => setSelectedImage("https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80")}
+              onClick={() => setSelectedImage("public/trip8.jpg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80"
+                src="public/trip8.jpg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2106,11 +2106,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.35 }}
-              onClick={() => setSelectedImage("https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=400&q=80")}
+              onClick={() => setSelectedImage("public/IMG_2371.JPG")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=400&q=80"
+                src="public/IMG_2371.JPG"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2125,11 +2125,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              onClick={() => setSelectedImage("https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80")}
+              onClick={() => setSelectedImage("public/IMG_4093.JPG")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80"
+                src="public/IMG_4093.JPG"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
