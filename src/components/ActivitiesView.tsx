@@ -123,6 +123,80 @@ const AnimatedCounter = ({ value, suffix = "" }: { value: number; suffix?: strin
 export default function ActivitiesView({ setView }: { setView?: (view: string) => void }) {
   const [activeTab, setActiveTab] = useState<"house" | "trips">("house");
 
+  const scrollToTrips = () => {
+    const el = document.getElementById("educational-trips") || document.getElementById("activities-tab-switcher");
+    if (el) {
+      const HEADER_HEIGHT = window.innerWidth < 768 ? 85 : 125;
+      const tabEl = document.getElementById("activities-tab-switcher");
+      const scrollTarget = tabEl || el;
+      const top = scrollTarget.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
+      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    const handleHash = (shouldScroll = true, explicitHash?: string) => {
+      if (typeof window === "undefined") return;
+      const rawHash = (explicitHash || window.location.hash.replace("#", "")).toLowerCase();
+      if (
+        rawHash === "educational-trips" ||
+        rawHash === "trips" ||
+        rawHash === "educational" ||
+        rawHash === "activities" ||
+        rawHash === "sports" ||
+        rawHash === "co-curricular"
+      ) {
+        setActiveTab("trips");
+        if (shouldScroll) {
+          setTimeout(scrollToTrips, 50);
+          setTimeout(scrollToTrips, 180);
+        }
+      } else if (rawHash === "house" || rawHash === "houses" || rawHash === "house-system") {
+        setActiveTab("house");
+        if (shouldScroll) {
+          const scrollHouse = () => {
+            const el = document.getElementById("activities-tab-switcher");
+            if (el) {
+              const HEADER_HEIGHT = window.innerWidth < 768 ? 85 : 125;
+              const top = el.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
+              window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+            }
+          };
+          setTimeout(scrollHouse, 50);
+          setTimeout(scrollHouse, 180);
+        }
+      }
+    };
+
+    handleHash(true);
+
+    const onHashChange = () => handleHash(true);
+    const onCustomNav = (e: any) => {
+      if (e.detail?.hash) {
+        handleHash(true, e.detail.hash);
+      } else {
+        handleHash(true);
+      }
+    };
+
+    window.addEventListener("hashchange", onHashChange);
+    window.addEventListener("app:navigate-anchor", onCustomNav);
+    document.addEventListener("astro:page-load", onHashChange);
+
+    return () => {
+      window.removeEventListener("hashchange", onHashChange);
+      window.removeEventListener("app:navigate-anchor", onCustomNav);
+      document.removeEventListener("astro:page-load", onHashChange);
+    };
+  }, []);
+
+  const handleTabChange = (tab: "house" | "trips") => {
+    setActiveTab(tab);
+    if (typeof window !== "undefined") {
+      history.replaceState(null, "", tab === "trips" ? "#educational-trips" : "#house-system");
+    }
+  };
+
   // Lightbox State
   const [lightboxTrip, setLightboxTrip] = useState<Trip | null>(null);
   const [lightboxPhotoIndex, setLightboxPhotoIndex] = useState(0);
@@ -673,11 +747,11 @@ export default function ActivitiesView({ setView }: { setView?: (view: string) =
       {/* ============================================================
           3. TAB SWITCHER
       ============================================================ */}
-      <div className="flex justify-center pb-16 px-6 sticky top-24 z-50 mt-10">
+      <div className="flex justify-center pb-16 px-6 sticky top-24 z-50 mt-10" id="activities-tab-switcher">
         <div className="tab-switcher">
           <button
             className={`nav-tab ${activeTab === "house" ? "active" : ""}`}
-            onClick={() => setActiveTab("house")}
+            onClick={() => handleTabChange("house")}
             role="tab"
           >
             {activeTab === "house" && (
@@ -693,7 +767,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: string) =
           </button>
           <button
             className={`nav-tab ${activeTab === "trips" ? "active" : ""}`}
-            onClick={() => setActiveTab("trips")}
+            onClick={() => handleTabChange("trips")}
             role="tab"
           >
             {activeTab === "trips" && (

@@ -1115,6 +1115,21 @@ export default function AcademicsView({
 }: AcademicsViewProps) {
   const [activeTab, setActiveTab] = useState<AcademicsSubView>(initialSubView);
 
+  const scrollToSection = (tab: string) => {
+    const targetEl =
+      document.getElementById(tab) ||
+      document.getElementById(`academics-${tab}`) ||
+      document.getElementById("academics-nav");
+
+    if (targetEl) {
+      const HEADER_HEIGHT = window.innerWidth < 768 ? 85 : 125;
+      const navEl = document.getElementById("academics-nav");
+      const scrollAnchor = navEl || targetEl;
+      const top = scrollAnchor.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
+      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     if (initialSubView) {
       setActiveTab(initialSubView);
@@ -1122,22 +1137,64 @@ export default function AcademicsView({
   }, [initialSubView]);
 
   useEffect(() => {
-    const handleHash = () => {
+    const handleHash = (shouldScroll = true, explicitHash?: string) => {
       if (typeof window === "undefined") return;
-      const hash = window.location.hash.replace("#", "");
-      if (hash === "timings" || hash === "calendar" || hash === "curriculum") {
-        setActiveTab(hash as AcademicsSubView);
+      const rawHash = (explicitHash || window.location.hash.replace("#", "")).toLowerCase();
+      let tab: AcademicsSubView | null = null;
+      if (rawHash === "curriculum" || rawHash === "overview" || rawHash === "academics-curriculum" || rawHash === "section-overview") {
+        tab = "curriculum";
+      } else if (rawHash === "timings" || rawHash === "daily-schedules" || rawHash === "academics-timings" || rawHash === "schedule" || rawHash === "schedules") {
+        tab = "timings";
+      } else if (rawHash === "calendar" || rawHash === "academic-calendar" || rawHash === "academics-calendar") {
+        tab = "calendar";
+      }
+
+      if (tab) {
+        setActiveTab(tab);
+        if (externalSetSubView) {
+          externalSetSubView(tab);
+        }
+        if (shouldScroll) {
+          // Double tick to handle immediate scroll as well as post-animation layout
+          setTimeout(() => {
+            scrollToSection(tab);
+          }, 50);
+          setTimeout(() => {
+            scrollToSection(tab);
+          }, 180);
+        }
       }
     };
-    handleHash();
-    window.addEventListener("hashchange", handleHash);
-    return () => window.removeEventListener("hashchange", handleHash);
-  }, []);
+
+    handleHash(true);
+
+    const onHashChange = () => handleHash(true);
+    const onCustomNav = (e: any) => {
+      if (e.detail?.hash) {
+        handleHash(true, e.detail.hash);
+      } else {
+        handleHash(true);
+      }
+    };
+
+    window.addEventListener("hashchange", onHashChange);
+    window.addEventListener("app:navigate-anchor", onCustomNav);
+    document.addEventListener("astro:page-load", onHashChange);
+
+    return () => {
+      window.removeEventListener("hashchange", onHashChange);
+      window.removeEventListener("app:navigate-anchor", onCustomNav);
+      document.removeEventListener("astro:page-load", onHashChange);
+    };
+  }, [externalSetSubView]);
 
   const handleTabChange = (tabId: AcademicsSubView) => {
     setActiveTab(tabId);
     if (externalSetSubView) {
       externalSetSubView(tabId);
+    }
+    if (typeof window !== "undefined") {
+      history.replaceState(null, "", `#${tabId}`);
     }
   };
 
@@ -1401,7 +1458,7 @@ export default function AcademicsView({
               1. CURRICULUM OVERVIEW
           ============================================================ */}
           {activeTab === "curriculum" && (
-            <div className="space-y-0 animate-fadeIn " id="academics-curriculum">
+            <div className="space-y-0 animate-fadeIn" id="curriculum" data-section="curriculum">
 
               {/* ============================================================
                   1a. OVERVIEW
@@ -1439,7 +1496,7 @@ export default function AcademicsView({
               2. SCHOOL TIMINGS
           ============================================================ */}
           {activeTab === "timings" && (
-             <div className="max-w-4xl mx-auto space-y-10 animate-fadeIn" id="academics-timings">
+             <div className="max-w-4xl mx-auto space-y-10 animate-fadeIn" id="timings" data-section="timings">
               <SectionHeading
                 eyebrow={
                   <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
@@ -1494,7 +1551,7 @@ export default function AcademicsView({
               3. ACADEMIC CALENDAR
           ============================================================ */}
           {activeTab === "calendar" && (
-            <div className="space-y-10 animate-fadeIn" id="academics-calendar">
+            <div className="space-y-10 animate-fadeIn" id="calendar" data-section="calendar">
               <SectionHeading
                 eyebrow={
                   <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>

@@ -173,6 +173,43 @@ export default function Header({
       ? "text-primary-dark font-bold"
       : "text-slate-800 hover:text-primary-dark";
 
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    setActiveDropdown(null);
+    setIsMounted(false);
+    setMobileMenuOpen(false);
+
+    if (typeof window === "undefined" || !href.includes("#")) return;
+
+    const [targetPath, targetHash] = href.split("#");
+    const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
+    const normTargetPath = (targetPath || "").replace(/\/$/, "") || "/";
+
+    // If already on target page (or anchor on current page)
+    if (targetHash && (normTargetPath === currentPath || !targetPath)) {
+      if (window.location.hash !== `#${targetHash}`) {
+        history.pushState(null, "", `#${targetHash}`);
+      }
+
+      // Dispatch custom anchor event + hashchange event so page views trigger tab switch & smooth scroll
+      window.dispatchEvent(new CustomEvent("app:navigate-anchor", { detail: { hash: targetHash, path: normTargetPath } }));
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
+
+      const HEADER_HEIGHT = window.innerWidth < 768 ? 85 : 125;
+      const el =
+        document.getElementById(targetHash) ||
+        document.getElementById(`academics-${targetHash}`) ||
+        document.getElementById("academics-nav") ||
+        document.getElementById("activities-tab-switcher") ||
+        document.getElementById(targetHash.replace("admissions-", "")) ||
+        document.getElementById(targetHash.replace("about-", ""));
+
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      }
+    }
+  };
+
   // Animated underline span: grows from 0 to full width on hover, stays full when active
   const Underline = ({ active }: { active: boolean }) => (
     <span
@@ -183,7 +220,12 @@ export default function Header({
 
   // Submenu item: same underline-hover language as top nav, plus a staggered fade/slide entrance
   const SubNavItem = ({ label, href, delay = 0, emphasize = false }: { label: string, href: string, delay?: number, emphasize?: boolean }) => (
-    <a href={href} style={{ transitionDelay: isOpen ? `${delay}ms` : "0ms" }} className={`group relative text-left px-4 py-2.5 text-sm font-medium transition-all duration-300 ease-out ${emphasize ? "text-primary-dark font-semibold" : "text-slate-700"} hover:text-primary-dark ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1.5"}`}>
+    <a
+      href={href}
+      onClick={(e) => handleLinkClick(e, href)}
+      style={{ transitionDelay: isOpen ? `${delay}ms` : "0ms" }}
+      className={`group relative text-left px-4 py-2.5 text-sm font-medium transition-all duration-300 ease-out ${emphasize ? "text-primary-dark font-semibold" : "text-slate-700"} hover:text-primary-dark ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1.5"}`}
+    >
       {label}
       <span className="absolute left-4 bottom-1 h-0.5 bg-primary transition-all duration-300 ease-out w-0 group-hover:w-[calc(100%-2rem)]" />
     </a>
@@ -457,7 +499,7 @@ export default function Header({
                   <SubNavItem label="Curriculum Overview (ECD to A Levels)" href="/academics#curriculum" delay={40} />
                   <SubNavItem label="School & Office Timings" href="/academics#timings" delay={80} />
                   <SubNavItem label="Academic Calendar 2026-27" href="/academics#calendar" delay={120} />
-                  <SubNavItem label="Co-curricular & Sports" href="/activities" delay={160} />
+                  <SubNavItem label="Co-curricular & Sports" href="/activities#educational-trips" delay={160} />
                   <SubNavItem label="STEM & Science Labs" href="/facilities" delay={200} />
                   {/*<SubNavItem label="Career & College Counseling" href="/careers" delay={240} emphasize />*/}
                 </div>
@@ -541,17 +583,17 @@ export default function Header({
               Academics
             </span>
             <div className="mt-1 space-y-1">
-              <a href="/academics#curriculum" onClick={() => setMobileMenuOpen(false)}
+              <a href="/academics#curriculum" onClick={(e) => handleLinkClick(e, "/academics#curriculum")}
                 className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
               >
                 Curriculum Overview
               </a>
-              <a href="/academics#timings" onClick={() => setMobileMenuOpen(false)}
+              <a href="/academics#timings" onClick={(e) => handleLinkClick(e, "/academics#timings")}
                 className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
               >
                 School Timings
               </a>
-              <a href="/academics#calendar" onClick={() => setMobileMenuOpen(false)}
+              <a href="/academics#calendar" onClick={(e) => handleLinkClick(e, "/academics#calendar")}
                 className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
               >
                 Academic Calendar
@@ -566,7 +608,7 @@ export default function Header({
           >
             Facilities
           </a>
-          <a href="/activities" onClick={() => setMobileMenuOpen(false)}
+          <a href="/activities#educational-trips" onClick={(e) => handleLinkClick(e, "/activities#educational-trips")}
             className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "activities" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-800 hover:bg-slate-50"
               }`}
           >

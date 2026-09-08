@@ -465,25 +465,59 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
   };
 
   useEffect(() => {
-    const sectionId = SECTION_MAP[subView];
-    if (!sectionId) return;
-
-    // Delay lets AnimatePresence finish its page-enter transition (~400ms)
-    // before we try to measure & scroll to the element.
-    const SCROLL_DELAY = 450;
-    // Sticky header height (top bar ~36px + logo row ~80px = ~116px, round up)
-    const HEADER_HEIGHT = 120;
-
-    const timer = setTimeout(() => {
-      const el = document.getElementById(sectionId);
+    const scrollToSection = (targetId: string) => {
+      const el = document.getElementById(targetId);
       if (!el) return;
+      const HEADER_HEIGHT = 120;
       const top = el.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
       window.scrollTo({ top, behavior: "smooth" });
-    }, SCROLL_DELAY);
+    };
 
-    return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const sectionId = SECTION_MAP[subView];
+    if (sectionId) {
+      const SCROLL_DELAY = 450;
+      const timer = setTimeout(() => scrollToSection(sectionId), SCROLL_DELAY);
+      return () => clearTimeout(timer);
+    }
   }, [subView]);
+
+  useEffect(() => {
+    const scrollToSection = (targetId: string) => {
+      const el = document.getElementById(targetId);
+      if (!el) return;
+      const HEADER_HEIGHT = 120;
+      const top = el.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
+      window.scrollTo({ top, behavior: "smooth" });
+    };
+
+    const handleHash = (explicitHash?: string) => {
+      if (typeof window === "undefined") return;
+      const raw = (explicitHash || window.location.hash.replace("#", "")).toLowerCase();
+      const mappedId = SECTION_MAP[raw] || raw;
+      if (mappedId) {
+        setTimeout(() => scrollToSection(mappedId), 50);
+        setTimeout(() => scrollToSection(mappedId), 200);
+      }
+    };
+
+    handleHash();
+
+    const onHashChange = () => handleHash();
+    const onCustomNav = (e: any) => {
+      if (e.detail?.hash) handleHash(e.detail.hash);
+      else handleHash();
+    };
+
+    window.addEventListener("hashchange", onHashChange);
+    window.addEventListener("app:navigate-anchor", onCustomNav);
+    document.addEventListener("astro:page-load", onHashChange);
+
+    return () => {
+      window.removeEventListener("hashchange", onHashChange);
+      window.removeEventListener("app:navigate-anchor", onCustomNav);
+      document.removeEventListener("astro:page-load", onHashChange);
+    };
+  }, []);
   // ─────────────────────────────────────────────────────────────────────────
 
 

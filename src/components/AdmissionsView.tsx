@@ -31,22 +31,61 @@ const sectionIdMap: Record<string, string> = {
 
 export default function AdmissionsView({ subView = "overview", onSubmitApplication }: AdmissionsViewProps) {
   useEffect(() => {
-    const id = sectionIdMap[subView as string];
-    if (!id) return;
-
-    const SCROLL_DELAY = 450;
-    const HEADER_HEIGHT = window.innerWidth < 768 ? 80 : 120;
-
-    const timer = setTimeout(() => {
-      const el = document.getElementById(id);
+    const scrollToSection = (targetId: string) => {
+      const el = document.getElementById(targetId);
       if (el) {
+        const HEADER_HEIGHT = window.innerWidth < 768 ? 80 : 120;
         const top = el.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
-        window.scrollTo({ top, behavior: "smooth" });
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
       }
-    }, SCROLL_DELAY);
+    };
 
-    return () => clearTimeout(timer);
+    const id = sectionIdMap[subView as string];
+    if (id) {
+      const SCROLL_DELAY = 450;
+      const timer = setTimeout(() => scrollToSection(id), SCROLL_DELAY);
+      return () => clearTimeout(timer);
+    }
   }, [subView]);
+
+  useEffect(() => {
+    const scrollToSection = (targetId: string) => {
+      const el = document.getElementById(targetId);
+      if (el) {
+        const HEADER_HEIGHT = window.innerWidth < 768 ? 80 : 120;
+        const top = el.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      }
+    };
+
+    const handleHash = (explicitHash?: string) => {
+      if (typeof window === "undefined") return;
+      const raw = (explicitHash || window.location.hash.replace("#", "")).toLowerCase();
+      const mappedId = sectionIdMap[raw] || raw;
+      if (mappedId) {
+        setTimeout(() => scrollToSection(mappedId), 50);
+        setTimeout(() => scrollToSection(mappedId), 200);
+      }
+    };
+
+    handleHash();
+
+    const onHashChange = () => handleHash();
+    const onCustomNav = (e: any) => {
+      if (e.detail?.hash) handleHash(e.detail.hash);
+      else handleHash();
+    };
+
+    window.addEventListener("hashchange", onHashChange);
+    window.addEventListener("app:navigate-anchor", onCustomNav);
+    document.addEventListener("astro:page-load", onHashChange);
+
+    return () => {
+      window.removeEventListener("hashchange", onHashChange);
+      window.removeEventListener("app:navigate-anchor", onCustomNav);
+      document.removeEventListener("astro:page-load", onHashChange);
+    };
+  }, []);
 
   return (
     <div
