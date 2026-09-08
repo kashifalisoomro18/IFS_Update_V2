@@ -234,21 +234,23 @@ function SectionHeading({
 function OverviewSection() {
   return (
     <div className="space-y-8" id="academics-overview">
-      <SectionHeading
-        eyebrow={
-          <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
-            Academic Program
-          </span>
-        }
-        heading="Curriculum"
-        accent={<span style={{ color: "#60BADC" }}> Overview</span>}
-        description="The curriculum focuses on a rigorous and creative academic foundation that aims at developing intellectual curiosity, critical thinking, and problem-solving skills amongst our students."
-        subDescription="Our renowned curriculum and devoted faculty uphold the high standards we have maintained for nearly four decades."
-        dividerColor="#f5c330"
-      />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          eyebrow={
+            <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
+              Academic Program
+            </span>
+          }
+          heading="Curriculum"
+          accent={<span style={{ color: "#60BADC" }}> Overview</span>}
+          description="The curriculum focuses on a rigorous and creative academic foundation that aims at developing intellectual curiosity, critical thinking, and problem-solving skills amongst our students."
+          subDescription="Our renowned curriculum and devoted faculty uphold the high standards we have maintained for nearly four decades."
+          dividerColor="#f5c330"
+        />
+      </div>
 
-      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen bg-slate-100 ">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center p-8 sm:p-10">
+      <div className="w-full bg-slate-100 py-10 sm:py-14">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center px-4 sm:px-6 lg:px-8">
           <div className="space-y-5">
             <p className="font-semibold text-sm sm:text-base leading-relaxed text-justify text-[#0d1f3c]">
               At each grade level, students are challenged academically and personally to learn
@@ -304,20 +306,22 @@ const dualCore = [
 ];
 function DualAcademicCoreSection() {
   return (
-    <div className="space-y-10 pt-20" id="dual-academic-blocks">
-      <SectionHeading
-        eyebrow={
-          <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
-            Dual Curriculum
-          </span>
-        }
+    <div className="space-y-10 pt-16 sm:pt-20" id="dual-academic-blocks">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          eyebrow={
+            <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
+              Dual Curriculum
+            </span>
+          }
 
-        heading="Academic"
-        accent={<span style={{ color: "#F5C330" }}> Excellence</span>}
-        dividerColor="#60BADC"
-      />
-      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
-        <div className="max-w-[1600px] mx-auto px-6 sm:px-12 space-y-8 md:space-y-20">
+          heading="Academic"
+          accent={<span style={{ color: "#F5C330" }}> Excellence</span>}
+          dividerColor="#60BADC"
+        />
+      </div>
+      <div className="w-full">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 space-y-8 md:space-y-20">
           {dualCore.map(({ eyebrow, title, desc, tags, tone, image, Icon }, idx) => {
             const isBlue = tone === "blue";
             const accentColor = isBlue ? "#60BADC" : "#F5C330";
@@ -1412,9 +1416,9 @@ export default function AcademicsView({
           </div>
         </section>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="w-full py-16 sm:py-20">
           {/* Sub-nav  */}
-          <div className="flex justify-center mb-10" id="academics-nav">
+          <div className="flex justify-center mb-10 px-4 sm:px-6 lg:px-8" id="academics-nav">
             <div className="flex w-full max-w-3xl bg-[#0d1f3c] p-2">
               {[
                 { id: "curriculum", label: "Curriculum Overview" },
@@ -1463,21 +1467,21 @@ export default function AcademicsView({
               {/* ============================================================
                   1a. OVERVIEW
               ============================================================ */}
-              <section id="section-overview" className="py-12">
+              <section id="section-overview" className="py-6 sm:py-8">
                 <OverviewSection />
               </section>
 
               {/* ============================================================
                   1b. FINLAND / CAMBRIDGE DUAL CORE
               ============================================================ */}
-              <section id="section-dual-core" className="py-12 ">
+              <section id="section-dual-core" className="py-6 sm:py-8">
                 <DualAcademicCoreSection />
               </section>
 
               {/* ============================================================
                   1c. TEACHING METHODOLOGY
               ============================================================ */}
-              <section id="section-methodology" className="py-16">
+              <section id="section-methodology" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <TeachingMethodologySection />
               </section>
 
@@ -1485,7 +1489,7 @@ export default function AcademicsView({
               {/* ============================================================
                   1d. SCHOOL LEVELS SHOWCASE
               ============================================================ */}
-              <section id="section-school-levels" className="py-4">
+              <section id="section-school-levels" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                 <SchoolLevelsShowcaseSection setSubView={handleTabChange} />
               </section>
 
@@ -1496,7 +1500,7 @@ export default function AcademicsView({
               2. SCHOOL TIMINGS
           ============================================================ */}
           {activeTab === "timings" && (
-             <div className="max-w-4xl mx-auto space-y-10 animate-fadeIn" id="timings" data-section="timings">
+             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 animate-fadeIn" id="timings" data-section="timings">
               <SectionHeading
                 eyebrow={
                   <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
@@ -1529,14 +1533,6 @@ export default function AcademicsView({
                       9:00 AM to 2:00 PM
                     </span>
                   </div>
-                  {/*<div className="p-5 grid grid-cols-2 items-center">
-                    <span className="font-bold text-slate-900 text-sm">Campus Library & Study Desk</span>
-                    <span className="font-mono text-slate-600 text-xs">8:15 AM to 2:30 PM</span>
-                  </div>
-                  <div className="p-5 grid grid-cols-2 items-center">
-                    <span className="font-bold text-slate-900 text-sm">STEM & Science Lab Sessions</span>
-                    <span className="font-mono text-slate-600 text-xs">9:00 AM to 1:45 PM</span>
-                  </div>*/}
                 </div> 
               </div>
 
@@ -1551,7 +1547,7 @@ export default function AcademicsView({
               3. ACADEMIC CALENDAR
           ============================================================ */}
           {activeTab === "calendar" && (
-            <div className="space-y-10 animate-fadeIn" id="calendar" data-section="calendar">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 animate-fadeIn" id="calendar" data-section="calendar">
               <SectionHeading
                 eyebrow={
                   <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
@@ -1575,22 +1571,6 @@ export default function AcademicsView({
                       <span className="font-bold text-slate-900">Term Commencement</span>
                       <span className="font-mono text-[#0d1f3c] font-bold"> 5 January, 2026</span>
                     </div>
-                   {/* <div className="flex justify-between border-b border-slate-100 pb-2">
-                      <span className="font-bold text-slate-900">Independence Day Assembly</span>
-                      <span className="font-mono">August 14, 2026</span>
-                    </div>
-                    <div className="flex justify-between border-b border-slate-100 pb-2">
-                      <span className="font-bold text-slate-900">First Mid-Term Tests</span>
-                      <span className="font-mono">September 15, 2026</span>
-                    </div>
-                    <div className="flex justify-between border-b border-slate-100 pb-2">
-                      <span className="font-bold text-slate-900">Annual STEM Innovation Expo</span>
-                      <span className="font-mono">October 05, 2026</span>
-                    </div>
-                    <div className="flex justify-between pb-1">
-                      <span className="font-bold text-slate-900">First Term Exams</span>
-                      <span className="font-mono">November 20, 2026</span>
-                    </div> */}
                   </div>
                 </div>
 
@@ -1605,22 +1585,6 @@ export default function AcademicsView({
                       <span className="font-bold text-slate-900">Term Commencement</span>
                       <span className="font-mono text-[#0d1f3c] font-bold">August 1, 2026</span>
                     </div>
-                   {/* <div className="flex justify-between border-b border-slate-100 pb-2">
-                      <span className="font-bold text-slate-900">Inter-House Sports League</span>
-                      <span className="font-mono">January 20, 2027</span>
-                    </div>
-                    <div className="flex justify-between border-b border-slate-100 pb-2">
-                      <span className="font-bold text-slate-900">Second Mid-Term Evaluation</span>
-                      <span className="font-mono">February 25, 2027</span>
-                    </div>
-                    <div className="flex justify-between border-b border-slate-100 pb-2">
-                      <span className="font-bold text-slate-900">CAIE Mock Exams</span>
-                      <span className="font-mono">March 15, 2027</span>
-                    </div>
-                    <div className="flex justify-between pb-1">
-                      <span className="font-bold text-slate-900">Final Examinations</span>
-                      <span className="font-mono">May 10, 2027</span>
-                    </div> */}
                   </div>
                 </div>
               </div>

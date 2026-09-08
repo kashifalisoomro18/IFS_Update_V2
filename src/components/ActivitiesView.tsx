@@ -681,14 +681,13 @@ export default function ActivitiesView({ setView }: { setView?: (view: string) =
       {/* ============================================================
           2. INTRO
       ============================================================ */}
-      <section className="py-20 px-6 lg:px-12">
-
+      <section className="pt-20">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-4xl mx-auto text-center"
+          className="max-w-4xl mx-auto text-center px-6 lg:px-12"
         >
           {/* Section Label */}
           <div className="flex items-center justify-center gap-3 mb-8">
@@ -719,29 +718,28 @@ export default function ActivitiesView({ setView }: { setView?: (view: string) =
           </h2>
 
           {/* Accent Line */}
-          <div className="w-18 h-1 bg-[#60BADC] mx-auto mt-8 mb-15 " />
-
-          {/* Paragraphs wrapper — squiggle lives only here, scoped to this block */}
-          <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-[#F3F5FA] py-20">
-            <div className="max-w-4xl mx-auto px-8">
-
-              {/* Description */}
-              <p className="text-[#020816] text-justify text-lg leading-8 mb-6 relative z-10">
-                Learning at Isra Foundation School extends well beyond the classroom.
-                Our co-curricular programme is built on two pillars: a House System
-                that channels healthy competition into teamwork and leadership, and a
-                calendar of educational trips that turns lessons into real-world
-                experiences.
-              </p>
-
-              <p className="text-[#020816] text-justify text-lg leading-8 relative z-10">
-                Together, these programmes give every student a stage to compete,
-                create, explore, and lead — building the confidence and character
-                that carry them well beyond their school years.
-              </p>
-            </div>
-          </div>
+          <div className="w-18 h-1 bg-[#60BADC] mx-auto mt-8 mb-12" />
         </motion.div>
+
+        {/* Paragraphs wrapper */}
+        <div className="w-full bg-[#F3F5FA] py-16 sm:py-20">
+          <div className="max-w-4xl mx-auto px-6 sm:px-8">
+            {/* Description */}
+            <p className="text-[#020816] text-justify text-lg leading-8 mb-6 relative z-10">
+              Learning at Isra Foundation School extends well beyond the classroom.
+              Our co-curricular programme is built on two pillars: a House System
+              that channels healthy competition into teamwork and leadership, and a
+              calendar of educational trips that turns lessons into real-world
+              experiences.
+            </p>
+
+            <p className="text-[#020816] text-justify text-lg leading-8 relative z-10">
+              Together, these programmes give every student a stage to compete,
+              create, explore, and lead — building the confidence and character
+              that carry them well beyond their school years.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* ============================================================
