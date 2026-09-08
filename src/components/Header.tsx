@@ -330,21 +330,37 @@ export default function Header({
             <Underline active={activeView === "gallery"} />
           </a>
 
+{/* ------------------------------------------------------------------------------ */}
+          {/*The Policies page is currently not needed, so it has been commented out for now.
+          And Also Commented careers page like. and Update with external redirect links before enabling*/}
           {/* Policies Link */}
-          <a href="/gallery" onClick={() => setMobileMenuOpen(false)}
+          {/* <a href="/gallery" onClick={() => setMobileMenuOpen(false)}
             className={`group ${navLinkBase} ${navLinkColor("gallery")}`}
           >
             Policies
             <Underline active={activeView === "gallery"} />
-          </a>
+          </a> */}
 
           {/* Careers Link */}
-          <a href="/careers" onClick={() => setMobileMenuOpen(false)}
+          {/* <a href="/careers" onClick={() => setMobileMenuOpen(false)}
             className={`group ${navLinkBase} ${navLinkColor("careers")}`}
           >
             Careers
             <Underline active={activeView === "careers"} />
-          </a>
+          </a> */}
+{/* ------------------------------------------------------------------------------ */}
+          
+          {/* Careers Link */}
+        <a 
+          href="https://careers.ifs.edu.pk/" 
+          target="_blank"                         
+          rel="noopener noreferrer"               
+          onClick={() => setMobileMenuOpen(false)}
+          className={`group ${navLinkBase} ${navLinkColor("careers")}`}
+        >
+          Careers
+          <Underline active={activeView === "careers"} />
+        </a>
 
           {/* Contact Link */}
           <a href="/contact" onClick={() => setMobileMenuOpen(false)}
