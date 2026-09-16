@@ -365,7 +365,7 @@ export default function GalleryView() {
       <section
         className="relative h-[420px] lg:h-[430px] overflow-hidden"
         style={{
-          backgroundImage: "url('building-image1.jpg')",
+          backgroundImage: "url('/building-image1.jpg')",
           backgroundAttachment: "fixed",
           backgroundPosition: "center",
           backgroundSize: "cover",

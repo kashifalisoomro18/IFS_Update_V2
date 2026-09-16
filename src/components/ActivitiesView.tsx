@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect, useRef } from "react";
+import { MainView } from "../types";
 import { motion, AnimatePresence, useInView } from "motion/react";
 import {
   Trophy,
@@ -46,7 +47,7 @@ const trips: Trip[] = [
   {
     label: "Museums",
     icon: Landmark,
-    photos: ["public/trip1.jpg", "public/trip2.jpg", "public/trip3.jpg", "public/trip4.jpg", "public/trip5.jpg", "public/trip6.jpg","public/trip7.jpg", "public/trip8.jpg", "public/trip9.jpg", "public/trip10.jpg", "public/trip11.jpg", "public/trip12.jpg", "public/trip13.jpg", "public/trip14.jpg", "public/trip15.jpg", "public/trip16.jpg", "public/trip17.jpg", "public/trip18.jpg", "public/trip19.jpg", "public/trip20.jpg", "public/trip21.jpg", "public/trip22.jpg", "public/trip23.jpg", "public/trip24.jpg", "public/trip25.jpg", "public/trip26.jpg", "public/trip27.jpg", "public/trip28.jpg", "public/trip29.jpg", "public/trip30.jpg", "public/trip31.jpg"],
+    photos: ["/trip1.jpg", "/trip2.jpg", "/trip3.jpg", "/trip4.jpg", "/trip5.jpg", "/trip6.jpg", "/trip7.jpg", "/trip8.jpg", "/trip9.jpg", "/trip10.jpg", "/trip11.jpg", "/trip12.jpg", "/trip13.jpg", "/trip14.jpg", "/trip15.jpg", "/trip16.jpg", "/trip17.jpg", "/trip18.jpg", "/trip19.jpg", "/trip20.jpg", "/trip21.jpg", "/trip22.jpg", "/trip23.jpg", "/trip24.jpg", "/trip25.jpg", "/trip26.jpg", "/trip27.jpg", "/trip28.jpg", "/trip29.jpg", "/trip30.jpg", "/trip31.jpg"],
     desc: "Discover history and art."
   },
   {
@@ -64,7 +65,7 @@ const trips: Trip[] = [
   {
     label: "Outdoor Sports",
     icon: Trees,
-    photos: ["public/hydolympic1.jpeg", "public/hydolympic2.jpeg", "public/hydolympic3.jpeg", "public/hydolympic4.jpeg", "public/hydolympic5.jpeg", "public/hydolympic6.jpeg", "public/hydolympic7.jpeg", "public/hydolympic8.jpeg", "public/hydolympic9.jpeg", "public/hydolympic10.jpeg", "public/hydolympic11.jpeg", "public/hydolympic12.jpeg", "public/hydolympic13.jpeg", "public/hydolympics14.jpeg", "public/hydolympics15.jpeg", "public/hydolympics16.jpeg", "public/hydolympics17.jpeg", "public/hydolympics18.jpeg", "public/hydolympics19.jpeg"],
+    photos: ["/hydolympic1.jpeg", "/hydolympic2.jpeg", "/hydolympic3.jpeg", "/hydolympic4.jpeg", "/hydolympic5.jpeg", "/hydolympic6.jpeg", "/hydolympic7.jpeg", "/hydolympic8.jpeg", "/hydolympic9.jpeg", "/hydolympic10.jpeg", "/hydolympic11.jpeg", "/hydolympic12.jpeg", "/hydolympic13.jpeg", "/hydolympic14.jpeg", "/hydolympic15.jpeg", "/hydolympic16.jpeg", "/hydolympic17.jpeg", "/hydolympic18.jpeg", "/hydolympic19.jpeg"],
     desc: "Explore the outdoors."
   },
   {
@@ -120,7 +121,7 @@ const AnimatedCounter = ({ value, suffix = "" }: { value: number; suffix?: strin
    MAIN VIEW
 ============================================================ */
 
-export default function ActivitiesView({ setView }: { setView?: (view: string) => void }) {
+export default function ActivitiesView({ setView }: { setView?: (view: MainView) => void }) {
   const [activeTab, setActiveTab] = useState<"house" | "trips">("house");
 
   const scrollToTrips = () => {
@@ -588,7 +589,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: string) =
         <div
           className="absolute inset-0 hidden sm:block"
           style={{
-            backgroundImage: "url('building-image1.jpg')",
+            backgroundImage: "url('/building-image1.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",
@@ -598,7 +599,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: string) =
         <div
           className="absolute inset-0 sm:hidden"
           style={{
-            backgroundImage: "url('building-image1.jpg')",
+            backgroundImage: "url('/building-image1.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

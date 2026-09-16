@@ -33,6 +33,29 @@ const scholarships = [
   },
 ];
 
+const STATIC_STARS = [
+  { width: 2.1, height: 2.1, top: "12%", left: "15%", opacity: 0.35, duration: 4.2, delay: "0.5s" },
+  { width: 1.5, height: 1.5, top: "25%", left: "80%", opacity: 0.25, duration: 5.8, delay: "1.2s" },
+  { width: 3.0, height: 3.0, top: "45%", left: "30%", opacity: 0.45, duration: 3.5, delay: "2.1s" },
+  { width: 1.8, height: 1.8, top: "60%", left: "70%", opacity: 0.30, duration: 6.2, delay: "0.8s" },
+  { width: 2.4, height: 2.4, top: "18%", left: "55%", opacity: 0.40, duration: 4.9, delay: "3.0s" },
+  { width: 1.2, height: 1.2, top: "75%", left: "20%", opacity: 0.20, duration: 5.1, delay: "1.7s" },
+  { width: 2.8, height: 2.8, top: "85%", left: "88%", opacity: 0.42, duration: 3.8, delay: "2.5s" },
+  { width: 1.6, height: 1.6, top: "35%", left: "92%", opacity: 0.28, duration: 6.5, delay: "0.3s" },
+  { width: 2.0, height: 2.0, top: "50%", left: "10%", opacity: 0.32, duration: 4.6, delay: "1.9s" },
+  { width: 2.5, height: 2.5, top: "90%", left: "45%", opacity: 0.38, duration: 5.4, delay: "3.2s" },
+  { width: 1.4, height: 1.4, top: "8%", left: "38%", opacity: 0.22, duration: 4.0, delay: "0.9s" },
+  { width: 2.2, height: 2.2, top: "68%", left: "62%", opacity: 0.36, duration: 5.0, delay: "2.8s" },
+  { width: 1.9, height: 1.9, top: "40%", left: "50%", opacity: 0.29, duration: 6.0, delay: "1.4s" },
+  { width: 2.7, height: 2.7, top: "28%", left: "5%", opacity: 0.44, duration: 3.6, delay: "2.2s" },
+  { width: 1.3, height: 1.3, top: "82%", left: "76%", opacity: 0.21, duration: 5.6, delay: "0.6s" },
+  { width: 2.6, height: 2.6, top: "55%", left: "95%", opacity: 0.39, duration: 4.4, delay: "3.5s" },
+  { width: 1.7, height: 1.7, top: "15%", left: "72%", opacity: 0.27, duration: 6.8, delay: "1.1s" },
+  { width: 2.3, height: 2.3, top: "72%", left: "35%", opacity: 0.34, duration: 4.8, delay: "2.0s" },
+  { width: 1.5, height: 1.5, top: "95%", left: "18%", opacity: 0.26, duration: 5.3, delay: "0.4s" },
+  { width: 2.9, height: 2.9, top: "32%", left: "65%", opacity: 0.46, duration: 3.9, delay: "3.1s" },
+];
+
 export default function AdmissionsScholarship() {
   const { ref: leftRef, visible: leftVisible } = useReveal();
   const { ref: rightRef, visible: rightVisible } = useReveal();
@@ -51,7 +74,7 @@ export default function AdmissionsScholarship() {
       {/* Background image */}
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <img
-          src="scholarship.jpeg"
+          src="/scholarship.jpeg"
           alt=""
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
@@ -190,18 +213,18 @@ export default function AdmissionsScholarship() {
 
       {/* Stars / particles */}
       <div style={{ position:"absolute", inset:0, pointerEvents:"none", overflow:"hidden" }}>
-        {[...Array(20)].map((_, i) => (
+        {STATIC_STARS.map((star, i) => (
           <div key={i} style={{
             position:"absolute",
-            width: Math.random() * 2.5 + 1,
-            height: Math.random() * 2.5 + 1,
+            width: star.width,
+            height: star.height,
             borderRadius:"0%",
             background:"white",
-            top:`${Math.random() * 100}%`,
-            left:`${Math.random() * 100}%`,
-            opacity: Math.random() * 0.4 + 0.1,
-            animation:`twinkle ${3 + Math.random() * 5}s ease-in-out infinite`,
-            animationDelay:`${Math.random() * 4}s`,
+            top: star.top,
+            left: star.left,
+            opacity: star.opacity,
+            animation:`twinkle ${star.duration}s ease-in-out infinite`,
+            animationDelay: star.delay,
           }} />
         ))}
       </div>

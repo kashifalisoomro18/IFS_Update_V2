@@ -259,7 +259,7 @@ export default function CareersView() {
         <div
           className="absolute inset-0 hidden sm:block"
           style={{
-            backgroundImage: "url('building-image1.jpg')",
+            backgroundImage: "url('/building-image1.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",
@@ -269,7 +269,7 @@ export default function CareersView() {
         <div
           className="absolute inset-0 sm:hidden"
           style={{
-            backgroundImage: "url('building-image1.jpg')",
+            backgroundImage: "url('/building-image1.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

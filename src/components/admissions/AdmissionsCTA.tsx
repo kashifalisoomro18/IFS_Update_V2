@@ -1,5 +1,20 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Phone, Mail, MapPin, ExternalLink } from "lucide-react";
+// Navigation handled via window.location for SPA compatibility
+import { ArrowRight, ExternalLink } from "lucide-react";
+
+const ADMISSIONS_PATH = "/admissions";
+const REGISTRATION_SECTION_ID = "admissions-registration";
+
+function scrollToAdmissionsSection(sectionId: string) {
+  const el = document.getElementById(sectionId);
+  const headerHeight = window.innerWidth < 768 ? 85 : 125;
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY - headerHeight;
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+  } else {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
 
 function useReveal(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
@@ -16,6 +31,22 @@ function useReveal(threshold = 0.15) {
 
 export default function AdmissionsCTA() {
   const { ref, visible } = useReveal();
+
+  const handleApplyNow = () => {
+    if (typeof window === "undefined") return;
+
+    const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
+    const onAdmissionsPage = currentPath === ADMISSIONS_PATH;
+
+    if (onAdmissionsPage) {
+      scrollToAdmissionsSection(REGISTRATION_SECTION_ID);
+      return;
+    }
+
+    // Store the scroll target so AdmissionsView can pick it up after mount
+    sessionStorage.setItem("admissionsScrollTarget", REGISTRATION_SECTION_ID);
+    window.location.href = `${ADMISSIONS_PATH}#${REGISTRATION_SECTION_ID}`;
+  };
 
   return (
     <section className="relative h-[auto] min-h-[500px] flex items-center overflow-hidden py-16 lg:py-24">
@@ -38,20 +69,20 @@ export default function AdmissionsCTA() {
               Start the application process now and give your child the world-class
               education they deserve at ISRA Foundation Schools.</p>
             <div className="flex flex-wrap gap-4 sm:gap-6 justify-center">
-              <a
-                href="#admissions-registration"
-                className="group relative overflow-hidden inline-flex items-center justify-center gap-2 font-bold px-6 py-3.5 sm:px-8 sm:py-4 w-full sm:w-auto"
+              <button
+                type="button"
+                onClick={handleApplyNow}
+                className="group relative overflow-hidden inline-flex items-center justify-center gap-2 font-bold px-6 py-3.5 sm:px-8 sm:py-4 w-full sm:w-auto cursor-pointer border-0"
                 style={{
-                  textDecoration: 'none',
-                  background: 'white',
-                  color: '#020816',
+                  background: "white",
+                  color: "#020816",
                 }}
               >
                 <span className="absolute inset-0 bg-[#f5C330] origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100" />
                 <span className="relative z-10 flex items-center gap-2">
                   Apply Now <ArrowRight className="w-5 h-5" />
                 </span>
-              </a>
+              </button>
 
                 {/* Google Form Button */}
                 <a 

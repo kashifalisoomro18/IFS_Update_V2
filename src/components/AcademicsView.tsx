@@ -184,8 +184,9 @@ function SectionHeading({
             letterSpacing: "0.12em",
             textTransform: "uppercase",
             marginBottom: "6px",
+            fontFamily: "'JetBrains Mono', ui-monospace, monospace",
           }}
-        > {eyebrow}</span>
+        >{eyebrow}</span>
         <span style={{ width: "32px", borderTop: "1px solid #020816" }} />
 
       </div>
@@ -236,11 +237,7 @@ function OverviewSection() {
     <div className="space-y-8" id="academics-overview">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow={
-            <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
-              Academic Program
-            </span>
-          }
+          eyebrow="Academic Program"
           heading="Curriculum"
           accent={<span style={{ color: "#60BADC" }}> Overview</span>}
           description="The curriculum focuses on a rigorous and creative academic foundation that aims at developing intellectual curiosity, critical thinking, and problem-solving skills amongst our students."
@@ -309,12 +306,7 @@ function DualAcademicCoreSection() {
     <div className="space-y-10 pt-16 sm:pt-20" id="dual-academic-blocks">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow={
-            <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
-              Dual Curriculum
-            </span>
-          }
-
+          eyebrow="Dual Curriculum"
           heading="Academic"
           accent={<span style={{ color: "#F5C330" }}> Excellence</span>}
           dividerColor="#60BADC"
@@ -426,11 +418,7 @@ function TeachingMethodologySection() {
   return (
     <div className="space-y-10 pt-20" id="academics-methodology">
       <SectionHeading
-        eyebrow={
-          <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
-            Our Approach
-          </span>
-        }
+        eyebrow="Our Approach"
         heading="How We Bring Learning"
         accent={<span style={{ color: "#60BADC" }}> <br />To Life</span>}
         dividerColor="#f5c330"
@@ -581,22 +569,35 @@ function AcademicsHeroBanner() {
         {/* CTAs */}
         <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
           <a
-            href="#academics-curriculum"
+            href="#curriculum"
             className="curriculum-btn"
             onClick={(e) => {
               e.preventDefault();
-              const target = document.getElementById('academics-curriculum');
-              if (target) {
-                const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+              // Ensure the curriculum tab hash is set so the section is visible
+              if (typeof window !== 'undefined') {
+                window.history.replaceState(null, '', '#curriculum');
+                window.dispatchEvent(new HashChangeEvent('hashchange'));
+              }
+              // After a brief tick (so React re-renders the tab), scroll smoothly
+              setTimeout(() => {
+                const target =
+                  document.getElementById('academics-nav') ||
+                  document.getElementById('curriculum');
+                if (!target) return;
+                const HEADER_OFFSET = window.innerWidth < 768 ? 85 : 110;
+                const targetPosition =
+                  target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
                 const startPosition = window.scrollY;
                 const distance = targetPosition - startPosition;
-                const duration = 1500; // 1.5 seconds for a slower scroll
+                const duration = 1600; // slow, deliberate upward journey ~1.6s
                 let start: number | null = null;
+
+                const easeInOutCubic = (t: number) =>
+                  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
                 const step = (timestamp: number) => {
                   if (!start) start = timestamp;
                   const progress = timestamp - start;
-                  const easeInOutCubic = (t: number) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
                   const percentage = Math.min(progress / duration, 1);
                   window.scrollTo(0, startPosition + distance * easeInOutCubic(percentage));
                   if (progress < duration) {
@@ -604,13 +605,12 @@ function AcademicsHeroBanner() {
                   }
                 };
                 window.requestAnimationFrame(step);
-              }
+              }, 60);
             }}
           >
             <span className="curriculum-btn-bg"></span>
             <span className="curriculum-btn-content">
               Explore Curriculum
-
             </span>
           </a>
         </div>
@@ -695,17 +695,13 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
   return (
     <section className="space-y-30 overflow-visible pt-20" id="fps-school-levels-showcase">
       <SectionHeading
-        eyebrow={
-          <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
-            Academic Pathways
-          </span>
-        }
+        eyebrow="Academic Pathways"
         heading="Levels "
         accent={<span style={{ color: "#f5c330" }}> Offered</span>}
         dividerColor="#60BADC"
       />
       {/* 1. ECD Section Block */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 my-30" id="junior-level-card">
+      <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 my-16 sm:my-28 lg:my-44" id="junior-level-card">
         <div className="relative">
 
           {/* Background depth layers behind the whole card */}
@@ -727,7 +723,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
           <motion.div
             whileHover={{ y: -10 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="bg-[#FDE047]  p-8 sm:p-12 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[460px] w-full sm:w-[92%] ml-auto"
+            className="bg-[#FDE047] p-5 sm:p-10 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-0 lg:min-h-[460px] w-full sm:w-[92%] ml-auto"
           >
 
             {/* Left Column: Narrative details and button — slides in from the left */}
@@ -736,13 +732,11 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 z-20 space-y-6 lg:pr-12"
+              className="lg:col-span-6 z-20 space-y-4 sm:space-y-6 lg:pr-12"
             >
-              <p className="text-[#020618]/85 text-base sm:text-lg leading-relaxed font-normal max-w-md text-justify">
+              <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
                 At IFS, we see<strong className="text-[#020618] font-extrabold"> Early Childhood Development (ECD) </strong> as a vital stage where children begin to explore the world, build meaningful relationships, and develop essential cognitive, social, emotional, and physical skills. Through a nurturing, safe, and engaging learning environment, we encourage curiosity, creativity, confidence, and a strong foundation for lifelong learning.
-
               </p>
-
             </motion.div>
 
             {/* Right Column: Large image block with golden tint and overlaid text — slides in from the right */}
@@ -751,11 +745,11 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 relative h-[400px] sm:h-[440px] flex items-center justify-center w-full"
+              className="lg:col-span-6 relative h-[280px] sm:h-[380px] lg:h-[440px] flex items-center justify-center w-full mt-4 lg:mt-0"
             >
-              <div className="absolute inset-0 -top-6 sm:-top-10 bg-slate-950  overflow-hidden shadow-xl z-10 group">
+              <div className="absolute inset-0 top-0 lg:-top-6 xl:-top-10 bg-slate-950 overflow-hidden shadow-xl z-10 group rounded-sm">
                 <img
-                  src="assets/slider/slide4.jpg"
+                  src="/assets/slider/slide4.jpg"
                   alt="Junior school students in lab"
                   className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
                 />
@@ -765,9 +759,9 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
 
                 {/* Heading — bold + light on two lines, like Elementary card */}
                 <div className="absolute bottom-20 sm:bottom-24 left-6 z-30 select-none">
-                  <h3 className="font-sans font-black text-white text-4xl sm:text-5xl leading-[0.9] tracking-tight">
+                  <h3 className="font-sans font-black text-white text-3xl sm:text-5xl leading-[0.9] tracking-tight">
                     ECD
-                    <span className="block font-light text-white/90 text-3xl sm:text-4xl mt-0.5">
+                    <span className="block font-light text-white/90 text-2xl sm:text-4xl mt-0.5">
                       Section
                     </span>
                   </h3>
@@ -778,7 +772,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                   <span className="text-[10px] sm:text-[11px] font-bold text-white uppercase tracking-widest block font-mono">
                     Grade Levels
                   </span>
-                  <span className="text-sm sm:text-base  text-white ">
+                  <span className="text-xs sm:text-base text-white">
                     Pre-Nursery - Kindergarten
                   </span>
                 </div>
@@ -789,8 +783,8 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
         </div>
       </div>
 
-      {/* 2. Elementary  section */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 my-50" id="elementary-level-card">
+      {/* 2. Elementary section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 my-16 sm:my-28 lg:my-44" id="elementary-level-card">
         <div className="relative">
 
           {/* Background depth layers — right side, lavender family */}
@@ -813,7 +807,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
           <motion.div
             whileHover={{ y: -10 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="bg-[#e1d8f7] p-8 sm:p-12 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[460px] w-full sm:w-[92%]"
+            className="bg-[#e1d8f7] p-5 sm:p-10 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-0 lg:min-h-[460px] w-full sm:w-[92%]"
           >
 
             {/* Left Column: Framed portrait photo + Grade Levels badge + heading */}
@@ -822,11 +816,11 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 relative flex flex-col justify-end min-h-[380px] sm:min-h-[440px] z-10 w-full"
+              className="lg:col-span-6 relative flex flex-col justify-end min-h-[300px] sm:min-h-[400px] lg:min-h-[440px] z-10 w-full"
             >
 
               {/* Image frame wrapper — light glass border, fits the lavender card */}
-              <div className="relative w-full h-[280px] sm:h-[320px]">
+              <div className="relative w-full h-[240px] sm:h-[320px]">
 
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -837,7 +831,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                   className="absolute inset-0 w-[82%] sm:w-[78%] h-full overflow-hidden bg-white/60 backdrop-blur-sm p-2 shadow-[0_18px_40px_rgba(31,20,10,0.15)] z-10 border border-white/60"
                 >
                   <img
-                    src="assets/slider/slide2.jpg"
+                    src="/assets/slider/slide2.jpg"
                     alt="School building"
                     className="w-full h-full object-cover object-center"
                   />
@@ -851,10 +845,10 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                   transition={{ duration: 0.6, delay: 0.5 }}
                   className="absolute right-0 sm:right-2 bottom-6 bg-white/70 backdrop-blur-md border border-white/20 px-4 py-3.5 shadow-lg z-20 select-none"
                 >
-                  <span className="text-[9px] sm:text-[11px] font-bold text-[020816] uppercase tracking-widest block font-mono">
+                  <span className="text-[9px] sm:text-[11px] font-bold text-[#020816] uppercase tracking-widest block font-mono">
                     Grade Levels
                   </span>
-                  <span className="text-xs sm:text-sm font-bold text-[#020816]]">
+                  <span className="text-xs sm:text-sm font-bold text-[#020816]">
                     Grade I - Grade V
                   </span>
                 </motion.div>
@@ -868,9 +862,9 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                 transition={{ duration: 0.7, delay: 0.55 }}
                 className="relative z-30 mt-6 select-none"
               >
-                <h3 className="font-sans font-black text-[#020816] text-5xl sm:text-6xl lg:text-7xl leading-[0.85] tracking-tight">
+                <h3 className="font-sans font-black text-[#020816] text-4xl sm:text-6xl lg:text-7xl leading-[0.85] tracking-tight">
                   Elementary
-                  <span className="block font-sans font-light text-[#020816]/60 text-4xl sm:text-5xl mt-1">
+                  <span className="block font-sans font-light text-[#020816]/60 text-3xl sm:text-5xl mt-1">
                     School
                   </span>
                 </h3>
@@ -883,9 +877,9 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 lg:pl-16 z-20 space-y-6"
+              className="lg:col-span-6 lg:pl-16 z-20 space-y-4 sm:space-y-6"
             >
-              <p className="text-[#020816]/85 text-base sm:text-lg leading-relaxed font-normal max-w-md text-justify">
+              <p className="text-[#020816]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
                 At <strong className="text-[#020816] font-extrabold">IFS Elementary</strong>, we nurture the development of each child emotionally, academically, physically, socially, and artistically during their formative years.
               </p>
             </motion.div>
@@ -895,7 +889,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
       </div>
 
       {/* 3. Middle Section */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 my-50" id="alevel-level-card">
+      <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 my-16 sm:my-28 lg:my-44" id="alevel-level-card">
         <div className="relative">
 
           {/* Background depth layers behind the whole card — left side, mint-teal family */}
@@ -917,7 +911,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
           <motion.div
             whileHover={{ y: -10 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="bg-[#91E5DB] p-8 sm:p-12 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[460px] w-full sm:w-[92%] ml-auto"
+            className="bg-[#91E5DB] p-5 sm:p-10 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-0 lg:min-h-[460px] w-full sm:w-[92%] ml-auto"
           >
 
             {/* Left Column: Narrative details and button — slides in from the left */}
@@ -926,14 +920,9 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 z-20 space-y-6 lg:pr-12"
+              className="lg:col-span-6 z-20 space-y-4 sm:space-y-6 lg:pr-12"
             >
-              {/* Small eyebrow tag — gives this card its own top-of-column identity */}
-              {/* <span className="inline-block text-[10px] sm:text-[11px] font-bold text-[#020618] uppercase tracking-widest font-mono border-b-2 border-[#020618] pb-1">
-                  Beyond Senior School
-                </span> */}
-
-              <p className="text-[#020618]/85 text-base sm:text-lg leading-relaxed font-normal max-w-md text-justify">
+              <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
                 At IFS <strong className="text-[#020816] font-extrabold"> Middle Section (Grades VI–VII) </strong>, students are encouraged to strengthen their academic skills, develop critical thinking, and build confidence as independent learners. Through engaging learning experiences, they are prepared to take on greater challenges and grow into responsible, curious, and capable individuals.
               </p>
             </motion.div>
@@ -944,15 +933,15 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 relative h-[420px] sm:h-[460px] flex items-center justify-center w-full"
+              className="lg:col-span-6 relative h-[300px] sm:h-[400px] lg:h-[460px] flex items-center justify-center w-full mt-4 lg:mt-0"
             >
               {/* Image with angled top edge instead of a plain rectangle */}
               <div
-                className="absolute inset-0 -top-6 sm:-top-10 bg-slate-950 overflow-hidden shadow-xl z-10 group"
+                className="absolute inset-0 top-0 lg:-top-6 xl:-top-10 bg-slate-950 overflow-hidden shadow-xl z-10 group rounded-sm"
                 style={{ clipPath: "polygon(0% 6%, 100% 0%, 100% 100%, 0% 100%)" }}
               >
                 <img
-                  src="assets/slider/slide6.jpg"
+                  src="/assets/slider/slide6.jpg"
                   alt="A-Level students"
                   className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
                 />
@@ -962,9 +951,9 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
 
                 {/* Heading — moved to TOP of image (Junior's sits at the bottom) */}
                 <div className="absolute top-8 sm:top-10 left-6 z-30 select-none">
-                  <h3 className="font-sans font-black text-white text-4xl sm:text-5xl leading-[0.9] tracking-tight">
+                  <h3 className="font-sans font-black text-white text-3xl sm:text-5xl leading-[0.9] tracking-tight">
                     Middle
-                    <span className="block font-light text-white/90 text-3xl sm:text-4xl mt-0.5">
+                    <span className="block font-light text-white/90 text-2xl sm:text-4xl mt-0.5">
                       Section
                     </span>
                   </h3>
@@ -993,7 +982,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
       </div>
 
       {/* 4. Cambridge section */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 my-50" id="senior-level-card">
+      <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 my-16 sm:my-28 lg:my-44" id="senior-level-card">
         <div className="relative">
 
           {/* Background depth layers behind the card — right side, like reference */}
@@ -1016,14 +1005,14 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
           <motion.div
             whileHover={{ y: -10 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="bg-[#BAE6FD] p-8 sm:p-12 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[460px] w-full sm:w-[92%]"
+            className="bg-[#BAE6FD] p-5 sm:p-10 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-0 lg:min-h-[460px] w-full sm:w-[92%]"
           >
 
             {/* Left Column: Image collage + heading */}
-            <div className="lg:col-span-6 relative flex flex-col justify-end min-h-[380px] sm:min-h-[440px] z-10 w-full">
+            <div className="lg:col-span-6 relative flex flex-col justify-end min-h-[300px] sm:min-h-[400px] lg:min-h-[440px] z-10 w-full">
 
               {/* Image stack wrapper */}
-              <div className="relative w-full h-[280px] sm:h-[320px]">
+              <div className="relative w-full h-[240px] sm:h-[320px]">
 
                 {/* Top polygon image — blue-tinted graduation photo */}
                 <motion.div
@@ -1036,7 +1025,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                   style={{ clipPath: "polygon(10% 0%, 100% 4%, 88% 100%, 0% 90%)" }}
                 >
                   <img
-                    src="assets/slider/slide51.jpg"
+                    src="/assets/slider/slide51.jpg"
                     alt="Senior school graduates"
                     className="w-full h-full object-cover object-center"
                   />
@@ -1054,7 +1043,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                   className="absolute left-0 bottom-[8%] w-[34%] sm:w-[30%] aspect-[4/5]  overflow-hidden bg-white p-1 shadow-[0_16px_35px_rgba(16,24,40,0.20)] border border-white z-20"
                 >
                   <img
-                    src="assets/slider/559005353_1378177237650043_1854500200270735487_n.jpg"
+                    src="/assets/slider/559005353_1378177237650043_1854500200270735487_n.jpg"
                     alt="Graduation ceremony group"
                     className="w-full h-full object-cover object-top"
                   />
@@ -1069,9 +1058,9 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                 transition={{ duration: 0.7, delay: 0.5 }}
                 className="relative z-30 mt-4 select-none"
               >
-                <h3 className="font-sans font-black text-[#0f172a] text-5xl sm:text-6xl lg:text-7xl leading-[0.85] tracking-tight">
+                <h3 className="font-sans font-black text-[#0f172a] text-4xl sm:text-6xl lg:text-7xl leading-[0.85] tracking-tight">
                   Cambridge
-                  <span className="block font-sans font-light text-slate-500 text-4xl sm:text-5xl mt-1">
+                  <span className="block font-sans font-light text-slate-500 text-3xl sm:text-5xl mt-1">
                     Section
                   </span>
                 </h3>
@@ -1092,9 +1081,9 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
-              className="lg:col-span-6 lg:pl-16 z-20 space-y-6"
+              className="lg:col-span-6 lg:pl-16 z-20 space-y-4 sm:space-y-6"
             >
-              <p className="text-slate-800 text-base sm:text-lg leading-relaxed font-normal max-w-md text-justify">
+              <p className="text-slate-800 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
                 At IFS <strong className="text-slate-950 font-bold">O Level & A Level</strong> provides students with a balanced and enriching learning experience that combines academic excellence with a vibrant co-curricular program. Our aim is to develop confident, independent, and critical thinkers, equipping students with the knowledge, skills, and confidence they need to succeed in their examinations, university, and beyond.
               </p>
 
@@ -1316,7 +1305,7 @@ export default function AcademicsView({
           <div
             className="absolute inset-0 hidden sm:block"
             style={{
-              backgroundImage: "url('building-image1.jpg')",
+              backgroundImage: "url('/building-image1.jpg')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundAttachment: "fixed",
@@ -1326,7 +1315,7 @@ export default function AcademicsView({
           <div
             className="absolute inset-0 sm:hidden"
             style={{
-              backgroundImage: "url('building-image1.jpg')",
+              backgroundImage: "url('/building-image1.jpg')",
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -1365,7 +1354,9 @@ export default function AcademicsView({
               const pts = Array.from({ length: 6 })
                 .map((_, k) => {
                   const a = (k * 60 * Math.PI) / 180 - Math.PI / 2;
-                  return `${hex.cx + r * Math.cos(a)},${hex.cy + r * Math.sin(a)}`;
+                  const px = (hex.cx + r * Math.cos(a)).toFixed(2);
+                  const py = (hex.cy + r * Math.sin(a)).toFixed(2);
+                  return `${px},${py}`;
                 })
                 .join(" ");
               return (
@@ -1502,11 +1493,7 @@ export default function AcademicsView({
           {activeTab === "timings" && (
              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 animate-fadeIn" id="timings" data-section="timings">
               <SectionHeading
-                eyebrow={
-                  <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
-                    Daily Hours
-                  </span>
-                }
+                eyebrow="Daily Hours"
                 heading="School Hours & "
                 accent={<span style={{ color: "#60BADC" }}>Office Timings</span>}
                 dividerColor="#F5C330"
@@ -1549,11 +1536,7 @@ export default function AcademicsView({
           {activeTab === "calendar" && (
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 animate-fadeIn" id="calendar" data-section="calendar">
               <SectionHeading
-                eyebrow={
-                  <span style={{ fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
-                    Yearly Milestones
-                  </span>
-                }
+                eyebrow="Yearly Milestones"
                 heading="Academic Term "
                 accent={<span style={{ color: "#F5C330" }}>Schedules</span>}
                 dividerColor="#60BADC"

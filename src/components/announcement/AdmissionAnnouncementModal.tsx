@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Sparkles, Calendar as CalendarIcon, ArrowRight } from "lucide-react";
 
@@ -102,9 +102,14 @@ export default function AnnouncementModal({
   onApply,
   data = DEFAULT_DATA,
 }: AnnouncementModalProps) {
+  const [mounted, setMounted] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Lock body scroll while open, restore on close/unmount.
   useEffect(() => {
@@ -162,6 +167,8 @@ export default function AnnouncementModal({
     onApply?.();
     onClose();
   };
+
+  if (!mounted) return null;
 
   return (
     <AnimatePresence>

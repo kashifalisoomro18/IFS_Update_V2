@@ -465,6 +465,10 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
   };
 
   useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash.replace("#", "")) {
+      return;
+    }
+
     const scrollToSection = (targetId: string) => {
       const el = document.getElementById(targetId);
       if (!el) return;
@@ -936,7 +940,7 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
         <div
           className="absolute inset-0 hidden sm:block"
           style={{
-            backgroundImage: "url('building-image1.jpg')",
+            backgroundImage: "url('/building-image1.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",
@@ -946,7 +950,7 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
         <div
           className="absolute inset-0 sm:hidden"
           style={{
-            backgroundImage: "url('building-image1.jpg')",
+            backgroundImage: "url('/building-image1.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -978,11 +982,13 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
             [200, 300], [320, 300],
           ].map(([cx, cy], i) => {
             const dist = Math.sqrt((cx - 200) ** 2 + (cy - 180) ** 2);
-            const opacity = Math.max(0.08, 0.55 - dist * 0.0028);
+            const opacity = Number(Math.max(0.08, 0.55 - dist * 0.0028).toFixed(3));
             const pts = Array.from({ length: 6 })
               .map((_, k) => {
                 const a = (k * 60 * Math.PI) / 180;
-                return `${cx + 34 * Math.cos(a)},${cy + 34 * Math.sin(a)}`;
+                const px = (cx + 34 * Math.cos(a)).toFixed(2);
+                const py = (cy + 34 * Math.sin(a)).toFixed(2);
+                return `${px},${py}`;
               })
               .join(" ");
             return <polygon key={i} points={pts} stroke={GOLD} strokeWidth="1.2" strokeOpacity={opacity} />;
@@ -1614,7 +1620,7 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
           {/* Tab switcher */}
           <div className="flex justify-center mb-10">
             <div className="flex gap-2 bg-[#0d1f3c] p-1.5 rounded-none">
-              {["olevel", "alevel"].map((tab) => (
+              {(["olevel", "alevel"] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}

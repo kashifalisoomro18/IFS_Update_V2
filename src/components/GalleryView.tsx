@@ -4,7 +4,6 @@
  */
 
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
-import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronRight,
@@ -33,40 +32,40 @@ const GOLD = "#F5C330";
    `size` controls the card's aspect ratio in the masonry grid.
 --------------------------------------------------------- */
 const galleryItems = [
-  { id: "1", src: "public/ACADEMICS7.JPG", alt: "Student holding flag", title: "Graduation", category: "academics", size: "tall" },
-  { id: "2", src: "public/ACADEMICS1.JPG", alt: "Student reaching for a book on a tall shelf", title: "Finding the Right Book", category: "academics", size: "wide" },
-  { id: "3", src: "public/IMG_2203.JPG", alt: "Student choosing a guitar from the music room wall", title: "Music Room", category: "cultural", size: "md" },
-  { id: "4", src: "public/IMG_2210.JPG", alt: "Student viewing an art installation", title: "Gallery Walk", category: "cultural", size: "md" },
-  { id: "5", src: "public/IMG_2348.JPG", alt: "Teacher giving a speech at the podium", title: "Annual Address", category: "events", size: "wide" },
-  { id: "6", src: "public/pintober1 (1).jpeg", alt: "certificate distribution", title: "Pintober Event", category: "events", size: "wide" },
-  { id: "8", src: "public/ACADEMICS2.JPG", alt: "Teacher writing on the whiteboard", title: "Morning Lecture", category: "academics", size: "wide" },
-  { id: "9", src: "public/IMG_4097.JPG", alt: "Group of students laughing together outdoors", title: "Between Classes", category: "campus", size: "md" },
-  { id: "10", src: "public/ACADEMICS6.JPG", alt: "Student portrait holding folders", title: "Class of 2026", category: "academics", size: "tall" },
-   { id: "7", src: "public/pintober2.jpeg", alt: "certificate distribution", title: "Pintober Event", category: "events", size: "wide" },
-  { id: "11", src: "public/ACADEMICS5.JPG", alt: "Students examining an anatomy model", title: "Science Lab", category: "academics", size: "wide" },
-  { id: "12", src: "public/hydolympic1.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
-  { id: "12", src: "public/hydolympic2.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
-  { id: "12", src: "public/hydolympic3.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
-  { id: "12", src: "public/hydolympic6.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
-  { id: "13", src: "public/ACADEMICS3.JPG", alt: "Student reading in the library aisle", title: "Quiet Corner", category: "academics", size: "wide" },
-  { id: "14", src: "public/IMG_4093.JPG", alt: "Students pointing at campus architecture", title: "Campus Tour", category: "campus", size: "wide" },
-  { id: "15", src: "public/IMG_4095.JPG", alt: "Two students walking with backpacks and books", title: "Heading to Class", category: "campus", size: "wide" },
-  { id: "16", src: "public/ACADEMICS4.JPG", alt: "Student thinking with a thoughtful expression", title: "Deep in Thought", category: "academics", size: "md" },
-  { id: "17", src: "public/IMG_4096.JPG", alt: "Student reading on the campus lawn", title: "Outdoor Reading", category: "campus", size: "wide" },
-  { id: "18", src: "public/playground.jpg", alt: "Athletes racing on the track", title: "Track Finals", category: "sports", size: "tall" },
-{ id: "12", src: "public/hydolympic9.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
-  { id: "12", src: "public/hydolympic10.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
-  { id: "12", src: "public/hydolympic13.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
-  { id: "12", src: "public/hydolympic15.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
-  { id: "19", src: "public/play3.jpg", alt: "Basketball team celebrating a win", title: "Championship Match", category: "sports", size: "md" },
-  { id: "20", src: "public/play2.jpg", alt: "Football team huddled on the field", title: "Team Huddle", category: "sports", size: "wide" },
-  { id: "21", src: "public/playground5.jpg", alt: "Swimmer diving into the pool", title: "Swim Meet", category: "sports", size: "tall" },
-  { id: "20", src: "https://picsum.photos/seed/culture-dance-20/800/900", alt: "Students performing a traditional dance", title: "Cultural Night", category: "cultural", size: "md" },
-  { id: "21", src: "https://picsum.photos/seed/culture-art-21/800/650", alt: "Students painting a mural together", title: "Mural Project", category: "cultural", size: "wide" },
-  { id: "22", src: "public/ID4.JPG", alt: "Students at the annual fall festival", title: "Fall Festival", category: "events", size: "tall" },
-  { id: "23", src: "public/ID3.JPG", alt: "Student receiving an award on stage", title: "Honors Ceremony", category: "events", size: "md" },
-  { id: "24", src: "public/IMG_4097.JPG", alt: "Wide view of the school building facade", title: "Main Building", category: "campus", size: "wide" },
-   { id: "25", src: "public/audi4.jpg", alt: "Students in auditorium for a session", title: "Auditorium Session", category: "campus", size: "md" },
+  { id: "1", src: "/ACADEMICS7.JPG", alt: "Student holding flag", title: "Graduation", category: "academics", size: "tall" },
+  { id: "2", src: "/ACADEMICS1.JPG", alt: "Student reaching for a book on a tall shelf", title: "Finding the Right Book", category: "academics", size: "wide" },
+  { id: "3", src: "/IMG_2203.JPG", alt: "Student choosing a guitar from the music room wall", title: "Music Room", category: "cultural", size: "md" },
+  { id: "4", src: "/IMG_2210.JPG", alt: "Student viewing an art installation", title: "Gallery Walk", category: "cultural", size: "md" },
+  { id: "5", src: "/IMG_2348.JPG", alt: "Teacher giving a speech at the podium", title: "Annual Address", category: "events", size: "wide" },
+  { id: "6", src: "/pintober1 (1).jpeg", alt: "certificate distribution", title: "Pintober Event", category: "events", size: "wide" },
+  { id: "8", src: "/ACADEMICS2.JPG", alt: "Teacher writing on the whiteboard", title: "Morning Lecture", category: "academics", size: "wide" },
+  { id: "9", src: "/IMG_4097.JPG", alt: "Group of students laughing together outdoors", title: "Between Classes", category: "campus", size: "md" },
+  { id: "10", src: "/ACADEMICS6.JPG", alt: "Student portrait holding folders", title: "Class of 2026", category: "academics", size: "tall" },
+   { id: "7", src: "/pintober2.jpeg", alt: "certificate distribution", title: "Pintober Event", category: "events", size: "wide" },
+  { id: "11", src: "/ACADEMICS5.JPG", alt: "Students examining an anatomy model", title: "Science Lab", category: "academics", size: "wide" },
+  { id: "hyd-1", src: "/hydolympic1.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
+  { id: "hyd-2", src: "/hydolympic2.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
+  { id: "hyd-3", src: "/hydolympic3.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
+  { id: "hyd-4", src: "/hydolympic6.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
+  { id: "13", src: "/ACADEMICS3.JPG", alt: "Student reading in the library aisle", title: "Quiet Corner", category: "academics", size: "wide" },
+  { id: "14", src: "/IMG_4093.JPG", alt: "Students pointing at campus architecture", title: "Campus Tour", category: "campus", size: "wide" },
+  { id: "15", src: "/IMG_4095.JPG", alt: "Two students walking with backpacks and books", title: "Heading to Class", category: "campus", size: "wide" },
+  { id: "16", src: "/ACADEMICS4.JPG", alt: "Student thinking with a thoughtful expression", title: "Deep in Thought", category: "academics", size: "md" },
+  { id: "17", src: "/IMG_4096.JPG", alt: "Student reading on the campus lawn", title: "Outdoor Reading", category: "campus", size: "wide" },
+  { id: "18", src: "/playground.jpg", alt: "Athletes racing on the track", title: "Track Finals", category: "sports", size: "tall" },
+  { id: "hyd-5", src: "/hydolympic9.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
+  { id: "hyd-6", src: "/hydolympic10.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
+  { id: "hyd-7", src: "/hydolympic13.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
+  { id: "hyd-8", src: "/hydolympic15.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
+  { id: "19", src: "/play3.jpg", alt: "Basketball team celebrating a win", title: "Championship Match", category: "sports", size: "md" },
+  { id: "20", src: "/play2.jpg", alt: "Football team huddled on the field", title: "Team Huddle", category: "sports", size: "wide" },
+  { id: "21", src: "/playground5.jpg", alt: "Swimmer diving into the pool", title: "Swim Meet", category: "sports", size: "tall" },
+  { id: "cult-1", src: "https://picsum.photos/seed/culture-dance-20/800/900", alt: "Students performing a traditional dance", title: "Cultural Night", category: "cultural", size: "md" },
+  { id: "cult-2", src: "https://picsum.photos/seed/culture-art-21/800/650", alt: "Students painting a mural together", title: "Mural Project", category: "cultural", size: "wide" },
+  { id: "22", src: "/ID4.JPG", alt: "Students at the annual fall festival", title: "Fall Festival", category: "events", size: "tall" },
+  { id: "23", src: "/ID3.JPG", alt: "Student receiving an award on stage", title: "Honors Ceremony", category: "events", size: "md" },
+  { id: "24", src: "/IMG_4097.JPG", alt: "Wide view of the school building facade", title: "Main Building", category: "campus", size: "wide" },
+   { id: "25", src: "/audi4.jpg", alt: "Students in auditorium for a session", title: "Auditorium Session", category: "campus", size: "md" },
 ];
 
 const categories = [
@@ -317,20 +316,22 @@ function GalleryCard({ item, onClick, index, stretch }) {
    Masonry grid
 --------------------------------------------------------- */
 function useColumnCount() {
-  const getCols = () => {
-    if (typeof window === "undefined") return 4;
-    const w = window.innerWidth;
-    if (w < 640) return 1;
-    if (w < 1024) return 2;
-    if (w < 1280) return 3;
-    return 4;
-  };
-  const [cols, setCols] = useState(getCols);
+  const [cols, setCols] = useState(4);
+
   useEffect(() => {
-    const onResize = () => setCols(getCols());
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const updateCols = () => {
+      const w = window.innerWidth;
+      if (w < 640) setCols(1);
+      else if (w < 1024) setCols(2);
+      else if (w < 1280) setCols(3);
+      else setCols(4);
+    };
+
+    updateCols();
+    window.addEventListener("resize", updateCols);
+    return () => window.removeEventListener("resize", updateCols);
   }, []);
+
   return cols;
 }
 

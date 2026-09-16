@@ -84,7 +84,7 @@ export default function Footer({
         {/* About IFS Column */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            
+
             <div className="flex flex-col">
               <h3 className="font-serif text-base font-bold text-white tracking-tight leading-none mb-0.5">
                 ISRA FOUNDATION
@@ -180,13 +180,21 @@ export default function Footer({
               </button>
             </li>
             <li>
-              <button
+              {/* <button
                 onClick={() => handleNav("careers")}
                 className="text-gray-300 hover:text-primary flex items-center gap-1.5 transition-colors group text-left"
               >
                 <ArrowRight className="w-3.5 h-3.5 text-primary group-hover:translate-x-1 transition-transform" />
                 Join Our Team (Careers)
+              </button> */}
+              <button
+                onClick={() => window.open("https://careers.ifs.edu.pk/", "_blank")} // Naye tab me open karne ke liye
+                className="text-gray-300 hover:text-primary flex items-center gap-1.5 transition-colors group text-left"
+              >
+                <ArrowRight className="w-3.5 h-3.5 text-primary group-hover:translate-x-1 transition-transform" />
+                Join Our Team (Careers)
               </button>
+
             </li>
           </ul>
         </div>

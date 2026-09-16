@@ -220,7 +220,9 @@ export default function AdmissionsFAQ() {
                 marginBottom: "6px",
                 fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
               }}
-            > Got Questions?</span>
+            >
+              Got Questions?
+            </span>
             <span className="w-8 h-px bg-[#020618]" />
           </div>
           <h2 style={{

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AdmissionsSubView, AdmissionFormData } from "../types";
 import AdmissionsHero from "./admissions/AdmissionsHero";
 import AdmissionsProcess from "./admissions/AdmissionsProcess";
@@ -13,7 +13,6 @@ import AdmissionsInfoCards from "./admissions/AdmissionsInfoCards";
 import AdmissionsRegistrationForm from "./admissions/AdmissionsRegistrationForm";
 import AdmissionsOnlineCTA from "./admissions/AdmissionsOnlineCTA";
 import AdmissionsFAQ from "./admissions/AdmissionsFAQ";
-import AdmissionsStickyNav from "./admissions/AdmissionsStickyNav";
 import AdmissionsStats from "./admissions/AdmissionsStats";
 import AdmissionsCTA from "./admissions/AdmissionsCTA";
 
@@ -30,6 +29,11 @@ const sectionIdMap: Record<string, string> = {
 };
 
 export default function AdmissionsView({ subView = "overview", onSubmitApplication }: AdmissionsViewProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   useEffect(() => {
     const scrollToSection = (targetId: string) => {
       const el = document.getElementById(targetId);
@@ -70,20 +74,34 @@ export default function AdmissionsView({ subView = "overview", onSubmitApplicati
 
     handleHash();
 
+    const applyStoredScrollTarget = () => {
+      const scrollTarget = sessionStorage.getItem("admissionsScrollTarget");
+      if (!scrollTarget) return;
+      sessionStorage.removeItem("admissionsScrollTarget");
+      setTimeout(() => scrollToSection(scrollTarget), 50);
+      setTimeout(() => scrollToSection(scrollTarget), 350);
+    };
+
+    applyStoredScrollTarget();
+
     const onHashChange = () => handleHash();
     const onCustomNav = (e: any) => {
       if (e.detail?.hash) handleHash(e.detail.hash);
       else handleHash();
     };
+    const onPageLoad = () => {
+      handleHash();
+      applyStoredScrollTarget();
+    };
 
     window.addEventListener("hashchange", onHashChange);
     window.addEventListener("app:navigate-anchor", onCustomNav);
-    document.addEventListener("astro:page-load", onHashChange);
+    document.addEventListener("astro:page-load", onPageLoad);
 
     return () => {
       window.removeEventListener("hashchange", onHashChange);
       window.removeEventListener("app:navigate-anchor", onCustomNav);
-      document.removeEventListener("astro:page-load", onHashChange);
+      document.removeEventListener("astro:page-load", onPageLoad);
     };
   }, []);
 

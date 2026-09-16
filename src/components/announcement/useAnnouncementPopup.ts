@@ -31,13 +31,20 @@ export function useAnnouncementPopup({
   autoCloseMs = 8000,
 }: UseAnnouncementPopupOptions = {}) {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (!enabled) return;
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || !enabled) return;
 
     let alreadyShown = false;
     try {
-      alreadyShown = sessionStorage.getItem(storageKey) === "true";
+      if (typeof window !== "undefined" && window.sessionStorage) {
+        alreadyShown = window.sessionStorage.getItem(storageKey) === "true";
+      }
     } catch {
       // sessionStorage unavailable (e.g. privacy mode) — fail open, show once per mount.
     }
@@ -46,12 +53,14 @@ export function useAnnouncementPopup({
 
     const timer = window.setTimeout(() => setIsOpen(true), delayMs);
     return () => window.clearTimeout(timer);
-  }, [enabled, storageKey, delayMs]);
+  }, [mounted, enabled, storageKey, delayMs]);
 
   const close = () => {
     setIsOpen(false);
     try {
-      sessionStorage.setItem(storageKey, "true");
+      if (typeof window !== "undefined" && window.sessionStorage) {
+        window.sessionStorage.setItem(storageKey, "true");
+      }
     } catch {
       // ignore — non-fatal
     }

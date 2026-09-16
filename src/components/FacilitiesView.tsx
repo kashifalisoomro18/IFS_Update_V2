@@ -637,7 +637,7 @@ export default function FacilitiesView() {
               icon={ShieldCheck}
               name="Classrooms"
               description="Air-conditioned, well-lit classrooms with digital boards and comfortable seating."
-              images={["/classroom1.jpg", "/classroom2.jpg", "/classroom3.jpg", "/classroom4.jpg", "/classroom5.jpg", "/classroom6.jpg", "classroom7.jpg", "/classroom8.jpg", "/classroom9.jpg"]}
+              images={["/classroom1.jpg", "/classroom2.jpg", "/classroom3.jpg", "/classroom4.jpg", "/classroom5.jpg", "/classroom6.jpg", "/classroom7.jpg", "/classroom8.jpg", "/classroom9.jpg"]}
               delay={0.6}
               isExpanded={expandedCard === "classrooms"}
               onToggle={() => handleToggle("classrooms")}

@@ -280,6 +280,22 @@ export default function HomeView({
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    video.addEventListener("play", onPlay);
+    video.addEventListener("pause", onPause);
+    return () => {
+      video.removeEventListener("play", onPlay);
+      video.removeEventListener("pause", onPause);
+    };
+  }, []);
 
   // Alumni gallery lightbox state
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -308,7 +324,7 @@ export default function HomeView({
   const heroSlides = [
     {
       id: 0,
-      image: "assets/slider/slide1.jpg",
+      image: "/assets/slider/slide1.jpg",
       category: "2026-2027",
       eyebrow: "Isra Foundation Schools",
       headline: ["Your Child’s", "Future Begins Here"],
@@ -319,7 +335,7 @@ export default function HomeView({
     },
     {
       id: 1,
-      image: "assets/slider/slide2.jpg",
+      image: "/assets/slider/slide2.jpg",
       category: "ESTABLISHED SINCE 1981",
       eyebrow: "Academic Excellence",
       headline: ["FOUNDED UPON ACADEMIC", "EXCELLENCE"],
@@ -330,7 +346,7 @@ export default function HomeView({
     },
     {
       id: 2,
-      image: "assets/slider/slide3.jpg",
+      image: "/assets/slider/slide3.jpg",
       category: "ACTIVE INQUIRY",
       eyebrow: "Holistic Development",
       headline: ["LEARNING BEYOND CLASSROOM", "BOUNDARIES"],
@@ -341,7 +357,7 @@ export default function HomeView({
     },
     {
       id: 3,
-      image: "assets/slider/slide4.jpg",
+      image: "/assets/slider/slide4.jpg",
       category: "DIGITAL LITERACY FOR ALL",
       eyebrow: "STEM Focus",
       headline: ["INNOVATIVE INTERACTIVE", "STEM LABS"],
@@ -352,7 +368,7 @@ export default function HomeView({
     },
     {
       id: 4,
-      image: "assets/slider/slide5.jpeg",
+      image: "/assets/slider/slide5.jpeg",
       category: "MORAL LEADERSHIP",
       eyebrow: "Values & Ethics",
       headline: ["CHARACTER BUILDING &", "ANCHORED ETHICS"],
@@ -363,7 +379,7 @@ export default function HomeView({
     },
     {
       id: 5,
-      image: "assets/slider/slide6.jpg",
+      image: "/assets/slider/slide6.jpg",
       category: "94% OUTSTANDING GRADES",
       eyebrow: "Cambridge Boarding",
       headline: ["PREPARING FUTURE CAMBRIDGE", "LEADERS"],
@@ -389,22 +405,36 @@ export default function HomeView({
   }, [next]);
 
   const handleApplyNow = () => {
-    setView("admissions");
-    setAdmissionsSubView("registration-form");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (setView) {
+      setView("admissions");
+      setAdmissionsSubView?.("registration-form");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (typeof window !== "undefined") {
+      sessionStorage.setItem("admissionsScrollTarget", "admissions-registration");
+      window.location.href = "/admissions#admissions-registration";
+    }
   };
 
   const handleInquire = () => {
-    setView("contact");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (setView) {
+      setView("contact");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (typeof window !== "undefined") {
+      window.location.href = "/contact";
+    }
   };
 
   const handleSubNav = (view: MainView, sub: string) => {
-    setView(view);
-    if (view === "about") setAboutSubView(sub as AboutSubView);
-    if (view === "admissions") setAdmissionsSubView(sub as AdmissionsSubView);
-    if (view === "academics") setAcademicsSubView(sub as AcademicsSubView);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (setView) {
+      setView(view);
+      if (view === "about") setAboutSubView?.(sub as AboutSubView);
+      if (view === "admissions") setAdmissionsSubView?.(sub as AdmissionsSubView);
+      if (view === "academics") setAcademicsSubView?.(sub as AcademicsSubView);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (typeof window !== "undefined") {
+      const path = view === "home" ? "/" : `/${view}`;
+      window.location.href = `${path}#${sub}`;
+    }
   };
 
   return (
@@ -532,9 +562,9 @@ export default function HomeView({
                   {/* Headline — word by word */}
                   <h1 className="mb-4 sm:mb-8 text-white" style={{ fontSize: "clamp(2rem, 3.87vw, 5rem)", lineHeight: 1.05, fontWeight: 900, letterSpacing: "-0.03em" }}>
                     <AnimatePresence mode="wait">
-                      <div key={`headline-${activeSlide}`}>
+                      <span key={`headline-${activeSlide}`} className="block">
                         {heroSlides[activeSlide].headline.map((line, li) => (
-                          <div key={li} className="block">
+                          <span key={li} className="block">
                             <span style={{ display: "inline-flex", flexWrap: "wrap", gap: "0 0.28em" }}>
                               {line.split(" ").map((w, wi) => (
                                 <span key={wi} style={{ overflow: "hidden", display: "inline-block", paddingBottom: "0.2em", marginBottom: "-0.2em" }}>
@@ -549,9 +579,9 @@ export default function HomeView({
                                 </span>
                               ))}
                             </span>
-                          </div>
+                          </span>
                         ))}
-                      </div>
+                      </span>
                     </AnimatePresence>
                   </h1>
 
@@ -647,17 +677,17 @@ export default function HomeView({
                       className="flex-1 group flex flex-col gap-1.5 cursor-pointer"
                       onClick={() => goTo(i, i > activeSlide ? 1 : -1)}
                     >
-                      <div className="relative h-[2px] w-full overflow-hidden rounded-full" style={{ background: "rgba(255,255,255,0.15)" }}>
+                      <span className="block relative h-[2px] w-full overflow-hidden rounded-full" style={{ background: "rgba(255,255,255,0.15)" }}>
                         {i === activeSlide && (
-                          <motion.div
-                            className="absolute left-0 top-0 h-full rounded-full"
+                          <motion.span
+                            className="block absolute left-0 top-0 h-full rounded-full"
                             style={{ background: heroSlides[activeSlide].accent }}
                             initial={{ width: "0%" }}
                             animate={{ width: "100%" }}
                             transition={{ duration: 5.5, ease: "linear" }}
                           />
                         )}
-                      </div>
+                      </span>
                       <span
                         className="text-[10px] font-bold uppercase tracking-widest transition-colors duration-300 hidden sm:block"
                         style={{ color: i === activeSlide ? heroSlides[activeSlide].accent : "rgba(255,255,255,0.3)" }}
@@ -753,8 +783,8 @@ export default function HomeView({
 
 
         {/* SECTION 2: Welcome Section with Video Overlap and Grid Collage (Pristine Layout Matching Image 2) */}
-        <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 py-8 overflow-hidden" id="IFS-welcome-section ">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center my-40">
+        <section className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 py-6 sm:py-8 overflow-hidden" id="IFS-welcome-section ">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center my-10 sm:my-16 lg:my-28">
 
             {/* Left Side: Overlapping Collage of Video and 2x2 Images */}
             <motion.div
@@ -762,18 +792,19 @@ export default function HomeView({
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="lg:col-span-6 relative flex items-center justify-center"
+              className="lg:col-span-6 relative flex items-center justify-center w-full"
             >
               {/* Primary Large Video */}
-              <div className="w-13/12 aspect-[4/3] bg-slate-950 rounded-sm overflow-hidden relative border-4 border-white -ml-35 group">
+              <div className="w-full max-w-lg lg:max-w-none lg:w-12/12 aspect-square bg-slate-950 rounded-none overflow-hidden relative border-2 sm:border-4 border-white ml-0 lg:-ml-12 xl:-ml-35 group shadow-xl">
 
                 <video
                   ref={videoRef}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                   autoPlay
                   muted
                   loop
                   playsInline
+                  suppressHydrationWarning
                 >
                   <source
                     src="/assets/videos/school-video.mp4"
@@ -786,15 +817,17 @@ export default function HomeView({
                 <div className="absolute inset-0 bg-slate-950/20" />
 
                 {/* Play Button */}
-                <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <button
                     onClick={toggleVideo}
-                    className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center  hover:bg-primary hover:border-primary transition-all duration-300 hover:scale-110 cursor-pointer shadow-lg"
+                    suppressHydrationWarning
+                    className="pointer-events-auto w-12 h-12 sm:w-16 sm:h-16 rounded-full border-2 border-white flex items-center justify-center bg-slate-900/40 backdrop-blur-xs hover:bg-primary hover:border-primary transition-all duration-300 hover:scale-110 cursor-pointer shadow-lg"
+                    aria-label={isPlaying ? "Pause video" : "Play video"}
                   >
                     {isPlaying ? (
-                      <Pause className="w-6 h-6 text-white" />
+                      <Pause className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     ) : (
-                      <Play className="w-6 h-6 text-white fill-white" />
+                      <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white ml-0.5" />
                     )}
                   </button>
                 </div>
@@ -807,27 +840,27 @@ export default function HomeView({
                 whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-                className="hidden xl:grid absolute -right-6 top-1/2 -translate-y-1/2 w-[190px] grid-cols-2 gap-1 bg-white p-1 shadow-xl border border-slate-100 rounded-sm z-20"
+                className="hidden xl:grid absolute -right-6 top-1/2 -translate-y-1/2 w-[190px] grid-cols-2 gap-1 bg-white p-1 shadow-xl border border-slate-100 rounded-none z-20"
               >
                 <img
-                  src="assets\slider\g1.jpg"
+                  src="/assets/slider/g1.jpg"
                   alt="Teacher Speaker"
-                  className="w-full aspect-square object-cover border border-slate-100 rounded-sm hover:scale-105 transition-transform duration-300"
+                  className="w-full aspect-square object-cover border border-slate-100 rounded-none hover:scale-105 transition-transform duration-300"
                 />
                 <img
-                  src="assets\slider\g2.jpg"
+                  src="/assets/slider/g2.jpg"
                   alt="Happy Child Mascot"
-                  className="w-full aspect-square object-cover border border-slate-100 rounded-sm hover:scale-105 transition-transform duration-300"
+                  className="w-full aspect-square object-cover border border-slate-100 rounded-none hover:scale-105 transition-transform duration-300"
                 />
                 <img
-                  src="assets\slider\g3.jpg"
+                  src="/assets/slider/g3.jpg"
                   alt="Sports Coordination"
-                  className="w-full aspect-square object-cover border border-slate-100 rounded-sm hover:scale-105 transition-transform duration-300"
+                  className="w-full aspect-square object-cover border border-slate-100 rounded-none hover:scale-105 transition-transform duration-300"
                 />
                 <img
-                  src="assets\slider\g4.jpg"
+                  src="/assets/slider/g4.jpg"
                   alt="Active Classroom"
-                  className="w-full aspect-square object-cover border border-slate-100 rounded-sm hover:scale-105 transition-transform duration-300"
+                  className="w-full aspect-square object-cover border border-slate-100 rounded-none hover:scale-105 transition-transform duration-300"
                 />
               </motion.div>
             </motion.div>
@@ -1142,58 +1175,58 @@ export default function HomeView({
 
 
         {/* SECTION 5: Admission Banner Section (Prisinte Layout Matching Image 5) */}
-<section className="relative h-[480px] w-full overflow-hidden flex items-center justify-center text-center px-6 my-50" id="IFS-admission-banner">
-  {/* Shadowy background layer with active student crowd overlay */}
-  <motion.div
-    initial={{ scale: 1.15 }}
-    whileInView={{ scale: 1.05 }}
-    viewport={{ once: true }}
-    transition={{ duration: 2.0 }}
-    className="absolute inset-0 bg-cover bg-center bg-fixed opacity-100"
-    style={{ backgroundImage: "url('/assets/images/admission.png')" }}
-  />
-  {/* Dark overlay with low transparency so the image is clearly visible */}
-  <div className="absolute inset-0 bg-slate-950/85 mix-blend-multiply z-10" />
+        <section className="relative h-[480px] w-full overflow-hidden flex items-center justify-center text-center px-6 my-50" id="IFS-admission-banner">
+          {/* Shadowy background layer with active student crowd overlay */}
+          <motion.div
+            initial={{ scale: 1.15 }}
+            whileInView={{ scale: 1.05 }}
+            viewport={{ once: true }}
+            transition={{ duration: 2.0 }}
+            className="absolute inset-0 bg-cover bg-center bg-fixed opacity-100"
+            style={{ backgroundImage: "url('/assets/images/admission.png')" }}
+          />
+          {/* Dark overlay with low transparency so the image is clearly visible */}
+          <div className="absolute inset-0 bg-slate-950/85 mix-blend-multiply z-10" />
 
-  {/* Content Box */}
-  <motion.div
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.8 }}
-    className="max-w-4xl mx-auto space-y-6 relative z-20"
-  >
-    <h2 className="font-sans font-extrabold text-white text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-none">
-      Admission
-    </h2>
-    <p className="text-slate-200 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-3xl mx-auto">
-      Admissions at IFS are <strong className="text-primary font-bold">extremely competitive</strong>. We encourage all applicants to apply as early as possible and to carefully review the admissions page before applying. To visit the admissions page and to apply online please click below.
-    </p>
-    <div className="pt-4">
-      <a href="/admissions"
-        className="group relative overflow-hidden bg-white text-slate-950 font-bold text-xs uppercase tracking-widest px-10 py-4 rounded-none shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
-      >
-        <span className="absolute inset-0 bg-primary origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
-        <span className="relative z-10 transition-colors duration-300 group-hover:text-slate-950">
-          APPLY NOW
-        </span>
-      </a>
-    </div>
-  </motion.div>
-</section>
+          {/* Content Box */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto space-y-6 relative z-20"
+          >
+            <h2 className="font-sans font-extrabold text-white text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-none">
+              Admission
+            </h2>
+            <p className="text-slate-200 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-3xl mx-auto">
+              Admissions at IFS are <strong className="text-primary font-bold">extremely competitive</strong>. We encourage all applicants to apply as early as possible and to carefully review the admissions page before applying. To visit the admissions page and to apply online please click below.
+            </p>
+            <div className="pt-4">
+              <a href="/admissions"
+                className="group relative overflow-hidden bg-white text-slate-950 font-bold text-xs uppercase tracking-widest px-10 py-4 rounded-none shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <span className="absolute inset-0 bg-primary origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
+                <span className="relative z-10 transition-colors duration-300 group-hover:text-slate-950">
+                  APPLY NOW
+                </span>
+              </a>
+            </div>
+          </motion.div>
+        </section>
 
 
         {/* SECTION 6: School Levels Overlapping Blocks (Pristine Layout Matching Reference Images) */}
-        <section className="space-y-24 overflow-visible" id="fps-school-levels-showcase ">
+        <section className="space-y-16 sm:space-y-24 overflow-visible" id="fps-school-levels-showcase">
           <SectionHeading
             eyebrow="Academic Pathways"
             heading="Levels "
             accent={<span style={{ color: "#f5c330" }}> Offered</span>}
           />
-          <div style={{ width: 72, height: 4, background: "#60badc", margin: "-100px auto 18px" }} />
+          <div style={{ width: 72, height: 4, background: "#60badc", margin: "-60px auto 24px" }} />
 
           {/* 1. ECD Section Block */}
-          <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 my-50" id="junior-level-card">
+          <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 my-16 sm:my-28 lg:my-44" id="junior-level-card">
             <div className="relative">
 
               {/* Background depth layers behind the whole card */}
@@ -1215,24 +1248,24 @@ export default function HomeView({
               <motion.div
                 whileHover={{ y: -10 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="bg-[#FDE047]  p-8 sm:p-12 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[460px] w-full sm:w-[92%] ml-auto"
+                className="bg-[#FDE047] p-5 sm:p-10 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-0 lg:min-h-[460px] w-full sm:w-[92%] ml-auto"
               >
 
-                {/* Left Column: Narrative details and button — slides in from the left */}
+                {/* Left Column: Narrative details and button */}
                 <motion.div
                   initial={{ opacity: 0, x: -120, scale: 0.92 }}
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                  className="lg:col-span-6 z-20 space-y-6 lg:pr-12"
+                  className="order-2 lg:order-1 lg:col-span-6 z-20 space-y-4 sm:space-y-6 lg:pr-12 flex flex-col justify-center mt-4 lg:mt-0"
                 >
-                  <p className="text-[#020618]/85 text-base sm:text-lg leading-relaxed font-normal max-w-md text-justify">
+                  <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
                     At IFS, we see<strong className="text-[#020618] font-extrabold"> Early Childhood Development (ECD) </strong> as a vital stage where children begin to explore the world, build meaningful relationships, and develop essential cognitive, social, emotional, and physical skills. Through a nurturing, safe, and engaging learning environment, we encourage curiosity, creativity, confidence, and a strong foundation for lifelong learning.
-
                   </p>
-                  <div className="pt-2">
-                    <a href="/academics#curriculum"
-                      className="group relative overflow-hidden bg-white text-slate-700 font-medium text-sm px-7 py-3  shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
+                  <div className="pt-2 sm:pt-4">
+                    <a
+                      href="/academics#curriculum"
+                      className="inline-flex items-center justify-center group relative overflow-hidden bg-white text-slate-800 font-semibold text-sm px-7 py-3 shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
                     >
                       {/* Left to Right Background */}
                       <span className="absolute inset-0 bg-[#020816] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
@@ -1245,17 +1278,17 @@ export default function HomeView({
                   </div>
                 </motion.div>
 
-                {/* Right Column: Large image block with golden tint and overlaid text — slides in from the right */}
+                {/* Right Column: Large image block with golden tint and overlaid text */}
                 <motion.div
                   initial={{ opacity: 0, x: 120, scale: 0.92 }}
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                  className="lg:col-span-6 relative h-[400px] sm:h-[440px] flex items-center justify-center w-full"
+                  className="order-1 lg:order-2 lg:col-span-6 relative h-[280px] sm:h-[380px] lg:h-[440px] flex items-center justify-center w-full mt-0"
                 >
-                  <div className="absolute inset-0 -top-6 sm:-top-10 bg-slate-950  overflow-hidden shadow-xl z-10 group">
+                  <div className="absolute inset-0 top-0 lg:-top-6 xl:-top-10 bg-slate-950 overflow-hidden shadow-xl z-10 group rounded-sm">
                     <img
-                      src="assets/slider/slide4.jpg"
+                      src="/assets/slider/slide4.jpg"
                       alt="Junior school students in lab"
                       className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
                     />
@@ -1265,9 +1298,9 @@ export default function HomeView({
 
                     {/* Heading — bold + light on two lines, like Elementary card */}
                     <div className="absolute bottom-20 sm:bottom-24 left-6 z-30 select-none">
-                      <h3 className="font-sans font-black text-white text-4xl sm:text-5xl leading-[0.9] tracking-tight">
+                      <h3 className="font-sans font-black text-white text-3xl sm:text-5xl leading-[0.9] tracking-tight">
                         ECD
-                        <span className="block font-light text-white/90 text-3xl sm:text-4xl mt-0.5">
+                        <span className="block font-light text-white/90 text-2xl sm:text-4xl mt-0.5">
                           Section
                         </span>
                       </h3>
@@ -1278,7 +1311,7 @@ export default function HomeView({
                       <span className="text-[10px] sm:text-[11px] font-bold text-white uppercase tracking-widest block font-mono">
                         Grade Levels
                       </span>
-                      <span className="text-sm sm:text-base  text-white ">
+                      <span className="text-xs sm:text-base text-white">
                         Pre-Nursery - Kindergarten
                       </span>
                     </div>
@@ -1289,8 +1322,8 @@ export default function HomeView({
             </div>
           </div>
 
-          {/* 2. Elementary  section */}
-          <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 my-50" id="elementary-level-card">
+          {/* 2. Elementary section */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 my-16 sm:my-28 lg:my-44" id="elementary-level-card">
             <div className="relative">
 
               {/* Background depth layers — right side, lavender family */}
@@ -1313,7 +1346,7 @@ export default function HomeView({
               <motion.div
                 whileHover={{ y: -10 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="bg-[#e1d8f7] p-8 sm:p-12 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[460px] w-full sm:w-[92%]"
+                className="bg-[#e1d8f7] p-5 sm:p-10 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-0 lg:min-h-[460px] w-full sm:w-[92%]"
               >
 
                 {/* Left Column: Framed portrait photo + Grade Levels badge + heading */}
@@ -1322,11 +1355,11 @@ export default function HomeView({
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                  className="lg:col-span-6 relative flex flex-col justify-end min-h-[380px] sm:min-h-[440px] z-10 w-full"
+                  className="order-1 lg:order-1 lg:col-span-6 relative flex flex-col justify-end min-h-[300px] sm:min-h-[400px] lg:min-h-[440px] z-10 w-full"
                 >
 
                   {/* Image frame wrapper — light glass border, fits the lavender card */}
-                  <div className="relative w-full h-[280px] sm:h-[320px]">
+                  <div className="relative w-full h-[240px] sm:h-[320px]">
 
                     <motion.div
                       initial={{ opacity: 0, y: 30 }}
@@ -1334,10 +1367,10 @@ export default function HomeView({
                       viewport={{ once: true }}
                       transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                       whileHover={{ scale: 1.02 }}
-                      className="absolute inset-0 w-[82%] sm:w-[78%] h-full overflow-hidden bg-white/60 backdrop-blur-sm p-2 shadow-[0_18px_40px_rgba(31,20,10,0.15)] z-10 border border-white/60"
+                      className="absolute inset-0 w-[82%] sm:w-[78%] h-full overflow-hidden bg-white/60 backdrop-blur-sm p-2 shadow-[0_18px_40px_rgba(31,20,10,0.15)] z-10 border border-white/60 rounded-sm"
                     >
                       <img
-                        src="assets/slider/slide2.jpg"
+                        src="/assets/slider/slide2.jpg"
                         alt="School building"
                         className="w-full h-full object-cover object-center"
                       />
@@ -1349,12 +1382,12 @@ export default function HomeView({
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: 0.5 }}
-                      className="absolute right-0 sm:right-2 bottom-6 bg-white/70 backdrop-blur-md border border-white/20 px-4 py-3.5 shadow-lg z-20 select-none"
+                      className="absolute right-0 sm:right-2 bottom-4 sm:bottom-6 bg-white/70 backdrop-blur-md border border-white/20 px-3 sm:px-4 py-2.5 sm:py-3.5 shadow-lg z-20 select-none"
                     >
-                      <span className="text-[9px] sm:text-[11px] font-bold text-[020816] uppercase tracking-widest block font-mono">
+                      <span className="text-[9px] sm:text-[11px] font-bold text-[#020816] uppercase tracking-widest block font-mono">
                         Grade Levels
                       </span>
-                      <span className="text-xs sm:text-sm font-bold text-[#020816]]">
+                      <span className="text-xs sm:text-sm font-bold text-[#020816]">
                         Grade I - Grade V
                       </span>
                     </motion.div>
@@ -1366,31 +1399,32 @@ export default function HomeView({
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.7, delay: 0.55 }}
-                    className="relative z-30 mt-6 select-none"
+                    className="relative z-30 mt-4 sm:mt-6 select-none"
                   >
-                    <h3 className="font-sans font-black text-[#020816] text-5xl sm:text-6xl lg:text-7xl leading-[0.85] tracking-tight">
+                    <h3 className="font-sans font-black text-[#020816] text-4xl sm:text-6xl lg:text-7xl leading-[0.85] tracking-tight">
                       Elementary
-                      <span className="block font-sans font-light text-[#020816]/60 text-4xl sm:text-5xl mt-1">
+                      <span className="block font-sans font-light text-[#020816]/60 text-3xl sm:text-5xl mt-1">
                         School
                       </span>
                     </h3>
                   </motion.div>
                 </motion.div>
 
-                {/* Right Column: Narrative + button — slides in from the right */}
+                {/* Right Column: Narrative + button */}
                 <motion.div
                   initial={{ opacity: 0, x: 120, scale: 0.92 }}
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                  className="lg:col-span-6 lg:pl-16 z-20 space-y-6"
+                  className="order-2 lg:order-2 lg:col-span-6 lg:pl-16 z-20 space-y-4 sm:space-y-6 mt-4 lg:mt-0 flex flex-col justify-center"
                 >
-                  <p className="text-[#020816]/85 text-base sm:text-lg leading-relaxed font-normal max-w-md text-justify">
-                    At <strong className="text-[#020816] font-extrabold">IFS Elementary</strong>, we nurture the development of each child emotionally, academically, physically, socially, and artistically during their formative years.
+                  <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
+                    At <strong className="text-[#020618] font-extrabold">IFS Elementary</strong>, we nurture the development of each child emotionally, academically, physically, socially, and artistically during their formative years.
                   </p>
-                  <div className="pt-2">
-                    <a href="/academics#curriculum"
-                      className="group relative overflow-hidden bg-white text-slate-700 font-medium text-sm px-7 py-3  shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
+                  <div className="pt-2 sm:pt-4">
+                    <a
+                      href="/academics#curriculum"
+                      className="inline-flex items-center justify-center group relative overflow-hidden bg-white text-slate-800 font-semibold text-sm px-7 py-3 shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
                     >
                       {/* Left to Right Background */}
                       <span className="absolute inset-0 bg-[#020816] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
@@ -1408,7 +1442,7 @@ export default function HomeView({
           </div>
 
           {/* 3. Middle Section */}
-          <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 my-50" id="alevel-level-card">
+          <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 my-16 sm:my-28 lg:my-44" id="alevel-level-card">
             <div className="relative">
 
               {/* Background depth layers behind the whole card — left side, mint-teal family */}
@@ -1430,31 +1464,27 @@ export default function HomeView({
               <motion.div
                 whileHover={{ y: -10 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="bg-[#91E5DB] p-8 sm:p-12 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[460px] w-full sm:w-[92%] ml-auto"
+                className="bg-[#91E5DB] p-5 sm:p-10 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-0 lg:min-h-[460px] w-full sm:w-[92%] ml-auto"
               >
 
-                {/* Left Column: Narrative details and button — slides in from the left */}
+                {/* Left Column: Narrative details and button */}
                 <motion.div
                   initial={{ opacity: 0, x: -120, scale: 0.92 }}
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                  className="lg:col-span-6 z-20 space-y-6 lg:pr-12"
+                  className="order-2 lg:order-1 lg:col-span-6 z-20 space-y-4 sm:space-y-6 lg:pr-12 flex flex-col justify-center mt-4 lg:mt-0"
                 >
-                  {/* Small eyebrow tag — gives this card its own top-of-column identity */}
-                  {/* <span className="inline-block text-[10px] sm:text-[11px] font-bold text-[#020618] uppercase tracking-widest font-mono border-b-2 border-[#020618] pb-1">
-                  Beyond Senior School
-                </span> */}
-
-                  <p className="text-[#020618]/85 text-base sm:text-lg leading-relaxed font-normal max-w-md text-justify">
+                  <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
                     At IFS <strong className="text-[#020816] font-extrabold"> Middle Section (Grades VI–VII) </strong>, students are encouraged to strengthen their academic skills, develop critical thinking, and build confidence as independent learners. Through engaging learning experiences, they are prepared to take on greater challenges and grow into responsible, curious, and capable individuals.
                   </p>
-                  <div className="pt-2">
-                    <a href="/academics#curriculum"
-                      className="group relative overflow-hidden bg-white text-slate-700 font-medium text-sm px-7 py-3  shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
+                  <div className="pt-2 sm:pt-4">
+                    <a
+                      href="/academics#curriculum"
+                      className="inline-flex items-center justify-center group relative overflow-hidden bg-white text-slate-800 font-semibold text-sm px-7 py-3 shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
                     >
                       {/* Left to Right Background */}
-                      <span className="absolute inset-0 bg-[#020618] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
+                      <span className="absolute inset-0 bg-[#020816] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
 
                       {/* Text */}
                       <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
@@ -1470,15 +1500,15 @@ export default function HomeView({
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                  className="lg:col-span-6 relative h-[420px] sm:h-[460px] flex items-center justify-center w-full"
+                  className="order-1 lg:order-2 lg:col-span-6 relative h-[280px] sm:h-[380px] lg:h-[460px] flex items-center justify-center w-full mt-0"
                 >
                   {/* Image with angled top edge instead of a plain rectangle */}
                   <div
-                    className="absolute inset-0 -top-6 sm:-top-10 bg-slate-950 overflow-hidden shadow-xl z-10 group"
+                    className="absolute inset-0 top-0 lg:-top-6 xl:-top-10 bg-slate-950 overflow-hidden shadow-xl z-10 group rounded-sm"
                     style={{ clipPath: "polygon(0% 6%, 100% 0%, 100% 100%, 0% 100%)" }}
                   >
                     <img
-                      src="assets/slider/slide6.jpg"
+                      src="/assets/slider/slide6.jpg"
                       alt="A-Level students"
                       className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
                     />
@@ -1486,11 +1516,11 @@ export default function HomeView({
                     <div className="absolute inset-0 bg-[#91E5DB]/45 mix-blend-color z-15" />
                     <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-20" />
 
-                    {/* Heading — moved to TOP of image (Junior's sits at the bottom) */}
-                    <div className="absolute top-8 sm:top-10 left-6 z-30 select-none">
-                      <h3 className="font-sans font-black text-white text-4xl sm:text-5xl leading-[0.9] tracking-tight">
+                    {/* Heading — moved to TOP of image */}
+                    <div className="absolute top-6 sm:top-10 left-6 z-30 select-none">
+                      <h3 className="font-sans font-black text-white text-3xl sm:text-5xl leading-[0.9] tracking-tight">
                         Middle
-                        <span className="block font-light text-white/90 text-3xl sm:text-4xl mt-0.5">
+                        <span className="block font-light text-white/90 text-2xl sm:text-4xl mt-0.5">
                           Section
                         </span>
                       </h3>
@@ -1503,12 +1533,12 @@ export default function HomeView({
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.7, delay: 0.4 }}
-                    className="absolute -bottom-4 left-4 sm:left-6 z-30 bg-white px-5 py-3 shadow-lg select-none"
+                    className="absolute -bottom-3 sm:-bottom-4 left-3 sm:left-6 z-30 bg-white px-4 sm:px-5 py-2 sm:py-3 shadow-lg select-none"
                   >
                     <span className="text-[10px] sm:text-[11px] font-bold text-[#020816] uppercase tracking-widest block font-mono">
                       Grade Levels
                     </span>
-                    <span className="text-sm sm:text-base font-bold text-[#020816]">
+                    <span className="text-xs sm:text-base font-bold text-[#020816]">
                       Grade VI - Grade VII
                     </span>
                   </motion.div>
@@ -1519,7 +1549,7 @@ export default function HomeView({
           </div>
 
           {/* 4. Cambridge section */}
-          <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 my-30" id="senior-level-card">
+          <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 my-16 sm:my-28 lg:my-44" id="senior-level-card">
             <div className="relative">
 
               {/* Background depth layers behind the card — right side, like reference */}
@@ -1542,14 +1572,14 @@ export default function HomeView({
               <motion.div
                 whileHover={{ y: -10 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="bg-[#BAE6FD] p-8 sm:p-12 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[460px] w-full sm:w-[92%]"
+                className="bg-[#BAE6FD] p-5 sm:p-10 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-0 lg:min-h-[460px] w-full sm:w-[92%]"
               >
 
                 {/* Left Column: Image collage + heading */}
-                <div className="lg:col-span-6 relative flex flex-col justify-end min-h-[380px] sm:min-h-[440px] z-10 w-full">
+                <div className="order-1 lg:order-1 lg:col-span-6 relative flex flex-col justify-end min-h-[300px] sm:min-h-[400px] lg:min-h-[440px] z-10 w-full">
 
                   {/* Image stack wrapper */}
-                  <div className="relative w-full h-[280px] sm:h-[320px]">
+                  <div className="relative w-full h-[240px] sm:h-[320px]">
 
                     {/* Top polygon image — blue-tinted graduation photo */}
                     <motion.div
@@ -1558,11 +1588,11 @@ export default function HomeView({
                       viewport={{ once: true }}
                       transition={{ duration: 0.8, delay: 0.35, ease: "easeOut" }}
                       whileHover={{ scale: 1.04 }}
-                      className="absolute left-[20%] sm:left-[24%] -top-6 w-[60%] sm:w-[56%] h-[85%] overflow-hidden shadow-[0_20px_45px_rgba(16,24,40,0.22)] z-10"
+                      className="absolute left-[20%] sm:left-[24%] top-0 lg:-top-6 w-[60%] sm:w-[56%] h-[85%] overflow-hidden shadow-[0_20px_45px_rgba(16,24,40,0.22)] z-10 rounded-sm"
                       style={{ clipPath: "polygon(10% 0%, 100% 4%, 88% 100%, 0% 90%)" }}
                     >
                       <img
-                        src="assets/slider/slide51.jpg"
+                        src="/assets/slider/slide51.jpg"
                         alt="Senior school graduates"
                         className="w-full h-full object-cover object-center"
                       />
@@ -1577,10 +1607,10 @@ export default function HomeView({
                       viewport={{ once: true }}
                       transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
                       whileHover={{ scale: 1.05, rotate: -4 }}
-                      className="absolute left-0 bottom-[8%] w-[34%] sm:w-[30%] aspect-[4/5]  overflow-hidden bg-white p-1 shadow-[0_16px_35px_rgba(16,24,40,0.20)] border border-white z-20"
+                      className="absolute left-0 bottom-[8%] w-[34%] sm:w-[30%] aspect-[4/5] overflow-hidden bg-white p-1 shadow-[0_16px_35px_rgba(16,24,40,0.20)] border border-white z-20 rounded-sm"
                     >
                       <img
-                        src="assets/slider/559005353_1378177237650043_1854500200270735487_n.jpg"
+                        src="/assets/slider/559005353_1378177237650043_1854500200270735487_n.jpg"
                         alt="Graduation ceremony group"
                         className="w-full h-full object-cover object-top"
                       />
@@ -1595,17 +1625,17 @@ export default function HomeView({
                     transition={{ duration: 0.7, delay: 0.5 }}
                     className="relative z-30 mt-4 select-none"
                   >
-                    <h3 className="font-sans font-black text-[#0f172a] text-5xl sm:text-6xl lg:text-7xl leading-[0.85] tracking-tight">
+                    <h3 className="font-sans font-black text-[#0f172a] text-4xl sm:text-6xl lg:text-7xl leading-[0.85] tracking-tight">
                       Cambridge
-                      <span className="block font-sans font-light text-slate-500 text-4xl sm:text-5xl mt-1">
+                      <span className="block font-sans font-light text-slate-500 text-3xl sm:text-5xl mt-1">
                         Section
                       </span>
                     </h3>
-                    <div className="mt-5 space-y-0.5">
+                    <div className="mt-4 sm:mt-5 space-y-0.5">
                       <span className="text-[10px] sm:text-[11px] font-bold text-slate-600 uppercase tracking-widest block font-mono">
                         Grade Levels
                       </span>
-                      <span className="text-sm sm:text-base font-black text-slate-950">
+                      <span className="text-xs sm:text-base font-black text-slate-950">
                         O Level - A Level
                       </span>
                     </div>
@@ -1618,17 +1648,18 @@ export default function HomeView({
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
-                  className="lg:col-span-6 lg:pl-16 z-20 space-y-6"
+                  className="order-2 lg:order-2 lg:col-span-6 lg:pl-16 z-20 space-y-4 sm:space-y-6 mt-4 lg:mt-0 flex flex-col justify-center"
                 >
-                  <p className="text-slate-800 text-base sm:text-lg leading-relaxed font-normal max-w-md text-justify">
+                  <p className="text-slate-800 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
                     At IFS <strong className="text-slate-950 font-bold">O Level & A Level</strong> provides students with a balanced and enriching learning experience that combines academic excellence with a vibrant co-curricular program. Our aim is to develop confident, independent, and critical thinkers, equipping students with the knowledge, skills, and confidence they need to succeed in their examinations, university, and beyond.
                   </p>
-                  <div className="pt-2">
-                    <a href="/academics#curriculum"
-                      className="group relative overflow-hidden bg-white text-slate-700 font-medium text-sm px-7 py-3  shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
+                  <div className="pt-2 sm:pt-4">
+                    <a
+                      href="/academics#curriculum"
+                      className="inline-flex items-center justify-center group relative overflow-hidden bg-white text-slate-800 font-semibold text-sm px-7 py-3 shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
                     >
                       {/* Hover Background */}
-                      <span className="absolute inset-0 bg-[#020618] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
+                      <span className="absolute inset-0 bg-[#020816] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
 
                       {/* Button Text */}
                       <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
@@ -1650,8 +1681,8 @@ export default function HomeView({
 
 
 
-          {/* SECTION 3: News Masonry Grid (Prisinte Layout Matching Image 3) */}
-          <section className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 space-y-8 overflow-hidden mt-70" id="IFS-news-events-grid">
+          {/* SECTION 3: News Masonry Grid (Pristine Layout Matching Image 3) */}
+          <section className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 space-y-8 overflow-hidden mt-16 sm:mt-24 lg:mt-36" id="IFS-news-events-grid">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1992,11 +2023,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.05 }}
-              onClick={() => setSelectedImage("public/pintober1 (1).jpeg")}
+              onClick={() => setSelectedImage("/pintober1 (1).jpeg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="public/pintober1 (1).jpeg"
+                src="/pintober1 (1).jpeg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2011,11 +2042,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              onClick={() => setSelectedImage("public/play1.jpg")}
+              onClick={() => setSelectedImage("/play1.jpg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm rounded-sm cursor-pointer"
             >
               <img
-                src="public/play1.jpg"
+                src="/play1.jpg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2030,11 +2061,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              onClick={() => setSelectedImage("public/scholarship.jpeg")}
+              onClick={() => setSelectedImage("/scholarship.jpeg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="public/scholarship.jpeg"
+                src="/scholarship.jpeg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2049,11 +2080,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              onClick={() => setSelectedImage("public/trip30.jpg")}
+              onClick={() => setSelectedImage("/trip30.jpg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="public/trip30.jpg"
+                src="/trip30.jpg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2068,11 +2099,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.25 }}
-              onClick={() => setSelectedImage("public/playground5.jpg")}
+              onClick={() => setSelectedImage("/playground5.jpg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="public/playground5.jpg"
+                src="/playground5.jpg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2087,11 +2118,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              onClick={() => setSelectedImage("public/trip8.jpg")}
+              onClick={() => setSelectedImage("/trip8.jpg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="public/trip8.jpg"
+                src="/trip8.jpg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2106,11 +2137,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.35 }}
-              onClick={() => setSelectedImage("public/IMG_2371.JPG")}
+              onClick={() => setSelectedImage("/IMG_2371.JPG")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="public/IMG_2371.JPG"
+                src="/IMG_2371.JPG"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2125,11 +2156,11 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              onClick={() => setSelectedImage("public/IMG_4093.JPG")}
+              onClick={() => setSelectedImage("/IMG_4093.JPG")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="public/IMG_4093.JPG"
+                src="/IMG_4093.JPG"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />

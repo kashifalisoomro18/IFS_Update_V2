@@ -48,8 +48,13 @@ export default function Header({
   setAcademicsSubView,
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileExpandedSection, setMobileExpandedSection] = useState<"about" | "admissions" | "academics" | null>(null);
   const [activeDropdown, setActiveDropdown] = useState<DropdownKey>(null);
   const [isMounted, setIsMounted] = useState(false); // controls animation classes separately from content swap
+
+  const toggleMobileSection = (section: "about" | "admissions" | "academics") => {
+    setMobileExpandedSection((prev) => (prev === section ? null : section));
+  };
 
   // Timers: one to delay opening (avoids accidental trigger while passing over nav),
   // one to delay closing (gives time to move mouse into the panel)
@@ -180,33 +185,44 @@ export default function Header({
 
     if (typeof window === "undefined" || !href.includes("#")) return;
 
-    const [targetPath, targetHash] = href.split("#");
+    const hashIndex = href.indexOf("#");
+    const targetPath = href.slice(0, hashIndex);
+    const targetHash = href.slice(hashIndex + 1);
+    if (!targetHash) return;
+
     const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
     const normTargetPath = (targetPath || "").replace(/\/$/, "") || "/";
 
-    // If already on target page (or anchor on current page)
-    if (targetHash && (normTargetPath === currentPath || !targetPath)) {
-      if (window.location.hash !== `#${targetHash}`) {
-        history.pushState(null, "", `#${targetHash}`);
-      }
+    // Prevent Astro ClientRouter from handling the click — it navigates to the
+    // path only and drops the hash in production view transitions.
+    e.preventDefault();
 
-      // Dispatch custom anchor event + hashchange event so page views trigger tab switch & smooth scroll
-      window.dispatchEvent(new CustomEvent("app:navigate-anchor", { detail: { hash: targetHash, path: normTargetPath } }));
-      window.dispatchEvent(new HashChangeEvent("hashchange"));
+    if (normTargetPath !== currentPath) {
+      window.location.href = href;
+      return;
+    }
 
-      const HEADER_HEIGHT = window.innerWidth < 768 ? 85 : 125;
-      const el =
-        document.getElementById(targetHash) ||
-        document.getElementById(`academics-${targetHash}`) ||
-        document.getElementById("academics-nav") ||
-        document.getElementById("activities-tab-switcher") ||
-        document.getElementById(targetHash.replace("admissions-", "")) ||
-        document.getElementById(targetHash.replace("about-", ""));
+    if (window.location.hash !== `#${targetHash}`) {
+      history.pushState(null, "", `#${targetHash}`);
+    }
 
-      if (el) {
-        const top = el.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
-        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
-      }
+    window.dispatchEvent(
+      new CustomEvent("app:navigate-anchor", { detail: { hash: targetHash, path: normTargetPath } })
+    );
+    window.dispatchEvent(new HashChangeEvent("hashchange"));
+
+    const HEADER_HEIGHT = window.innerWidth < 768 ? 85 : 125;
+    const el =
+      document.getElementById(targetHash) ||
+      document.getElementById(`academics-${targetHash}`) ||
+      document.getElementById("academics-nav") ||
+      document.getElementById("activities-tab-switcher") ||
+      document.getElementById(targetHash.replace("admissions-", "")) ||
+      document.getElementById(targetHash.replace("about-", ""));
+
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
+      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
     }
   };
 
@@ -417,7 +433,7 @@ export default function Header({
         {/* Now shows up to 1279px (xl:hidden instead of lg:hidden) to match nav switch */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="xl:hidden p-2 text-slate-800 hover:bg-slate-50 border border-gray-100 transition-colors duration-300"
+          className="xl:hidden w-11 h-11 min-w-[44px] min-h-[44px] aspect-square flex-shrink-0 flex items-center justify-center rounded-none text-slate-800 hover:bg-slate-100 border border-gray-200 transition-colors duration-200 cursor-pointer focus:outline-none"
           aria-label="Toggle Menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -509,143 +525,279 @@ export default function Header({
         </div>
       )}
 
-      {/* Mobile Drawer Navigation (Accordion Styled) */}
+      {/* Mobile Drawer Navigation (Accordion Styled with Clear Hierarchy) */}
       {mobileMenuOpen && (
         <div
-          className="xl:hidden bg-white border-b border-gray-200 px-4 py-4 space-y-3 shadow-lg max-h-[calc(100vh-5rem)] overflow-y-auto"
+          className="xl:hidden bg-white border-b border-gray-200 px-3 sm:px-4 py-4 space-y-1 shadow-xl max-h-[calc(100vh-4.5rem)] overflow-y-auto rounded-none"
           id="mobile-drawer-menu"
         >
-          {/* Home Mobile Link */}
-          <a href="/" onClick={() => setMobileMenuOpen(false)}
-            className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "home" ? "text-primary-dark bg-slate-50 font-bold" : "text-slate-800 hover:bg-slate-50"
-              }`}
+          {/* Home Link */}
+          <a
+            href="/"
+            onClick={() => setMobileMenuOpen(false)}
+            className={`block w-full text-left px-4 py-3 rounded-none text-base font-semibold transition-colors duration-200 ${
+              activeView === "home"
+                ? "text-primary-dark bg-amber-50/80 font-bold"
+                : "text-slate-800 hover:bg-slate-50"
+            }`}
           >
             Home
           </a>
 
-          {/* About Section */}
-          <div className="border-b border-gray-100 pb-2 mb-2">
-            <span className="px-4 text-[9px] uppercase font-mono font-bold tracking-wider text-gray-400">
-              About IFS
-            </span>
-            <div className="mt-1 space-y-1">
-              <a href="/about#about-story" onClick={() => setMobileMenuOpen(false)}
-                className={`w-full text-left px-6 py-2 text-sm font-medium transition-colors duration-200 ${activeView === "about" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-700 hover:bg-slate-50"
-                  }`}
-              >
-                Who We Are
-              </a>
-              <a href="/about#principal-message" onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
-              >
-                Principal's Message
-              </a>
-              <a href="/about#management-board" onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
-              >
-                Management Team
-              </a>
-              <a href="/about#academic-faculty" onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
-              >
-                Our Faculty & Staff
-              </a>
-            </div>
+          {/* About IFS Section Accordion */}
+          <div className="border-b border-gray-100 pb-1">
+            <button
+              type="button"
+              onClick={() => toggleMobileSection("about")}
+              className="flex items-center justify-between w-full px-4 py-3 text-base font-semibold text-slate-800 rounded-none hover:bg-slate-50 transition-colors duration-200 cursor-pointer"
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="text-slate-800">About IFS</span>
+                <span className="text-[10px] font-mono font-bold tracking-wider px-2 py-0.5 rounded-none bg-slate-100 text-slate-500 uppercase">
+                  Explore
+                </span>
+              </div>
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-200 ${
+                  mobileExpandedSection === "about"
+                    ? "rotate-180 text-primary-dark"
+                    : "text-slate-400"
+                }`}
+              />
+            </button>
+            {mobileExpandedSection === "about" && (
+              <div className="pl-4 pr-2 py-1.5 ml-4 my-1 border-l-2 border-primary/50 bg-slate-50/70 rounded-none space-y-1 fade-in">
+                <a
+                  href="/about#about-story"
+                  onClick={(e) => handleLinkClick(e, "/about#about-story")}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  Who We Are (Our Story)
+                </a>
+                <a
+                  href="/about#principal-message"
+                  onClick={(e) => handleLinkClick(e, "/about#principal-message")}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  Principal's Message
+                </a>
+                <a
+                  href="/about#vision-mission"
+                  onClick={(e) => handleLinkClick(e, "/about#vision-mission")}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  Vision & Mission
+                </a>
+                <a
+                  href="/about#management-board"
+                  onClick={(e) => handleLinkClick(e, "/about#management-board")}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  Management Team
+                </a>
+                <a
+                  href="/about#academic-faculty"
+                  onClick={(e) => handleLinkClick(e, "/about#academic-faculty")}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  Our Faculty & Staff
+                </a>
+              </div>
+            )}
           </div>
 
-          {/* Admissions Section */}
-          <div className="border-b border-gray-100 pb-2 mb-2">
-            <span className="px-4 text-[9px] uppercase font-mono font-bold tracking-wider text-gray-400">
-              Admissions
-            </span>
-            <div className="mt-1 space-y-1">
-              <a href="/admissions#admissions-process" onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
-              >
-                Admissions Process
-              </a>
-              <a href="/admissions#admissions-registration" onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
-              >
-                Online Registration
-              </a>
-              <a href="/admissions#admissions-scholarships" onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
-              >
-                Scholarships & Grants
-              </a>
-            </div>
+          {/* Admissions Section Accordion */}
+          <div className="border-b border-gray-100 pb-1">
+            <button
+              type="button"
+              onClick={() => toggleMobileSection("admissions")}
+              className="flex items-center justify-between w-full px-4 py-3 text-base font-semibold text-slate-800 rounded-none hover:bg-slate-50 transition-colors duration-200 cursor-pointer"
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="text-slate-800">Admissions</span>
+                <span className="text-[10px] font-mono font-bold tracking-wider px-2 py-0.5 rounded-none bg-amber-100 text-amber-800 uppercase">
+                  2026-27
+                </span>
+              </div>
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-200 ${
+                  mobileExpandedSection === "admissions"
+                    ? "rotate-180 text-primary-dark"
+                    : "text-slate-400"
+                }`}
+              />
+            </button>
+            {mobileExpandedSection === "admissions" && (
+              <div className="pl-4 pr-2 py-1.5 ml-4 my-1 border-l-2 border-primary/50 bg-slate-50/70 rounded-none space-y-1 fade-in">
+                <a
+                  href="/admissions#admissions-process"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  Admissions Process (Step-by-Step)
+                </a>
+                <a
+                  href="/admissions#admissions-registration"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  Online Registration Form
+                </a>
+                <a
+                  href="/admissions#admissions-scholarships"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  Scholarships & Grants
+                </a>
+                <a
+                  href="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  Contact Admissions Team
+                </a>
+              </div>
+            )}
           </div>
 
-          {/* Academics Section */}
-          <div className="border-b border-gray-100 pb-2 mb-2">
-            <span className="px-4 text-[9px] uppercase font-mono font-bold tracking-wider text-gray-400">
-              Academics
-            </span>
-            <div className="mt-1 space-y-1">
-              <a href="/academics#curriculum" onClick={(e) => handleLinkClick(e, "/academics#curriculum")}
-                className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
-              >
-                Curriculum Overview
-              </a>
-              <a href="/academics#timings" onClick={(e) => handleLinkClick(e, "/academics#timings")}
-                className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
-              >
-                School Timings
-              </a>
-              <a href="/academics#calendar" onClick={(e) => handleLinkClick(e, "/academics#calendar")}
-                className="w-full text-left px-6 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors duration-200"
-              >
-                Academic Calendar
-              </a>
-            </div>
+          {/* Academics Section Accordion */}
+          <div className="border-b border-gray-100 pb-1">
+            <button
+              type="button"
+              onClick={() => toggleMobileSection("academics")}
+              className="flex items-center justify-between w-full px-4 py-3 text-base font-semibold text-slate-800 rounded-none hover:bg-slate-50 transition-colors duration-200 cursor-pointer"
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="text-slate-800">Academics</span>
+                <span className="text-[10px] font-mono font-bold tracking-wider px-2 py-0.5 rounded-none bg-sky-100 text-sky-800 uppercase">
+                  Programs
+                </span>
+              </div>
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-200 ${
+                  mobileExpandedSection === "academics"
+                    ? "rotate-180 text-primary-dark"
+                    : "text-slate-400"
+                }`}
+              />
+            </button>
+            {mobileExpandedSection === "academics" && (
+              <div className="pl-4 pr-2 py-1.5 ml-4 my-1 border-l-2 border-primary/50 bg-slate-50/70 rounded-none space-y-1 fade-in">
+                <a
+                  href="/academics#curriculum"
+                  onClick={(e) => handleLinkClick(e, "/academics#curriculum")}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  Curriculum Overview (ECD to A Levels)
+                </a>
+                <a
+                  href="/academics#timings"
+                  onClick={(e) => handleLinkClick(e, "/academics#timings")}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  School & Office Timings
+                </a>
+                <a
+                  href="/academics#calendar"
+                  onClick={(e) => handleLinkClick(e, "/academics#calendar")}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  Academic Calendar 2026-27
+                </a>
+                <a
+                  href="/activities#educational-trips"
+                  onClick={(e) => handleLinkClick(e, "/activities#educational-trips")}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  Co-curricular & Sports
+                </a>
+                <a
+                  href="/facilities"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:text-primary-dark hover:bg-white rounded-none transition-colors"
+                >
+                  STEM & Science Labs
+                </a>
+              </div>
+            )}
           </div>
 
           {/* General Links */}
-          <a href="/facilities" onClick={() => setMobileMenuOpen(false)}
-            className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "facilities" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-800 hover:bg-slate-50"
-              }`}
+          <a
+            href="/facilities"
+            onClick={() => setMobileMenuOpen(false)}
+            className={`block w-full text-left px-4 py-3 rounded-none text-base font-semibold transition-colors duration-200 ${
+              activeView === "facilities"
+                ? "text-primary-dark bg-slate-50 font-bold"
+                : "text-slate-800 hover:bg-slate-50"
+            }`}
           >
             Facilities
           </a>
-          <a href="/activities#educational-trips" onClick={(e) => handleLinkClick(e, "/activities#educational-trips")}
-            className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "activities" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-800 hover:bg-slate-50"
-              }`}
+          <a
+            href="/activities#educational-trips"
+            onClick={(e) => handleLinkClick(e, "/activities#educational-trips")}
+            className={`block w-full text-left px-4 py-3 rounded-none text-base font-semibold transition-colors duration-200 ${
+              activeView === "activities"
+                ? "text-primary-dark bg-slate-50 font-bold"
+                : "text-slate-800 hover:bg-slate-50"
+            }`}
           >
             Co-curricular
           </a>
-          <a href="/news-events" onClick={() => setMobileMenuOpen(false)}
-            className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "news-events" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-800 hover:bg-slate-50"
-              }`}
+          <a
+            href="/news-events"
+            onClick={() => setMobileMenuOpen(false)}
+            className={`block w-full text-left px-4 py-3 rounded-none text-base font-semibold transition-colors duration-200 ${
+              activeView === "news-events"
+                ? "text-primary-dark bg-slate-50 font-bold"
+                : "text-slate-800 hover:bg-slate-50"
+            }`}
           >
             News & Events
           </a>
-          <a href="/gallery" onClick={() => setMobileMenuOpen(false)}
-            className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "gallery" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-800 hover:bg-slate-50"
-              }`}
+          <a
+            href="/gallery"
+            onClick={() => setMobileMenuOpen(false)}
+            className={`block w-full text-left px-4 py-3 rounded-none text-base font-semibold transition-colors duration-200 ${
+              activeView === "gallery"
+                ? "text-primary-dark bg-slate-50 font-bold"
+                : "text-slate-800 hover:bg-slate-50"
+            }`}
           >
             Gallery
           </a>
-          <a href="/careers" onClick={() => setMobileMenuOpen(false)}
-            className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "careers" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-800 hover:bg-slate-50"
-              }`}
+          <a
+            href="/careers"
+            onClick={() => setMobileMenuOpen(false)}
+            className={`block w-full text-left px-4 py-3 rounded-none text-base font-semibold transition-colors duration-200 ${
+              activeView === "careers"
+                ? "text-primary-dark bg-slate-50 font-bold"
+                : "text-slate-800 hover:bg-slate-50"
+            }`}
           >
             Careers
           </a>
-          <a href="/contact" onClick={() => setMobileMenuOpen(false)}
-            className={`w-full text-left px-4 py-2.5 text-base font-semibold transition-colors duration-200 ${activeView === "contact" ? "text-primary-dark font-bold bg-slate-50" : "text-slate-800 hover:bg-slate-50"
-              }`}
+          <a
+            href="/contact"
+            onClick={() => setMobileMenuOpen(false)}
+            className={`block w-full text-left px-4 py-3 rounded-none text-base font-semibold transition-colors duration-200 ${
+              activeView === "contact"
+                ? "text-primary-dark bg-slate-50 font-bold"
+                : "text-slate-800 hover:bg-slate-50"
+            }`}
           >
             Contact
           </a>
 
           {/* Student Portal Mobile */}
-          <div className="pt-4">
+          <div className="pt-3 pb-2">
             <button
               onClick={() => window.open("https://moodle26.ifs.edu.pk/", "_blank")}
-              className="w-full flex items-center justify-center gap-2 bg-slate-900 text-primary hover:bg-slate-800 py-3 text-sm font-bold shadow border border-primary/40 transition-colors duration-200"
+              className="w-full flex items-center justify-center gap-2 bg-slate-900 text-primary hover:bg-slate-800 py-3.5 px-4 rounded-none text-sm font-bold shadow-md border border-primary/40 transition-colors duration-200 cursor-pointer"
             >
-              <GraduationCap className="w-5 h-5 text-primary" />
+              <GraduationCap className="w-5 h-5 text-primary flex-shrink-0" />
               Student LMS Portal
             </button>
           </div>

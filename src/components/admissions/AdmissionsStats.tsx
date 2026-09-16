@@ -3,7 +3,7 @@ import { CalendarClock, GraduationCap, HeartHandshake, Users, LucideIcon } from 
 
 interface Stat {
   value: number;
-  suffix: string;
+  suffix?: string;
   label: string;
   icon: LucideIcon;
   desc: string;
@@ -16,7 +16,7 @@ const stats: Stat[] = [
   { value: 4,  label: "House Systems", icon: Users, desc: "Co-curricular excellence" },
 ];
 
-function Counter({ value, suffix }: { value: number; suffix: string }) {
+function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
   const [display, setDisplay] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);

@@ -63,12 +63,12 @@ const COLORS = {
 };
 
 const steps = [
-  { num: "01", title: "Apply Online", desc: "Complete the initial application via our secure online portal or Google Form.", image: "step1-apply-online.jpg" },
-  { num: "02", title: "Placement Test", desc: "A grade-level assessment to evaluate your child's current academic standing.", image: "step2-placement-test.jpg" },
-  { num: "03", title: "Parent Interview", desc: "A collaborative discussion with our admissions team to align on educational goals.", image: "step3-parent-interview.jpg" },
-  { num: "04", title: "Document Review", desc: "Verification of academic records, birth certificate, and necessary identification.", image: "step4-document-review.jpg" },
-  { num: "05", title: "Fee Deposit", desc: "Submission of the admission fee to secure and formalize enrollment.", image: "step5-fee-deposit.jpg" },
-  { num: "06", title: "Confirmation", desc: "Official welcome packet issued, including uniform details and term dates.", image: "step6-confirmation.jpg" },
+  { num: "01", title: "Apply Online", desc: "Complete the initial application via our secure online portal or Google Form.", image: "/step1-apply-online.jpg" },
+  { num: "02", title: "Placement Test", desc: "A grade-level assessment to evaluate your child's current academic standing.", image: "/step2-placement-test.jpg" },
+  { num: "03", title: "Parent Interview", desc: "A collaborative discussion with our admissions team to align on educational goals.", image: "/step3-parent-interview.jpg" },
+  { num: "04", title: "Document Review", desc: "Verification of academic records, birth certificate, and necessary identification.", image: "/step4-document-review.jpg" },
+  { num: "05", title: "Fee Deposit", desc: "Submission of the admission fee to secure and formalize enrollment.", image: "/step5-fee-deposit.jpg" },
+  { num: "06", title: "Confirmation", desc: "Official welcome packet issued, including uniform details and term dates.", image: "/step6-confirmation.jpg" },
 ];
 
 function useReveal(threshold = 0.25) {

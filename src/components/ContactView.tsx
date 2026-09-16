@@ -170,8 +170,18 @@ export default function ContactView() {
             <div className="flex flex-wrap gap-4 pt-2">
               {/* Send Message Button: Yellow se Black fill hoga */}
               <a
-                href="#inquiry-form-col"
-                className="group relative inline-flex items-center gap-2 bg-[#F5C330] text-[#04080c] font-bold text-xs uppercase tracking-widest px-6 py-3.5 overflow-hidden transition-colors duration-300 hover:text-white"
+                  href="#inquiry-form-col"
+                  onClick={(e) => {
+                    e.preventDefault(); 
+                    const target = document.getElementById("inquiry-form-col");
+                    if (target) {
+                      target.scrollIntoView({
+                        behavior: "smooth", // Slow aur smooth scrolling ke liye
+                        block: "start",
+                      });
+                    }
+                  }}
+                  className="group relative inline-flex items-center gap-2 bg-[#F5C330] text-[#04080c] font-bold text-xs uppercase tracking-widest px-6 py-3.5 overflow-hidden transition-colors duration-300 hover:text-white"
               >
                 {/* Left-to-right filling layer */}
                 <span className="absolute inset-0 w-0 bg-[#60badc] transition-all duration-500 ease-out group-hover:w-full" />

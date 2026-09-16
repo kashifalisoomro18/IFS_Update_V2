@@ -55,7 +55,7 @@ export default function AdmissionsWhyChoose() {
             {/* Main image */}
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <img
-                src="assets/images/admissions-hero-full.jpg"
+                src="/assets/images/admissions-hero-full.jpg"
                 alt="ISRA Foundation campus"
                 className="w-full object-cover"
                 style={{ height: "clamp(320px, 50vw, 520px)" }}

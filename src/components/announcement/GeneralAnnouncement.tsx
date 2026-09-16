@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X } from "lucide-react";
 
@@ -15,6 +15,14 @@ export interface AnnouncementData {
   image: string;
   /** Alt text for the banner image */
   imageAlt?: string;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  badgeText?: string;
+  date?: string;
+  isNew?: boolean;
+  ctaText?: string;
+  secondaryText?: string;
 }
 
 export interface AnnouncementModalProps {
@@ -22,6 +30,8 @@ export interface AnnouncementModalProps {
   isOpen: boolean;
   /** Called when the user closes the modal (X button, backdrop click, Escape). */
   onClose: () => void;
+  /** Called when the user clicks the primary CTA or image. */
+  onApply?: () => void;
   /** Announcement content. Falls back to sensible defaults if omitted. */
   data?: AnnouncementData;
 }
@@ -46,7 +56,7 @@ const modalVariants = {
     opacity: 1,
     scale: 1,
     y: 0,
-    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] as const },
   },
   exit: {
     opacity: 0,
@@ -65,11 +75,17 @@ const FOCUSABLE_SELECTOR =
 export default function AnnouncementModal({
   isOpen,
   onClose,
+  onApply,
   data = DEFAULT_DATA,
 }: AnnouncementModalProps) {
+  const [mounted, setMounted] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Lock body scroll while open, restore on close/unmount.
   useEffect(() => {
@@ -123,6 +139,8 @@ export default function AnnouncementModal({
     };
   }, [isOpen, onClose]);
 
+  if (!mounted) return null;
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -170,7 +188,8 @@ export default function AnnouncementModal({
             <img
               src={data.image}
               alt={data.imageAlt ?? ""}
-              className="w-full h-auto max-h-[85vh] object-contain block"
+              onClick={onApply}
+              className={`w-full h-auto max-h-[85vh] object-contain block ${onApply ? "cursor-pointer" : ""}`}
             />
           </motion.div>
         </motion.div>
