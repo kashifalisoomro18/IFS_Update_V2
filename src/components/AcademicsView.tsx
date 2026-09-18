@@ -240,8 +240,8 @@ function OverviewSection() {
           eyebrow="Academic Program"
           heading="Curriculum"
           accent={<span style={{ color: "#60BADC" }}> Overview</span>}
-          description="The curriculum focuses on a rigorous and creative academic foundation that aims at developing intellectual curiosity, critical thinking, and problem-solving skills amongst our students."
-          subDescription="Our renowned curriculum and devoted faculty uphold the high standards we have maintained for nearly four decades."
+          description="IFS provides an academic programme designed to build strong foundations in literacy, numeracy, scientific understanding, communication, critical thinking, creativity and personal development."
+          
           dividerColor="#f5c330"
         />
       </div>
@@ -249,16 +249,13 @@ function OverviewSection() {
       <div className="w-full bg-slate-100 py-10 sm:py-14">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center px-4 sm:px-6 lg:px-8">
           <div className="space-y-5">
-            <p className="font-semibold text-sm sm:text-base leading-relaxed text-justify text-[#0d1f3c]">
-              At each grade level, students are challenged academically and personally to learn
-              and grow. Our academic program is designed to teach students the knowledge, skills,
-              and attitudes that will best prepare them for success in a global society.
+            <p className="font-bold text-base sm:text-lg lg:text-xl leading-relaxed text-justify text-[#0d1f3c]">
+             This foundation is nurtured through a well-rounded and progressive approach to learning,
+              where every subject area is designed to work in harmony with the others. 
+              Beyond academic content, students are guided to develop essential life skills — from effective communication and collaboration to independent thinking and self-expression. 
+              By combining structured learning with opportunities for exploration and creativity, IFS ensures that students not only acquire knowledge but also learn how to apply it meaningfully in everyday life.
             </p>
-            <p className="text-xs sm:text-sm leading-relaxed text-justify text-[#0d1f3c]">
-              Our coursework also emphasizes an ethic of empathy and social responsibility.
-              Students continually draw connections between what they learn and real-world
-              experiences.
-            </p>
+          
           </div>
           <div className="flex justify-center -translate-x-[10px]">
             <AnimatedAtomIcon size={400} color="#60BADC" accent="#F5C330" />

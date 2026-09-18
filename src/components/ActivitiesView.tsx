@@ -811,11 +811,9 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                     <span className="text-[#60BADC] mt-2 inline-block">One School , One Family</span>
                   </h2>
                   <p className="text-[#020816] text-lg max-w-2xl mx-auto text-justify">
-                    At Isra Foundation School, we believe that life outside the
-                    classroom is just as important as the learning that happens
-                    inside it. Our House System and carefully curated
-                    educational trips are designed to build confidence, teamwork,
-                    and real-world understanding in every student.
+                   The House System at IFS encourages teamwork, healthy competition, leadership, participation 
+                  and school spirit. Students participate in house-based activities and competitions that provide opportunities to 
+                  develop confidence, collaboration, sportsmanship and leadership skills.
                   </p>
                 </motion.div>
 

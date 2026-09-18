@@ -63,12 +63,13 @@ const COLORS = {
 };
 
 const steps = [
-  { num: "01", title: "Apply Online", desc: "Complete the initial application via our secure online portal or Google Form.", image: "/step1-apply-online.jpg" },
-  { num: "02", title: "Placement Test", desc: "A grade-level assessment to evaluate your child's current academic standing.", image: "/step2-placement-test.jpg" },
-  { num: "03", title: "Parent Interview", desc: "A collaborative discussion with our admissions team to align on educational goals.", image: "/step3-parent-interview.jpg" },
-  { num: "04", title: "Document Review", desc: "Verification of academic records, birth certificate, and necessary identification.", image: "/step4-document-review.jpg" },
-  { num: "05", title: "Fee Deposit", desc: "Submission of the admission fee to secure and formalize enrollment.", image: "/step5-fee-deposit.jpg" },
-  { num: "06", title: "Confirmation", desc: "Official welcome packet issued, including uniform details and term dates.", image: "/step6-confirmation.jpg" },
+  { num: "01", title: "Contact School", desc: "Contact school to obtain application form .", image: "/01-contact-school.jpg" },
+  { num: "02", title: "Submit Application", desc: " Submit application form . ", image: "/02-submit-application-form.jpg" },
+  { num: "03", title: "Submit Documents", desc: " Submit required documents .", image: "/03-submit-required-documents.jpg" },
+  { num: "04", title: "Placement Test & Interview", desc: " Placement Test and Parent Interview scheduled and conducted .", image: "/04-placement-test-parent-interview.jpg" },
+  { num: "05", title: "Admission Result", desc: " Admission decision .", image: "/05-admission-decision.jpg" },
+  { num: "06", title: "Fee Deposit", desc: "Fee submission .", image: "/06-fee-submission.jpg" },
+  { num: "07", title: "Enrollment Confirmed", desc: "Schedule Enrollment.", image: "/07-schedule-enrollment.jpg" },
 ];
 
 function useReveal(threshold = 0.25) {
@@ -269,7 +270,7 @@ export default function AdmissionsProcess() {
         </h2>
         <div style={{ width:72, height:4, background:"#60BADC", margin:"0 auto 20px" }} />
         <p style={{ fontSize: 16, color: "rgba(2,6,24,0.65)", maxWidth: 480, margin: "0 auto", lineHeight: 1.6 }}>
-          A streamlined, transparent pathway designed to welcome your family into our community.
+         Isra Foundation Schools welcomes applications from families seeking a supportive and academically focused learning environment for their children.
         </p>
       </div>
 
@@ -321,4 +322,4 @@ export default function AdmissionsProcess() {
       </div>
     </section>
   );
-}
+}

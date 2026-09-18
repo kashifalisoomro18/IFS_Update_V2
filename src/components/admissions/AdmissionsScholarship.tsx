@@ -412,7 +412,7 @@ export default function AdmissionsScholarship() {
             </div>
 
             <a
-              href="https://forms.gle/M9nuKcakF15TbsYQ9"
+             href="/IFS-Cambridge Scholarship-Criteria.pdf"
               target="_blank"
               rel="noreferrer"
               className="schol-cta-btn"

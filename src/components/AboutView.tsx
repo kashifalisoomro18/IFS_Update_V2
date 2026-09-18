@@ -222,41 +222,34 @@ const TeamCarousel = ({ members, prefersReducedMotion, isMobile }: { members: Cu
 const boardMembers: BoardMember[] = [
   {
     name: "Dr. Ahmed Waliullah Kazi",
-    title: "Chairperson — Executive Board",
-    description: "Guiding IFS with a long-term vision for academic and instructional excellence. Dr. Kazi brings decades of experience in higher education and institutional leadership to steer the school towards its mission of empowering learners.",
+    title: "Executive Director",
+    description: "Dr. Ahmed Waliullah Kazi is the Vice Chancellor of Isra University and Director of Isra Islamic Foundation, under whose vision Isra Foundation Schools was established. He founded the school with the aim of providing students with a safe, nurturing and supportive environment where they can pursue their academic goals. His educational vision emphasizes academic excellence, character development and the holistic growth of every student, preparing them to become confident and responsible individuals.",
     photo: "/principal.jpg",
     initials: "AW",
   },
   {
-    name: "Mrs. Sadia Rehman",
-    title: "Head of Primary Section",
-    description: "Nurturing curiosity and strong foundations in our youngest learners. Mrs. Rehman has dedicated over 15 years to early childhood pedagogy, crafting a warm and stimulating environment where children discover the joy of learning.",
-    photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800",
-    initials: "SR",
+    name: "Mrs. Maha Khan",
+    title: "Cambridge Section Head ",
+    description:  "Mrs. Maha Khan leads the Cambridge Section with a focus on academic excellence and student development. Her approach encourages independent thinking, conceptual understanding and confidence in learning. She strives to prepare students for internationally recognized academic pathways while nurturing curiosity and lifelong learning.",
+    photo: "",
+    initials: "MK",
   },
   {
-    name: "Mr. Muhammad Bilal Shah",
-    title: "Head of Secondary Section",
-    description: "Preparing students for rigorous academics and responsible leadership. With a firm belief in discipline paired with creativity, Mr. Shah oversees a dynamic secondary curriculum that balances international standards with local relevance.",
-    photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800",
-    initials: "BS",
+    name: "Ms. Rukhsar Khan ",
+    title: "Middle Section head",
+    description: "Ms. Rukhsar Khan leads the Middle Section with an emphasis on strong academic foundations and the development of independent learners.She believes in creating a supportive environment where students are encouraged to question, explore and take responsibility for their learning.Her focus is on helping students grow in confidence as they transition towards higher levels of education.",
+    photo: "",
+    initials: "RK",
   },
   {
 
-    name: "Ms. Elina Virtanen",
-    title: "Head of Academics",
-    description: "Ensuring every program meets the high standards our students deserve. Ms. Virtanen spearheads curriculum development, teacher training initiatives, and quality assurance protocols aligned with CAIE and HEI benchmarks.",
-    photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=800",
-    initials: "EV",
+    name: "Mrs. Sobia Soomro ",
+    title: "ECD/Elementary Section Head ",
+    description: "She emphasizes the development of academic skills alongside confidence, creativity, communication and positive learning habits. Her approach supports children in becoming enthusiastic, capable and well-rounded learners from their earliest years. ",
+    photo: "",
+    initials: "SS",
   },
 
-  {
-    name: "Ms. Hafsa Qamar",
-    title: "Head of Academics",
-    description: "Ensuring every program meets the high standards our students deserve. Ms. Virtanen spearheads curriculum development, teacher training initiatives, and quality assurance protocols aligned with CAIE and HEI benchmarks.",
-    photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=800",
-    initials: "HQ",
-  },
 ];
 
 /* ── FACULTY & STAFF (GSAP vertical slider) ──────────────────── */
@@ -1070,15 +1063,28 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
               About <span className="text-[#60BADC]">IFS</span>
             </h2>
             <div className="section-divider" />
-            <p className="text-slate-600 leading-relaxed text-base text-justify">
-              The Isra Foundation School (IFS) was established in 2016 to bridge the gap between premium international education and value-driven local roots. Operating under the banner of Isra Islamic Foundation and affiliated with Isra University, IFS represents a vibrant and ever-growing academic community.
-            </p>
-            <p className="text-slate-600 leading-relaxed text-base text-justify">
-              IFS is firmly committed to serve as a vital bridge connecting international educational standards with our global community of students. This platform is designed to foster lifelong connections, celebrate student achievements, and involve graduates in the university's academic, research, and entrepreneurial initiatives.
-            </p>
-            <p className="text-slate-600 leading-relaxed text-base text-justify">
-              Our students are not only the ambassadors of Isra University but also strategic partners who support innovation, leadership development, and societal impact across diverse professional sectors.
-            </p>
+          <p className="text-slate-600 leading-relaxed text-base text-justify">
+              Isra Foundation Schools (IFS) is a school project associated with Isra Islamic Foundation and serves as an educational institution in Hyderabad, Sindh.
+          </p>
+          <p className="text-slate-600 leading-relaxed text-base text-justify">
+            IFS is committed to providing quality education in an environment that supports academic achievement, character development and the holistic growth of students.
+          </p>
+          <p className="text-slate-600 leading-relaxed text-base text-justify">
+            The school aims to develop learners who are confident, responsible, intellectually curious and equipped to contribute positively to society.
+          </p>
+          <p className="text-slate-600 leading-relaxed text-base text-justify">
+             Our educational philosophy places importance on:
+          </p>
+          <ul className="list-disc list-inside text-slate-600 leading-relaxed text-base space-y-1">
+              <li>Academic excellence</li>
+              <li>Character and moral development</li>
+              <li>Critical and creative thinking</li>
+              <li>Collaboration and communication</li>
+              <li>Student participation</li>
+              <li>Practical and hands-on learning</li>
+              <li>Personal responsibility</li>
+              <li>Social awareness and service</li>
+          </ul>
           </motion.div>
         </div>
       </section>

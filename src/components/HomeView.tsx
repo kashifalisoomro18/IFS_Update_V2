@@ -195,22 +195,38 @@ const STATS_DATA = [
 const WHY_CHOOSE_DATA = [
   {
     icon: UserCheck,
-    title: "Personalized Attention & Instruction",
+    title: "Holistic Development",
     description:
-      "Dedicated faculty trained to recognize and actively nurture the unique potential of every student through individualized support and guidance.",
+    "We focus on the development of the whole child by balancing academic learning with character building, creativity, physical development, communication skills and social responsibility.",
   },
   {
     icon: Shield,
-    title: "Strong Moral & Character Building",
+    title: "Strong Academic Foundation",
     description:
-      "A balanced educational environment that combines academic excellence with Islamic values, discipline, leadership, and character development.",
+      "Our academic programme is designed to develop conceptual understanding, independent thinking, problem-solving and a lifelong love of learning.",
   },
   {
     icon: Laptop,
-    title: "Tech-Forward Learning Environment",
+    title: "Student-Centered Learning",
     description:
-      "Modern classrooms equipped with digital learning tools and innovative teaching methods that prepare students for the future.",
+      "Students are encouraged to participate actively in their learning through collaboration,discussion, hands-on activities, inquiry and practical application.",
   },
+  {icon: Clock,
+    title:" Character & Values",
+    description: 
+    "We believe that academic excellence is strengthened by strong moral values. Students are encouraged to develop integrity, responsibility, respect, empathy and a sense of service.",
+  },
+  {icon: Award,
+    title:" Supportive Learning Environment",
+    description:
+    "IFS aims to provide a safe, respectful and encouraging environment in which students can explore their interests, build confidence and reach their potential.",
+},
+{icon: BookOpen,
+    title:"  Pathways for Continued Growth ",
+    description:
+    "IFS provides students with an academic pathway that develops from the early years through secondary education, with opportunities to broaden their horizons through internationally recognized curricula and diverse learning experiences.",
+}
+
 ];
 
 const ACHIEVEMENTS_DATA = [
@@ -910,19 +926,27 @@ export default function HomeView({
                 <h2 className="font-sans font-black text-slate-900 text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
                   Isra Foundation
                   <br />
-                  <span className="text-[#60badc]">School</span>
+                  <span className="text-[#60badc]">Schools</span>
                 </h2>
               </div>
 
               <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-normal text-justify">
-                Welcome to Isra Foundation Schools, where
-                academic excellence meets holistic character
-                development. We provide a modern, value-driven
-                education that equips students with critical thinking
-                skills, Islamic ethics, and global competencies.
+                At Isra Foundation Schools, we believe that education is not limited to academic achievement. 
+                It is a journey of developing confident, responsible, ethical and lifelong learners who are prepared 
+                to contribute positively to society. 
+                Our educational approach combines academic rigor with character development, creativity, 
+                collaboration, critical thinking and practical learning. We strive to provide a safe, respectful and 
+                stimulating environment where every child is encouraged to discover their strengths, develop 
+                their potential and grow into a well-rounded individual. 
+                With dedicated educators, a student-centered learning environment and a strong commitment to 
+                academic and personal development, Isra Foundation Schools aims to prepare students not only 
+                for examinations, but also for the opportunities and challenges of the future. 
               </p>
+              <strong className="text-slate-900 text-sm sm:text-base leading-relaxed font-bold text-justify">
+                Your child's future begins here. 
+              </strong>
 
-              <div className="pt-2 flex flex-wrap items-center gap-4">
+              <div className="pt-8 flex flex-wrap items-center gap-4">
                 <a href="/about#about-story"
                   className="group relative overflow-hidden bg-slate-950 text-white font-bold text-xs uppercase tracking-widest px-6 py-3.5 shadow-md rounded-none transition-transform duration-300 hover:scale-105 active:scale-95 cursor-pointer"
                 >
@@ -1260,7 +1284,7 @@ export default function HomeView({
                   className="order-2 lg:order-1 lg:col-span-6 z-20 space-y-4 sm:space-y-6 lg:pr-12 flex flex-col justify-center mt-4 lg:mt-0"
                 >
                   <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
-                    At IFS, we see<strong className="text-[#020618] font-extrabold"> Early Childhood Development (ECD) </strong> as a vital stage where children begin to explore the world, build meaningful relationships, and develop essential cognitive, social, emotional, and physical skills. Through a nurturing, safe, and engaging learning environment, we encourage curiosity, creativity, confidence, and a strong foundation for lifelong learning.
+                    At IFS, our <strong className="text-[#020618] font-extrabold"> Early Childhood Development (ECD) </strong> spans Pre-Nursery through KG. Early childhood learning focused on foundational social, emotional, language, physical and cognitive development. Early years programme developing communication, independence, creativity and foundational learning skills. Preparation for formal schooling through literacy, numeracy, inquiry, social development and age-appropriate activities.
                   </p>
                   <div className="pt-2 sm:pt-4">
                     <a
@@ -1309,7 +1333,7 @@ export default function HomeView({
                     {/* Grade levels — separate, dark charcoal text, below heading */}
                     <div className="absolute bottom-6 left-6 z-30 space-y-0.5 select-none">
                       <span className="text-[10px] sm:text-[11px] font-bold text-white uppercase tracking-widest block font-mono">
-                        Grade Levels
+                        Level
                       </span>
                       <span className="text-xs sm:text-base text-white">
                         Pre-Nursery - Kindergarten
@@ -1385,7 +1409,7 @@ export default function HomeView({
                       className="absolute right-0 sm:right-2 bottom-4 sm:bottom-6 bg-white/70 backdrop-blur-md border border-white/20 px-3 sm:px-4 py-2.5 sm:py-3.5 shadow-lg z-20 select-none"
                     >
                       <span className="text-[9px] sm:text-[11px] font-bold text-[#020816] uppercase tracking-widest block font-mono">
-                        Grade Levels
+                      Levels
                       </span>
                       <span className="text-xs sm:text-sm font-bold text-[#020816]">
                         Grade I - Grade V
@@ -1418,8 +1442,7 @@ export default function HomeView({
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                   className="order-2 lg:order-2 lg:col-span-6 lg:pl-16 z-20 space-y-4 sm:space-y-6 mt-4 lg:mt-0 flex flex-col justify-center"
                 >
-                  <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
-                    At <strong className="text-[#020618] font-extrabold">IFS Elementary</strong>, we nurture the development of each child emotionally, academically, physically, socially, and artistically during their formative years.
+                   <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-left"> At IFS <strong className="text-[#020618] font-extrabold"> Elementary</strong>, we nurture the development of each child emotionally, academically, physically, socially, and artistically during their formative years. Foundational primary education with emphasis on <strong className="text-[#020618] font-extrabold"> literacy, numeracy, conceptual understanding</strong> and <strong className="text-[#020618] font-extrabold">learning habits</strong>. Continued development of core academic <strong className="text-[#020618] font-extrabold">skills, confidence, communication</strong> and <strong className="text-[#020618] font-extrabold">independent learning</strong>. Primary-level education with increasing emphasis on <strong className="text-[#020618] font-extrabold">conceptual understanding</strong> and application. Development of subject knowledge,  <strong className="text-[#020618] font-extrabold">critical thinking</strong> and<strong className="text-[#020618] font-extrabold"> independent learning</strong> skills. Consolidation of primary learning and preparation for the middle school academic pathway.
                   </p>
                   <div className="pt-2 sm:pt-4">
                     <a
@@ -1475,9 +1498,9 @@ export default function HomeView({
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                   className="order-2 lg:order-1 lg:col-span-6 z-20 space-y-4 sm:space-y-6 lg:pr-12 flex flex-col justify-center mt-4 lg:mt-0"
                 >
-                  <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
-                    At IFS <strong className="text-[#020816] font-extrabold"> Middle Section (Grades VI–VII) </strong>, students are encouraged to strengthen their academic skills, develop critical thinking, and build confidence as independent learners. Through engaging learning experiences, they are prepared to take on greater challenges and grow into responsible, curious, and capable individuals.
-                  </p>
+                  <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-left">
+  At IFS <strong className="text-[#020618] font-extrabold">Middle School</strong>, we build on the foundations of elementary learning to prepare students for the challenges of secondary education. Students experience broader subject exposure and greater academic independence, with the introduction of testing, followed by continued emphasis on subject knowledge, analytical thinking and responsibility. As they progress, students prepare for secondary-level academic pathways through more specialized subject learning with plenty of subject options.
+</p>
                   <div className="pt-2 sm:pt-4">
                     <a
                       href="/academics#curriculum"
@@ -1536,7 +1559,7 @@ export default function HomeView({
                     className="absolute -bottom-3 sm:-bottom-4 left-3 sm:left-6 z-30 bg-white px-4 sm:px-5 py-2 sm:py-3 shadow-lg select-none"
                   >
                     <span className="text-[10px] sm:text-[11px] font-bold text-[#020816] uppercase tracking-widest block font-mono">
-                      Grade Levels
+                      Levels
                     </span>
                     <span className="text-xs sm:text-base font-bold text-[#020816]">
                       Grade VI - Grade VII
@@ -1633,7 +1656,7 @@ export default function HomeView({
                     </h3>
                     <div className="mt-4 sm:mt-5 space-y-0.5">
                       <span className="text-[10px] sm:text-[11px] font-bold text-slate-600 uppercase tracking-widest block font-mono">
-                        Grade Levels
+                        Levels
                       </span>
                       <span className="text-xs sm:text-base font-black text-slate-950">
                         O Level - A Level
@@ -1650,9 +1673,9 @@ export default function HomeView({
                   transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
                   className="order-2 lg:order-2 lg:col-span-6 lg:pl-16 z-20 space-y-4 sm:space-y-6 mt-4 lg:mt-0 flex flex-col justify-center"
                 >
-                  <p className="text-slate-800 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
-                    At IFS <strong className="text-slate-950 font-bold">O Level & A Level</strong> provides students with a balanced and enriching learning experience that combines academic excellence with a vibrant co-curricular program. Our aim is to develop confident, independent, and critical thinkers, equipping students with the knowledge, skills, and confidence they need to succeed in their examinations, university, and beyond.
-                  </p>
+                  <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-left">
+  At IFS <strong className="text-[#020618] font-extrabold">Senior Secondary</strong>, students follow the <strong className="text-[#020618] font-extrabold">Cambridge (CIE)</strong> pathway, building on subject-specific study to prepare for internationally recognized <strong className="text-[#020618] font-extrabold">O Level</strong> examinations. This progresses into the <strong className="text-[#020618] font-extrabold">A Level</strong> pathway, marking the senior stage of secondary education.
+</p>
                   <div className="pt-2 sm:pt-4">
                     <a
                       href="/academics#curriculum"
