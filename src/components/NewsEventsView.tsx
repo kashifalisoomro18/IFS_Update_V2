@@ -138,52 +138,40 @@ const ANNOUNCEMENTS_DATA = [
   // Announcement 1
   {
     id: "ann-1",
-    title: "School Timings Update",
-    content: "Please note the revised school timings effective from 10th August 2026.",
-    date: "01 Aug, 2026",
+    title: "Academic Session 2026–2027",
+    content: " Isra Foundation Schools commenced the new academic session on Monday, 10 August 2026. .",
+    date: "10 August 2026 ",
   },
   // Announcement 2
   {
     id: "ann-2",
-    title: "Fee Submission Reminder",
-    content: "Reminder: Last date for fee submission is 15th August 2026. Avoid late charges.",
-    date: "31 Jul, 2026",
+    title: "Independence Day celebration ",
+    content: " Activities Celebrating 79 Years of Freedom .",
+    date: " 16 August 2026",
   },
   // Announcement 3
   {
     id: "ann-3",
-    title: "Transport Notice",
-    content: "New transport routes have been added. Please check the updated schedule.",
-    date: "29 Jul, 2026",
+    title: "Seerah Session ",
+    content: "Seerah of Nabi Kareem ﷺ: A Role Model for Young Muslims.",
+    date: " 8 September , 2026",
   },
   // Announcement 4
   {
     id: "ann-4",
     title: "Library Book Return Deadline",
     content: "All borrowed books must be returned before the term ends on 20th August 2026.",
-    date: "28 Jul, 2026",
+    date: "30 August, 2026",
   },
   // Announcement 5
   {
     id: "ann-5",
-    title: "Parent-Teacher Meeting Schedule",
-    content: "PTMs for Elementary and Middle School will be held on 22nd August 2026.",
-    date: "25 Jul, 2026",
-  },
-  // Announcement 6
-  {
-    id: "ann-6",
     title: "Sports Trials Announcement",
     content: "Trials for the inter-house football and basketball teams begin next week.",
-    date: "22 Jul, 2026",
+    date: "18 August, 2026",
   },
   // Announcement 7
-  {
-    id: "ann-7",
-    title: "Uniform Guidelines Update",
-    content: "Updated summer uniform guidelines are now in effect for all grades.",
-    date: "18 Jul, 2026",
-  },
+ 
 ];
 
 // ============================================================
@@ -226,22 +214,24 @@ const EVENTS_DATA = [
     id: "evt-1",
     category: "Academic",
     time: "09:00 AM - 02:00 PM",
-    title: "Annual Science & STEM Innovation Expo",
+    title: "Independence Day Celebration",
     description:
-      "Students from Elementary to A Levels will showcase interactive science experiments, automated engineering designs, and Finland-style activity-based models.",
-    date: "August 15, 2026",
+      "Activities Celebrating 79 Years of Freedom",
+    date: "August 16, 2026",
     venue: "Main Multipurpose Auditorium",
+    image: "/ID1.JPG",
   },
   // Event Card 2 — Inter-House Football & Basketball Championship
   {
     id: "evt-2",
-    category: "Sports",
-    time: "08:30 AM - 01:30 PM",
-    title: "Inter-House Football & Basketball Championship",
+    category: "Academic",
+    time: "11:30 AM - 01:30 PM",
+    title: "Seerah Session ",
     description:
-      "The annual inter-house sports battle of Red, Blue, and Gold houses kicks off with football and basketball tournaments.",
-    date: "September 05, 2026",
-    venue: "Secured Campus Football Ground",
+      "Seerah of Nabi Kareem ﷺ: A Role Model for Young Muslims .",
+    date: "September 08, 2026",
+    venue: "Auditorium",
+    image: "/audi2.jpg",
   },
   // Event Card 3 — Annual Study Trip: Science Museum & Historical Sites
   {
@@ -253,6 +243,7 @@ const EVENTS_DATA = [
       "Educational study trip designed to facilitate experiential, out-of-classroom learning for grades 4 to 8.",
     date: "October 12, 2026",
     venue: "Out of Campus",
+    image: "/trip1.jpg",
   },
   // Event Card 4 — Independence Day Celebrations
   {
@@ -264,6 +255,7 @@ const EVENTS_DATA = [
       "Patriotic school assembly, stage performances, and flag-hoisting ceremony celebrating national heritage.",
     date: "August 14, 2026",
     venue: "Auditorium & Lawns",
+    image: "/ID2.JPG",
   },
   // Event Card 5 — Annual Prize Distribution Ceremony
   {
@@ -275,6 +267,7 @@ const EVENTS_DATA = [
       "Recognizing top-performing students across all grades with awards, certificates, and academic honors.",
     date: "November 02, 2026",
     venue: "Main Multipurpose Auditorium",
+    image: "/graduationcermony.jpeg",
   },
 
   // Event Card 6 — Annual Prize Distribution Ceremony
@@ -287,8 +280,9 @@ const EVENTS_DATA = [
       "Recognizing top-performing students across all grades with awards, certificates, and academic honors.",
     date: "November 03, 2026",
     venue: "Auditorium",
+    image: "/audi3.jpg",
   },
-  // Event Card 6 — Annual Prize Distribution Ceremony
+  // Event Card 7 — Annual Prize Distribution Ceremony
   {
     id: "evt-7",
     category: "Academic",
@@ -298,6 +292,7 @@ const EVENTS_DATA = [
       "ISRA welcomes teams from leading schools for friendly competitions in athletics, chess, football, and basketball.",
     date: "November 30, 2026",
     venue: "International Sports Stadium",
+    image: "/hydolympic1.jpeg",
   },
 ];
 
@@ -384,7 +379,7 @@ function EventCard({ event }: { event: EventData; key?: string }) {
         <img
           src={
             event.image ??
-            "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=600&q=80"
+            "/audi1.jpg"
           }
           alt={event.title}
           className="w-full h-full object-cover transition-transform duration-500"

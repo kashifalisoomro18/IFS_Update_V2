@@ -847,7 +847,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                       </p>
 
                       <div className="grid grid-cols-2 gap-4 mb-10">
-                        {["Inter-house Sports", "Cultural Celebrations", "Quiz & Debate", "Student Leadership", "Science & Art Exhibitions", "Annual House Championship"].map((a, i) => (
+                        {["Sports Competitions",  "Quiz Competitions", "Art and Creative Competitions", "Inter House Debates / Public Speaking ", "Academic Competitions", "Cultural Activities","Team-Building Activities","Community / Service Activities"].map((a, i) => (
                           <div key={i} className="flex items-center gap-3">
                             <div className="w-2 h-2 " style={{ background: "#016B4F" }} />
                             <span className="text-sm font-semibold text-[#020816]">{a}</span>
@@ -934,7 +934,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                       </p>
 
                       <div className="grid grid-cols-2 gap-4 mb-10">
-                        {["Inter-house Sports", "Cultural Celebrations", "Quiz & Debate", "Student Leadership", "Science & Art Exhibitions", "Annual House Championship"].map((a, i) => (
+                        {["Sports Competitions", "Quiz Competitions", "Art and Creative Competitions", "Inter House Debates / Public Speaking", "Academic Competitions", "Cultural Activities", "Team-Building Activities", "Community / Service Activities"].map((a, i) => (
                           <div key={i} className="flex items-center gap-3">
                             <div className="w-2 h-2 " style={{ background: "#0F4C81" }} />
                             <span className="text-sm font-semibold text-[#020816]">{a}</span>
@@ -1025,10 +1025,10 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                       </p>
 
                       <div className="grid grid-cols-2 gap-4 mb-10">
-                        {["Inter-house Sports", "Cultural Celebrations", "Quiz & Debate", "Student Leadership", "Science & Art Exhibitions", "Annual House Championship"].map((a, i) => (
+                        {["Sports Competitions", "Quiz Competitions", "Art and Creative Competitions", "Inter House Debates / Public Speaking", "Academic Competitions", "Cultural Activities", "Team-Building Activities", "Community / Service Activities"].map((a, i) => (
                           <div key={i} className="flex items-center gap-3">
                             <div className="w-2 h-2 " style={{ background: "#7B0D17" }} />
-                            <span className="text-sm font-semibold text-[#020816]">{a}</span>
+                            <span className="text-sm font-semibond text-[#020816]">{a}</span>
                           </div>
                         ))}
                       </div>
@@ -1116,7 +1116,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                       </p>
 
                       <div className="grid grid-cols-2 gap-4 mb-10">
-                        {["Inter-house Sports", "Cultural Celebrations", "Quiz & Debate", "Student Leadership", "Science & Art Exhibitions", "Annual House Championship"].map((a, i) => (
+                        {["Sports Competitions", "Quiz Competitions", "Art and Creative Competitions", "Inter House Debates / Public Speaking ", "Academic Competitions", "Cultural Activities","Team-Building Activities","Community / Service Activities"].map((a, i) => (
                           <div key={i} className="flex items-center gap-3">
                             <div className="w-2 h-2 " style={{ background: "#4B2E63" }} />
                             <span className="text-sm font-semibold text-[#020816]">{a}</span>

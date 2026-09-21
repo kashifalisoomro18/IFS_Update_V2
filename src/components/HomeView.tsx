@@ -1085,7 +1085,7 @@ export default function HomeView({
                   <h4 className="font-sans font-extrabold text-[#0e1e38] text-xl leading-snug mb-3">
                     {item.title}
                   </h4>
-                  <p className="text-slate-600 text-sm leading-relaxed font-normal text-justify">
+                  <p className="text-slate-600 text-sm leading-relaxed font-normal">
                     {item.description}
                   </p>
                 </motion.div>
@@ -1171,7 +1171,7 @@ export default function HomeView({
                   <h4 className="font-sans font-extrabold text-slate text-lg leading-snug mb-3">
                     {item.title}
                   </h4>
-                  <p className="text-slate-600 text-sm leading-relaxed font-normal text-justify">
+                  <p className="text-slate-600 text-sm leading-relaxed font-normal">
                     {item.description}
                   </p>
 
@@ -1903,16 +1903,17 @@ export default function HomeView({
                 {/* Floating date panel */}
                 <div className="w-[84px] h-[94px] bg-[#F8FAFC] border-t-2 border-[#F5C330] group-hover:border-[#60BADC] shadow-sm flex flex-col items-center justify-center transition-colors duration-300 flex-shrink-0">
                   <Calendar className="w-4 h-4 text-[#F5C330] group-hover:text-[#60BADC] transition-colors duration-300 mb-1" />
-                  <span className="text-[#0F172A] font-black text-3xl leading-none">27</span>
-                  <span className="text-[9px] uppercase font-bold text-slate-500 tracking-widest mt-1">July</span>
+                  <span className="text-[#0F172A] font-black text-3xl leading-none">10</span>
+                  <span className="text-[9px] uppercase font-bold text-slate-500 tracking-widest mt-1">August</span>
                 </div>
 
                 <div className="flex-1 pt-1">
                   <h4 className="font-sans font-bold text-[#0F172A] text-lg leading-snug">
-                    Back to School for Teachers
+                     Academic Session 2026–2027
                   </h4>
                   <p className="text-slate-500 text-sm mt-2 leading-relaxed">
-                    Professional development and alignment sessions.
+                  Isra Foundation Schools commenced the new academic session on 
+                  Monday, 10 August 2026. 
                   </p>
 
                 </div>
@@ -1932,16 +1933,16 @@ export default function HomeView({
 
                 <div className="w-[84px] h-[94px] bg-[#F8FAFC] border-t-2 border-[#F5C330] group-hover:border-[#60BADC] shadow-sm flex flex-col items-center justify-center transition-colors duration-300 flex-shrink-0">
                   <Calendar className="w-4 h-4 text-[#F5C330] group-hover:text-[#60BADC] transition-colors duration-300 mb-1" />
-                  <span className="text-[#0F172A] font-black text-3xl leading-none">10</span>
+                  <span className="text-[#0F172A] font-black text-3xl leading-none">16</span>
                   <span className="text-[9px] uppercase font-bold text-slate-500 tracking-widest mt-1">August</span>
                 </div>
 
                 <div className="flex-1 pt-1">
                   <h4 className="font-sans font-bold text-[#0F172A] text-lg leading-snug">
-                    Back to School for Students
+                  Independence Day celebration
                   </h4>
                   <p className="text-slate-500 text-sm mt-2 leading-relaxed">
-                    Welcoming our brilliant scholars back to campuses.
+                   Activities Celebrating 79 Years of Freedom
                   </p>
 
                 </div>
@@ -1961,16 +1962,16 @@ export default function HomeView({
 
                 <div className="w-[84px] h-[94px] bg-[#F8FAFC] border-t-2 border-[#F5C330] group-hover:border-[#60BADC] shadow-sm flex flex-col items-center justify-center transition-colors duration-300 flex-shrink-0">
                   <Calendar className="w-4 h-4 text-[#F5C330] group-hover:text-[#60BADC] transition-colors duration-300 mb-1" />
-                  <span className="text-[#0F172A] font-black text-3xl leading-none">14</span>
-                  <span className="text-[9px] uppercase font-bold text-slate-500 tracking-widest mt-1">August</span>
+                  <span className="text-[#0F172A] font-black text-3xl leading-none">8</span>
+                  <span className="text-[9px] uppercase font-bold text-slate-500 tracking-widest mt-1">September </span>
                 </div>
 
                 <div className="flex-1 pt-1">
                   <h4 className="font-sans font-bold text-[#0F172A] text-lg leading-snug">
-                    Independence Day
+                   Seerah Session 
                   </h4>
                   <p className="text-slate-500 text-sm mt-2 leading-relaxed">
-                    National anthem ceremonies and student showcases.
+                    Seerah of Nabi Kareem ﷺ: A Role Model for Young Muslims 
                   </p>
 
                 </div>
@@ -1991,16 +1992,16 @@ export default function HomeView({
 
                 <div className="w-[84px] h-[94px] bg-[#F8FAFC] border-t-2 border-[#F5C330] group-hover:border-[#60BADC] shadow-sm flex flex-col items-center justify-center transition-colors duration-300 flex-shrink-0">
                   <Calendar className="w-4 h-4 text-[#F5C330] group-hover:text-[#60BADC] transition-colors duration-300 mb-1" />
-                  <span className="text-[#0F172A] font-black text-3xl leading-none">24</span>
-                  <span className="text-[9px] uppercase font-bold text-slate-500 tracking-widest mt-1">August</span>
+                  <span className="text-[#0F172A] font-black text-3xl leading-none">11</span>
+                  <span className="text-[9px] uppercase font-bold text-slate-500 tracking-widest mt-1">September</span>
                 </div>
 
                 <div className="flex-1 pt-1">
                   <h4 className="font-sans font-bold text-[#0F172A] text-lg leading-snug">
-                    Fresher's Week Orientation at A'level
+                   Training & Professional Development – Hei Training
                   </h4>
                   <p className="text-slate-500 text-sm mt-2 leading-relaxed">
-                    Guiding senior entries towards university pipelines.
+                   Our team completed HEI Schools Finland's professional development in Finnish Pedagogy, exploring play-based, holistic early childhood education — continuous learning for our teachers, a brighter tomorrow for our students."
                   </p>
 
                 </div>
