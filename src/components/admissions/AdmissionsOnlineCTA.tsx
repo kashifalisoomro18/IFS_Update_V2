@@ -198,8 +198,8 @@ export default function AdmissionsOnlineCTA() {
           maxWidth:520,
           margin:"0 auto 48px",
         }}>
-          Seats for the 2025–26 academic session are limited. Complete the online
-          registration form and secure your child's place at ISRA Foundation Schools.
+          Seats for the 2026–27 academic session are limited. Complete the online
+          registration form and secure your child's place at Isra Foundation Schools.
         </p>
 
         {/* CTA button */}

@@ -14,6 +14,7 @@ import AdmissionsRegistrationForm from "./admissions/AdmissionsRegistrationForm"
 import AdmissionsOnlineCTA from "./admissions/AdmissionsOnlineCTA";
 import AdmissionsFAQ from "./admissions/AdmissionsFAQ";
 import AdmissionsStats from "./admissions/AdmissionsStats";
+import AdmissionDocumentRequried from "./admissions/AdmissionDocumentRequried";
 import AdmissionsCTA from "./admissions/AdmissionsCTA";
 
 interface AdmissionsViewProps {
@@ -209,7 +210,7 @@ export default function AdmissionsView({ subView = "overview", onSubmitApplicati
       `}</style>
 
       {/* ── Sticky sidebar progress nav (desktop) ── */}
-      {/* <AdmissionsStickyNav /> */}
+      {/* <AdmissionsStickyNav /> 
 
       {/* ── 1. HERO ── */}
       <AdmissionsHero />
@@ -219,6 +220,9 @@ export default function AdmissionsView({ subView = "overview", onSubmitApplicati
 
       {/* ── 9. STATS ── */}
       <AdmissionsStats />
+
+      {/* ── REQUIRED DOCUMENTS ── */}
+      <AdmissionDocumentRequried />
 
       {/* ── 3. ELIGIBILITY ── */}
       <AdmissionsEligibility />

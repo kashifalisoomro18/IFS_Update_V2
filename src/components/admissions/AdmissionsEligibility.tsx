@@ -222,9 +222,9 @@ export default function AdmissionsEligibility() {
             margin:"0 0 14px",
             lineHeight:1.15,
           }}>
-            Eligibility & <span style={{ color:"#60BADC" }}>Programs</span>
+            Eligibility & <span style={{ color:"#F5C330" }}>Programs</span>
           </h2>
-          <div style={{ width:72, height:4, background:"#F5C330", margin:"0 auto 18px" }} />
+          <div style={{ width:72, height:4, background:"#60BADC", margin:"0 auto 18px" }} />
           <p style={{ color:"#020618A6", fontSize:"1rem", maxWidth:520, margin:"0 auto", lineHeight:1.7 }}>
             We welcome students from Pre-Nursery to A Levels with a nurturing, inclusive environment for all learners.
           </p>

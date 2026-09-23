@@ -65,9 +65,9 @@ export default function AdmissionsCTA() {
             <h2 className="text-3xl sm:text-6xl font-extrabold text-white mb-6">
               Secure Your Child's <span className="text-[#F5C330]">Future</span> Today</h2>
             <p className="text-white text-base sm:text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
-              Seats for the 2025–26 academic session are filling fast.
+              Seats for the 2026–27 academic session are filling fast.
               Start the application process now and give your child the world-class
-              education they deserve at ISRA Foundation Schools.</p>
+              education they deserve at Isra Foundation Schools.</p>
             <div className="flex flex-wrap gap-4 sm:gap-6 justify-center">
               <button
                 type="button"

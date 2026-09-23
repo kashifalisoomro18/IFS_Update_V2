@@ -412,10 +412,34 @@ export default function AdmissionsScholarship() {
             </div>
 
             <a
-             href="/IFSCambridgeScholarshipCriteria.pdf"
+              href="/IFSCambridgeScholarshipCriteria.pdf"
               target="_blank"
               rel="noreferrer"
               className="schol-cta-btn"
+              onClick={(e) => {
+                e.preventDefault();
+                const newWin = window.open("", "_blank");
+                if (newWin) {
+                  newWin.document.write(`
+                    <!DOCTYPE html>
+                    <html lang="en">
+                      <head>
+                        <meta charset="UTF-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <title>IFS Cambridge Scholarship Criteria</title>
+                        <style>
+                          html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #525659; }
+                          iframe { width: 100%; height: 100%; border: none; }
+                        </style>
+                      </head>
+                      <body>
+                        <iframe src="/IFSCambridgeScholarshipCriteria.pdf"></iframe>
+                      </body>
+                    </html>
+                  `);
+                  newWin.document.close();
+                }
+              }}
             >
               Apply for Scholarship
               <ArrowRight size={18} />
