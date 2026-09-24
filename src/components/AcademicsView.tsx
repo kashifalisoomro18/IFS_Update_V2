@@ -1484,7 +1484,8 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
 
       {/* =========================================================
           4. CAMBRIDGE SECTION
-          Same design as the ECD / Middle card, image on the LEFT, text on the RIGHT
+          Same design as the ECD / Middle card, image on the LEFT, text on the RIGHT (desktop)
+          Mobile: text first, image below (same as the other cards)
           sky-blue palette: #7DD3FC (accent) · #BAE6FD · #E0F2FE · #0f172a (text)
       ========================================================= */}
       <div
@@ -1508,7 +1509,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
             <div className="grid grid-cols-1 lg:grid-cols-12 lg:min-h-[460px]">
 
               {/* -------------------------------------------------
-                  LEFT IMAGE
+                  IMAGE (left on desktop, below text on mobile)
               ------------------------------------------------- */}
               <motion.div
                 initial={{ opacity: 0, x: -60 }}
@@ -1519,7 +1520,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                   delay: 0.15,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="lg:order-1 lg:col-span-7 relative min-h-[260px] sm:min-h-[340px] lg:min-h-0 bg-[#0f172a]"
+                className="order-2 lg:order-1 lg:col-span-7 relative min-h-[260px] sm:min-h-[340px] lg:min-h-0 bg-[#0f172a]"
               >
 
                 <div className="absolute inset-0 overflow-hidden">
@@ -1582,7 +1583,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
 
 
               {/* -------------------------------------------------
-                  RIGHT CONTENT (TEXT)
+                  CONTENT (right on desktop, above image on mobile)
               ------------------------------------------------- */}
               <motion.div
                 initial={{ opacity: 0, x: 60 }}
@@ -1592,7 +1593,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                   duration: 0.8,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="lg:order-2 lg:col-span-5 px-6 sm:px-10 lg:px-12 xl:px-14 py-8 sm:py-10 lg:py-9 flex flex-col justify-center"
+                className="order-1 lg:order-2 lg:col-span-5 px-6 sm:px-10 lg:px-12 xl:px-14 py-8 sm:py-10 lg:py-9 flex flex-col justify-center"
               >
 
                 {/* Eyebrow */}
@@ -1742,6 +1743,7 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
           </div>
         </div>
       </div>
+
       {/* use this div for spacing */}
       <div className="pb-20"></div>
 
