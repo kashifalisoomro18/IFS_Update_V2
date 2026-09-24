@@ -769,13 +769,11 @@ export default function Header({
             Gallery
           </a>
           <a
-            href="/careers"
+            href="https://careers.ifs.edu.pk/"
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setMobileMenuOpen(false)}
-            className={`block w-full text-left px-4 py-3 rounded-none text-base font-semibold transition-colors duration-200 ${
-              activeView === "careers"
-                ? "text-primary-dark bg-slate-50 font-bold"
-                : "text-slate-800 hover:bg-slate-50"
-            }`}
+            className="block w-full text-left px-4 py-3 rounded-none text-base font-semibold transition-colors duration-200 text-slate-800 hover:bg-slate-50"
           >
             Careers
           </a>

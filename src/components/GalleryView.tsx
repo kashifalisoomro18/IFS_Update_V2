@@ -5,6 +5,7 @@
 
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 import {
   ChevronRight,
   ChevronLeft,
@@ -41,7 +42,7 @@ const galleryItems = [
   { id: "8", src: "/ACADEMICS2.JPG", alt: "Teacher writing on the whiteboard", title: "Morning Lecture", category: "academics", size: "wide" },
   { id: "9", src: "/IMG_4097.JPG", alt: "Group of students laughing together outdoors", title: "Between Classes", category: "campus", size: "md" },
   { id: "10", src: "/ACADEMICS6.JPG", alt: "Student portrait holding folders", title: "Class of 2026", category: "academics", size: "tall" },
-   { id: "7", src: "/pintober2.jpeg", alt: "certificate distribution", title: "Pintober Event", category: "events", size: "wide" },
+  { id: "7", src: "/pintober2.jpeg", alt: "certificate distribution", title: "Pintober Event", category: "events", size: "wide" },
   { id: "11", src: "/ACADEMICS5.JPG", alt: "Students examining an anatomy model", title: "Science Lab", category: "academics", size: "wide" },
   { id: "hyd-1", src: "/hydolympic1.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
   { id: "hyd-2", src: "/hydolympic2.jpeg", alt: "Student at the Olympic games", title: "Olympic", category: "events", size: "wide" },
@@ -65,7 +66,7 @@ const galleryItems = [
   { id: "22", src: "/ID4.JPG", alt: "Students at the annual fall festival", title: "Fall Festival", category: "events", size: "tall" },
   { id: "23", src: "/ID3.JPG", alt: "Student receiving an award on stage", title: "Honors Ceremony", category: "events", size: "md" },
   { id: "24", src: "/IMG_4097.JPG", alt: "Wide view of the school building facade", title: "Main Building", category: "campus", size: "wide" },
-   { id: "25", src: "/audi4.jpg", alt: "Students in auditorium for a session", title: "Auditorium Session", category: "campus", size: "md" },
+  { id: "25", src: "/audi4.jpg", alt: "Students in auditorium for a session", title: "Auditorium Session", category: "campus", size: "md" },
 ];
 
 const categories = [

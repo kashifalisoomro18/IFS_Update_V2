@@ -1345,7 +1345,7 @@ export default function HomeView({
               </motion.div>
             </div>
           </div>
-
+        
           {/* 2. Elementary section */}
           <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 my-16 sm:my-28 lg:my-44" id="elementary-level-card">
             <div className="relative">
@@ -1442,7 +1442,7 @@ export default function HomeView({
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                   className="order-2 lg:order-2 lg:col-span-6 lg:pl-16 z-20 space-y-4 sm:space-y-6 mt-4 lg:mt-0 flex flex-col justify-center"
                 >
-                   <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-left"> At IFS <strong className="text-[#020618] font-extrabold"> Elementary</strong>, we nurture the development of each child emotionally, academically, physically, socially, and artistically during their formative years. Foundational primary education with emphasis on <strong className="text-[#020618] font-extrabold"> literacy, numeracy, conceptual understanding</strong> and <strong className="text-[#020618] font-extrabold">learning habits</strong>. Continued development of core academic <strong className="text-[#020618] font-extrabold">skills, confidence, communication</strong> and <strong className="text-[#020618] font-extrabold">independent learning</strong>. Primary-level education with increasing emphasis on <strong className="text-[#020618] font-extrabold">conceptual understanding</strong> and application. Development of subject knowledge,  <strong className="text-[#020618] font-extrabold">critical thinking</strong> and<strong className="text-[#020618] font-extrabold"> independent learning</strong> skills. Consolidation of primary learning and preparation for the middle school academic pathway.
+                   <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify"> At IFS <strong className="text-[#020618] font-extrabold"> Elementary</strong>, we nurture the development of each child emotionally, academically, physically, socially, and artistically during their formative years. Foundational primary education with emphasis on  literacy, numeracy, conceptual understanding and learning habits. Continued development of core academic skills, confidence, communication and independent learning. Primary-level education with increasing emphasis on conceptual understanding and application. Development of subject knowledge, critical thinking and independent learning skills. Consolidation of primary learning and preparation for the middle school academic pathway.
                   </p>
                   <div className="pt-2 sm:pt-4">
                     <a
@@ -1498,9 +1498,9 @@ export default function HomeView({
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                   className="order-2 lg:order-1 lg:col-span-6 z-20 space-y-4 sm:space-y-6 lg:pr-12 flex flex-col justify-center mt-4 lg:mt-0"
                 >
-                  <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-left">
-  At IFS <strong className="text-[#020618] font-extrabold">Middle School</strong>, we build on the foundations of elementary learning to prepare students for the challenges of secondary education. Students experience broader subject exposure and greater academic independence, with the introduction of testing, followed by continued emphasis on subject knowledge, analytical thinking and responsibility. As they progress, students prepare for secondary-level academic pathways through more specialized subject learning with plenty of subject options.
-</p>
+                  <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
+                      At IFS <strong className="text-[#020618] font-extrabold">Middle School</strong>, we build on the foundations of elementary learning to prepare students for the challenges of secondary education. Students experience broader subject exposure and greater academic independence, with the introduction of testing, followed by continued emphasis on subject knowledge, analytical thinking and responsibility. As they progress, students prepare for secondary-level academic pathways through more specialized subject learning with plenty of subject options.
+                  </p>
                   <div className="pt-2 sm:pt-4">
                     <a
                       href="/academics#curriculum"
@@ -1673,9 +1673,9 @@ export default function HomeView({
                   transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
                   className="order-2 lg:order-2 lg:col-span-6 lg:pl-16 z-20 space-y-4 sm:space-y-6 mt-4 lg:mt-0 flex flex-col justify-center"
                 >
-                  <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-left">
-  At IFS <strong className="text-[#020618] font-extrabold">Senior Secondary</strong>, students follow the <strong className="text-[#020618] font-extrabold">Cambridge (CIE)</strong> pathway, building on subject-specific study to prepare for internationally recognized <strong className="text-[#020618] font-extrabold">O Level</strong> examinations. This progresses into the <strong className="text-[#020618] font-extrabold">A Level</strong> pathway, marking the senior stage of secondary education.
-</p>
+                  <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
+                    At IFS <strong className="text-[#020618] font-extrabold">Senior Secondary</strong>, students follow the Cambridge (CIE) pathway, building on subject-specific study to prepare for internationally recognized O Level examinations. This progresses into the A Level pathway, marking the senior stage of secondary education.
+                  </p>
                   <div className="pt-2 sm:pt-4">
                     <a
                       href="/academics#curriculum"
@@ -1695,14 +1695,6 @@ export default function HomeView({
               </motion.div>
             </div>
           </div>
-
-
-
-
-
-
-
-
 
           {/* SECTION 3: News Masonry Grid (Pristine Layout Matching Image 3) */}
           <section className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 space-y-8 overflow-hidden mt-16 sm:mt-24 lg:mt-36" id="IFS-news-events-grid">
@@ -2235,3 +2227,4 @@ export default function HomeView({
     </div>
   );
 }
+

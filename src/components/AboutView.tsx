@@ -230,7 +230,7 @@ const boardMembers: BoardMember[] = [
   {
     name: "Mrs. Maha Khan",
     title: "Cambridge Section Head ",
-    description:  "Mrs. Maha Khan leads the Cambridge Section with a focus on academic excellence and student development. Her approach encourages independent thinking, conceptual understanding and confidence in learning. She strives to prepare students for internationally recognized academic pathways while nurturing curiosity and lifelong learning.",
+    description: "Mrs. Maha Khan leads the Cambridge Section with a focus on academic excellence and student development. Her approach encourages independent thinking, conceptual understanding and confidence in learning. She strives to prepare students for internationally recognized academic pathways while nurturing curiosity and lifelong learning.",
     photo: "",
     initials: "MK",
   },
@@ -1063,19 +1063,19 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
               About <span className="text-[#60BADC]">IFS</span>
             </h2>
             <div className="section-divider" />
-          <p className="text-slate-600 leading-relaxed text-base text-justify">
+            <p className="text-slate-600 leading-relaxed text-base text-justify">
               Isra Foundation Schools (IFS) is a school project associated with Isra Islamic Foundation and serves as an educational institution in Hyderabad, Sindh.
-          </p>
-          <p className="text-slate-600 leading-relaxed text-base text-justify">
-            IFS is committed to providing quality education in an environment that supports academic achievement, character development and the holistic growth of students.
-          </p>
-          <p className="text-slate-600 leading-relaxed text-base text-justify">
-            The school aims to develop learners who are confident, responsible, intellectually curious and equipped to contribute positively to society.
-          </p>
-          <p className="text-slate-600 leading-relaxed text-base text-justify">
-             Our educational philosophy places importance on:
-          </p>
-          <ul className="list-disc list-inside text-slate-600 leading-relaxed text-base space-y-1">
+            </p>
+            <p className="text-slate-600 leading-relaxed text-base text-justify">
+              IFS is committed to providing quality education in an environment that supports academic achievement, character development and the holistic growth of students.
+            </p>
+            <p className="text-slate-600 leading-relaxed text-base text-justify">
+              The school aims to develop learners who are confident, responsible, intellectually curious and equipped to contribute positively to society.
+            </p>
+            <p className="text-slate-600 leading-relaxed text-base text-justify">
+              Our educational philosophy places importance on:
+            </p>
+            <ul className="list-disc list-inside text-slate-600 leading-relaxed text-base space-y-1">
               <li>Academic excellence</li>
               <li>Character and moral development</li>
               <li>Critical and creative thinking</li>
@@ -1084,7 +1084,7 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
               <li>Practical and hands-on learning</li>
               <li>Personal responsibility</li>
               <li>Social awareness and service</li>
-          </ul>
+            </ul>
           </motion.div>
         </div>
       </section>
@@ -1203,7 +1203,7 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
 
             {/* LEFT — Message */}
             <motion.div
-              className="space-y-5"
+              className="space-y-5 order-2 lg:order-1"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -1250,7 +1250,7 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
 
             {/* RIGHT — Square Photo with theme accents */}
             <motion.div
-              className="flex flex-col items-center gap-6"
+              className="flex flex-col items-center gap-6 order-1 lg:order-2"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}

@@ -143,7 +143,7 @@ export default function AdmissionDocumentRequried() {
   return (
     <section
       id="admissions-required-documents"
-      className="scroll-mt-24 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#f8fafc] relative overflow-hidden"
+      className="scroll-mt-24 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#f8fafc] relative overflow-hidden -mt-10"
     >
       <div className="max-w-6xl mx-auto" ref={sectionRef}>
         {/* Header */}
@@ -231,10 +231,10 @@ export default function AdmissionDocumentRequried() {
                 </div> */}
 
                 {/* Circular Outer Background Glow */}
-                <div className="w-24 h-24 rounded-full bg-[#fef7e0] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-105">
+                <div className="w-24 h-24 rounded-full  flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-105">
                   {/* Inner Colored Rounded Box */}
                   <div
-                    className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm ${
+                    className={`w-14 h-14  flex items-center justify-center shadow-sm ${
                       doc.color === "blue" ? "bg-[#54c0e8]" : "bg-[#f5c330]"
                     }`}
                   >

@@ -3,9 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, ChangeEvent, FormEvent } from "react";
 import { motion, Variants } from "framer-motion";
-import { InquiryFormData } from "../types";
 import {
   MapPin,
   Phone,
@@ -93,29 +91,13 @@ const INFO_CARDS = [
 ];
 
 export default function ContactView() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [formData, setFormData] = useState<InquiryFormData>({
-    name: "",
-    email: "",
-    phone: "",
-    grade: "Pre-Nursery",
-    message: "",
-  });
-
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-  };
+  /* Opens IFS WhatsApp with a ready-made greeting */
+  const waNumber = CONTACT.whatsapp.replace(/[^0-9]/g, ""); // 923173700049
+  const waMessage = "Assalam-o-Alaikum IFS Team, I would like to know more about admissions.";
+  const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
 
   return (
-    <div className="w-full bg-white text-slate-900 font-sans" id="contact-view-container" >
+    <div className="w-full bg-white text-slate-900 font-sans" id="contact-view-container">
       {/* ============================================================
           HERO
       ============================================================ */}
@@ -141,7 +123,6 @@ export default function ContactView() {
           style={{ background: "linear-gradient(180deg, rgba(2,8,22,0.15) 0%, rgba(2,8,22,0.35) 100%)" }}
         />
 
-
         <DotGrid className="absolute top-8 left-6 hidden sm:block" />
         <DotGrid className="absolute -bottom-4 right-6 hidden lg:block opacity-60" />
 
@@ -152,13 +133,6 @@ export default function ContactView() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-2xl space-y-6"
           >
-            {/* Breadcrumb */}
-            {/* <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest">
-              <span className="text-[#60BADC]">Home</span>
-              <span className="text-white/40">/</span>
-              <span className="text-white">Contact Us</span>
-            </div> */}
-
             <h1 className="font-sans font-black text-white text-4xl sm:text-6xl tracking-tight leading-[1.02]">
               Get In <span className="text-[#F5C330]">Touch</span>
             </h1>
@@ -168,20 +142,20 @@ export default function ContactView() {
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2">
-              {/* Send Message Button: Yellow se Black fill hoga */}
+              {/* Send Message Button */}
               <a
-                  href="#inquiry-form-col"
-                  onClick={(e) => {
-                    e.preventDefault(); 
-                    const target = document.getElementById("inquiry-form-col");
-                    if (target) {
-                      target.scrollIntoView({
-                        behavior: "smooth", // Slow aur smooth scrolling ke liye
-                        block: "start",
-                      });
-                    }
-                  }}
-                  className="group relative inline-flex items-center gap-2 bg-[#F5C330] text-[#04080c] font-bold text-xs uppercase tracking-widest px-6 py-3.5 overflow-hidden transition-colors duration-300 hover:text-white"
+                href="#inquiry-form-col"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const target = document.getElementById("inquiry-form-col");
+                  if (target) {
+                    target.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                }}
+                className="group relative inline-flex items-center gap-2 bg-[#F5C330] text-[#04080c] font-bold text-xs uppercase tracking-widest px-6 py-3.5 overflow-hidden transition-colors duration-300 hover:text-white"
               >
                 {/* Left-to-right filling layer */}
                 <span className="absolute inset-0 w-0 bg-[#60badc] transition-all duration-500 ease-out group-hover:w-full" />
@@ -194,7 +168,7 @@ export default function ContactView() {
                 </span>
               </a>
 
-              {/* Call Us Now Button: Border/Transparent se White fill hoga */}
+              {/* Call Us Now Button */}
               <a
                 href={`tel:${CONTACT.phones[0].replace(/\s/g, "")}`}
                 className="group relative inline-flex items-center gap-2 border border-white/25 text-white font-bold text-xs uppercase tracking-widest px-6 py-3.5 overflow-hidden transition-colors duration-300 hover:text-[#04080c]"
@@ -209,7 +183,6 @@ export default function ContactView() {
                 </span>
               </a>
             </div>
-
           </motion.div>
         </div>
       </section>
@@ -273,155 +246,74 @@ export default function ContactView() {
             </motion.div>
           </motion.div>
 
-          {/* ── Right: inquiry form ── */}
+          {/* ── Right: WhatsApp contact card ── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 bg-white border border-slate-100 shadow-lg p-8 sm:p-10 h-fit relative overflow-hidden"
+            className="lg:col-span-7 bg-white border border-slate-100 shadow-lg p-8 sm:p-12 relative overflow-hidden flex flex-col justify-center"
             id="inquiry-form-col"
           >
             <div className="absolute top-0 left-0 right-0 h-1 bg-[#F5C330]" />
 
-            <h3 className="font-sans font-black text-[#020816] text-2xl sm:text-3xl tracking-tight mb-2">
+            <div className="w-16 h-16 bg-[#020816] flex items-center justify-center mb-6">
+              <MessageCircle className="w-8 h-8 text-[#F5C330]" />
+            </div>
+
+            <h3 className="font-sans font-black text-[#020816] text-3xl sm:text-4xl tracking-tight leading-[1.1] mb-3">
               Send Us a <span className="text-[#F5C330]">Message</span>
             </h3>
-            <p className="text-slate-500 text-sm mb-8">
-              Fill out the form below and our admissions team will get back to you shortly.
+            <p className="text-slate-500 text-sm sm:text-base leading-relaxed max-w-lg mb-8">
+              Have a question? Connect with our team on WhatsApp for quick assistance.
             </p>
 
-            {isSubmitted ? (
-              <div className="text-center py-14 space-y-4">
-                <div className="w-16 h-16 bg-[#020816] text-[#F5C330] flex items-center justify-center mx-auto">
-                  <CheckCircle className="w-8 h-8" />
-                </div>
-                <h4 className="font-sans font-extrabold text-xl text-[#020816]">
-                  Inquiry Submitted!
-                </h4>
-                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto">
-                  Thank you for your interest, <strong className="text-slate-700">{formData.name}</strong>.
-                  Our team has received your questions about{" "}
-                  <strong className="text-slate-700">{formData.grade}</strong> and will contact you
-                  at <strong className="text-slate-700">{formData.email}</strong> shortly.
-                </p>
-                <button
-                  onClick={() => {
-                    setIsSubmitted(false);
-                    setFormData({ name: "", email: "", phone: "", grade: "Pre-Nursery", message: "" });
-                  }}
-                  className="mt-4 bg-[#020816] hover:bg-[#0f172b] text-white px-6 py-3 text-xs font-bold uppercase tracking-widest cursor-pointer transition-colors"
-                >
-                  Submit New Inquiry
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="Enter your full name"
-                      className="w-full text-sm bg-slate-50 border border-slate-200 p-3.5 focus:border-[#60BADC] focus:outline-none focus:bg-white transition-colors text-slate-900"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="Enter your email"
-                      className="w-full text-sm bg-slate-50 border border-slate-200 p-3.5 focus:border-[#60BADC] focus:outline-none focus:bg-white transition-colors text-slate-900"
-                    />
-                  </div>
-                </div>
+            {/* What you can ask */}
+            <ul className="space-y-3 mb-8 border-t border-slate-100 pt-6">
+              {[
+                "Admissions and enrollment process",
+                "Fee structure and class availability",
+                "Campus visits and school timings",
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-3 text-slate-600 text-sm">
+                  <CheckCircle className="w-4 h-4 text-[#60BADC] flex-shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
-                      Mobile Number *
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      required
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="e.g. +92 3XX XXXXXXX"
-                      className="w-full text-sm bg-slate-50 border border-slate-200 p-3.5 focus:border-[#60BADC] focus:outline-none focus:bg-white transition-colors text-slate-900"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
-                      Class of Interest *
-                    </label>
-                    <select
-                      name="grade"
-                      value={formData.grade}
-                      onChange={handleInputChange}
-                      className="w-full text-sm bg-slate-50 border border-slate-200 p-3.5 focus:border-[#60BADC] focus:outline-none focus:bg-white transition-colors text-slate-900"
-                    >
-                      <option value="Pre-Nursery">Pre-Nursery</option>
-                      <option value="Nursery">Nursery</option>
-                      <option value="Kindergarten">Kindergarten</option>
-                      <option value="Grades 1-5">Grades 1 - 5</option>
-                      <option value="Grades 6-8">Grades 6 - 8</option>
-                      <option value="O Levels">Cambridge O Levels</option>
-                      <option value="A Levels">Cambridge A Levels</option>
-                    </select>
-                  </div>
-                </div>
+            {/* WhatsApp number */}
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                WhatsApp
+              </span>
+              <span className="font-sans font-extrabold text-[#020816] text-lg tracking-tight">
+                {CONTACT.whatsapp}
+              </span>
+            </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
-                    Your Message *
-                  </label>
-                  <textarea
-                    name="message"
-                    required
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    placeholder="Describe your questions about fees, classes, or timing..."
-                    className="w-full text-sm bg-slate-50 border border-slate-200 p-3.5 focus:border-[#60BADC] focus:outline-none focus:bg-white transition-colors resize-none text-slate-900"
-                  />
-                </div>
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative w-full bg-[#020816] text-[#F5C330] py-4 text-xs font-bold uppercase tracking-widest transition-colors duration-300 shadow-md cursor-pointer flex items-center justify-center gap-2 overflow-hidden hover:text-[#020816]"
+            >
+              {/* Left-to-right yellow filling layer */}
+              <span className="absolute inset-0 w-0 bg-[#F5C330] transition-all duration-500 ease-out group-hover:w-full" />
 
-                <button
-                  type="submit"
-                  className="group relative w-full bg-[#020816] text-[#F5C330] py-4 text-xs font-bold uppercase tracking-widest transition-colors duration-300 shadow-md cursor-pointer flex items-center justify-center gap-2 overflow-hidden hover:text-[#020816]"
-                >
-                  {/* Left-to-right yellow filling layer */}
-                  <span className="absolute inset-0 w-0 bg-[#F5C330] transition-all duration-500 ease-out group-hover:w-full" />
+              {/* Content layered above the background fill */}
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                <MessageCircle className="w-4 h-4" />
+                Send on WhatsApp
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </a>
 
-                  {/* Content layered above the background fill */}
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    <Send className="w-4 h-4" />
-                    Submit Academic Inquiry
-                  </span>
-                </button>
-
-              </form>
-            )}
+            <p className="text-slate-400 text-xs mt-4">{CONTACT.hours}</p>
           </motion.div>
         </div>
       </section>
 
-      {/* ============================================================
-          MAP
-      ============================================================ */}
       {/* ============================================================
           MAP
       ============================================================ */}
@@ -535,20 +427,19 @@ export default function ContactView() {
                 We'd Love to Hear <span className="text-[#F5C330]">From You!</span>
               </h2>
             </div>
-            <p className="text-white/70 text-sm sm:text-base leading-relaxed max-w-md ">
+            <p className="text-white/70 text-sm sm:text-base leading-relaxed max-w-md">
               Have questions about joining us? Reach out now and let our admissions experts help you take the first step.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
-              {/* Custom slow/smooth click function added here */}
               <a
                 href="#inquiry-form-col"
                 onClick={(e) => {
-                  e.preventDefault(); // Default fast jump ko rokne ke liye
+                  e.preventDefault();
                   const target = document.getElementById("inquiry-form-col");
                   if (target) {
                     target.scrollIntoView({
-                      behavior: "smooth", // Slow aur smooth scrolling ke liye
+                      behavior: "smooth",
                       block: "start",
                     });
                   }

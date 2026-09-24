@@ -171,7 +171,7 @@ const ANNOUNCEMENTS_DATA = [
     date: "18 August, 2026",
   },
   // Announcement 7
- 
+
 ];
 
 // ============================================================
@@ -634,7 +634,7 @@ function SuccessStoriesSection() {
 
       {/* ── TOP HEADER BAR (not absolute — sits above bubbles) ── */}
       <div
-        className="relative z-20 flex items-center justify-between px-8 pt-8 pb-4"
+        className="relative z-20 flex items-center justify-between px-6 sm:px-8 pt-8 pb-4"
       >
         <div>
           <h2
@@ -650,16 +650,11 @@ function SuccessStoriesSection() {
         </div>
       </div>
 
-      {/* ── MAIN CONTENT: bubbles (left) + detail (right) ── */}
-      <div
-        className="relative z-10 flex flex-col lg:flex-row"
-        style={{ minHeight: 440 }}
-      >
-        {/* LEFT — active profile image */}
-        <div
-          className="relative flex-shrink-0 flex items-center justify-center"
-          style={{ width: "50%", minHeight: 440 }}
-        >
+
+      {/* ── MAIN CONTENT: profile image + detail ── */}
+      <div className="relative z-10 flex flex-col lg:flex-row lg:min-h-[440px]">
+        {/* LEFT — active profile image (always centered) */}
+        <div className="relative w-full lg:w-1/2 flex-shrink-0 flex items-center justify-center py-6 lg:py-0 min-h-[240px] sm:min-h-[300px] lg:min-h-[440px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
@@ -667,12 +662,12 @@ function SuccessStoriesSection() {
               animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
               exit={{ opacity: 0, scale: 0.85, filter: "blur(4px)" }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="absolute"
+              className="flex items-center justify-center mx-auto"
             >
               <div
                 className="rounded-full overflow-hidden"
                 style={{
-                  width: "clamp(200px, 25vw, 320px)",
+                  width: "clamp(170px, 40vw, 300px)",
                   aspectRatio: "1/1",
                   border: "3px solid #F5C330",
                   boxShadow: "0 0 0 8px rgba(245,195,48,0.15), 0 16px 40px rgba(0,0,0,0.5)",
@@ -690,7 +685,7 @@ function SuccessStoriesSection() {
 
         {/* RIGHT — active student detail */}
         <div
-          className="flex-1 flex flex-col justify-center px-10 py-8"
+          className="flex-1 flex flex-col justify-center px-6 sm:px-10 py-8"
           style={{ minWidth: 0 }}
         >
           <AnimatePresence mode="wait">
@@ -749,7 +744,7 @@ function SuccessStoriesSection() {
               {/* Quote */}
               <p
                 className="leading-relaxed"
-                style={{ fontSize: "13.5px", color: "rgba(255,255,255,0.6)", maxWidth: 340 }}
+                style={{ fontSize: "13.5px", color: "rgba(255,255,255,0.6)", maxWidth: 420 }}
               >
                 {story.quote.length > 190 ? story.quote.slice(0, 190) + "…" : story.quote}
               </p>
@@ -757,15 +752,14 @@ function SuccessStoriesSection() {
           </AnimatePresence>
 
           {/* Dot navigation */}
-          <div className="flex items-center gap-3 mt-8">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-8">
             {STORIES_DATA.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setActive(i)}
-                className="focus:outline-none transition-all duration-300"
+                aria-label={`Show story ${i + 1}`}
+                className="focus:outline-none transition-all duration-300 w-6 sm:w-[35px] h-2"
                 style={{
-                  width: 35,
-                  height: 8,
                   borderRadius: "0px",
                   background: i === active ? "#F5C330" : "transparent",
                   border: i === active

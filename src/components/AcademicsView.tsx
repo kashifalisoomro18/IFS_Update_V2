@@ -241,7 +241,7 @@ function OverviewSection() {
           heading="Curriculum"
           accent={<span style={{ color: "#60BADC" }}> Overview</span>}
           description="IFS provides an academic programme designed to build strong foundations in literacy, numeracy, scientific understanding, communication, critical thinking, creativity and personal development."
-          
+
           dividerColor="#f5c330"
         />
       </div>
@@ -249,13 +249,13 @@ function OverviewSection() {
       <div className="w-full bg-slate-100 py-10 sm:py-14">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center px-4 sm:px-6 lg:px-8">
           <div className="space-y-5">
-            <p className="font-bold text-base sm:text-lg lg:text-xl leading-relaxed text-justify text-[#0d1f3c]">
-             This foundation is nurtured through a well-rounded and progressive approach to learning,
-              where every subject area is designed to work in harmony with the others. 
-              Beyond academic content, students are guided to develop essential life skills — from effective communication and collaboration to independent thinking and self-expression. 
+            <p className=" text-base sm:text-lg lg:text-xl leading-relaxed text-justify text-[#0d1f3c]">
+              This foundation is nurtured through a well-rounded and progressive approach to learning,
+              where every subject area is designed to work in harmony with the others.
+              Beyond academic content, students are guided to develop essential life skills — from effective communication and collaboration to independent thinking and self-expression.
               By combining structured learning with opportunities for exploration and creativity, IFS ensures that students not only acquire knowledge but also learn how to apply it meaningfully in everyday life.
             </p>
-          
+
           </div>
           <div className="flex justify-center -translate-x-[10px]">
             <AnimatedAtomIcon size={400} color="#60BADC" accent="#F5C330" />
@@ -690,405 +690,1060 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
   const goToCurriculum = () => setSubView("curriculum");
 
   return (
-    <section className="space-y-30 overflow-visible pt-20" id="fps-school-levels-showcase">
+    <section
+      className="space-y-30 overflow-visible pt-20"
+      id="fps-school-levels-showcase"
+    >
       <SectionHeading
         eyebrow="Academic Pathways"
         heading="Levels "
         accent={<span style={{ color: "#f5c330" }}> Offered</span>}
         dividerColor="#60BADC"
       />
-      {/* 1. ECD Section Block */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 my-16 sm:my-28 lg:my-44" id="junior-level-card">
+
+      {/* =========================================================
+          1. ECD SECTION  (compact height version)
+      ========================================================= */}
+      <div
+        className="relative w-screen max-w-none left-1/2 -translate-x-1/2 px-0 my-4 sm:my-6 lg:my-8 h-auto pt-20"
+        id="junior-level-card"
+      >
         <div className="relative">
 
-          {/* Background depth layers behind the whole card */}
+          {/* Decorative yellow background element */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="pointer-events-none absolute -top-4 left-2 sm:left-6 w-[70%] sm:w-[42%] h-[85%] bg-[#FEF08A]/70 hidden sm:block"
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.12 }}
-            className="pointer-events-none absolute top-6 left-8 sm:left-14 w-[65%] sm:w-[38%] h-[75%]  bg-[#FDE047]/50 hidden sm:block"
+            className="pointer-events-none absolute -left-3 sm:-left-7 top-8 sm:top-12 w-20 sm:w-28 h-24 sm:h-40 bg-[#FEF08A]/70"
           />
 
-          <motion.div
-            whileHover={{ y: -10 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="bg-[#FDE047] p-5 sm:p-10 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-0 lg:min-h-[460px] w-full sm:w-[92%] ml-auto"
-          >
+          {/* Main ECD layout */}
+          <div className="relative bg-white border border-slate-200 shadow-[0_20px_70px_rgba(15,23,42,0.08)] overflow-hidden">
 
-            {/* Left Column: Narrative details and button — slides in from the left */}
-            <motion.div
-              initial={{ opacity: 0, x: -120, scale: 0.92 }}
-              whileInView={{ opacity: 1, x: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 z-20 space-y-4 sm:space-y-6 lg:pr-12"
-            >
-              <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
-                At IFS, we see<strong className="text-[#020618] font-extrabold"> Early Childhood Development (ECD) </strong> as a vital stage where children begin to explore the world, build meaningful relationships, and develop essential cognitive, social, emotional, and physical skills. Through a nurturing, safe, and engaging learning environment, we encourage curiosity, creativity, confidence, and a strong foundation for lifelong learning.
-              </p>
-            </motion.div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 lg:min-h-[460px]">
 
-            {/* Right Column: Large image block with golden tint and overlaid text — slides in from the right */}
-            <motion.div
-              initial={{ opacity: 0, x: 120, scale: 0.92 }}
-              whileInView={{ opacity: 1, x: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 relative h-[280px] sm:h-[380px] lg:h-[440px] flex items-center justify-center w-full mt-4 lg:mt-0"
-            >
-              <div className="absolute inset-0 top-0 lg:-top-6 xl:-top-10 bg-slate-950 overflow-hidden shadow-xl z-10 group rounded-sm">
-                <img
-                  src="/assets/slider/slide4.jpg"
-                  alt="Junior school students in lab"
-                  className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
-                />
-                {/* Golden color-wash overlay */}
-                <div className="absolute inset-0 bg-[#FCD34D]/45 mix-blend-color z-15" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent z-20" />
+              {/* -------------------------------------------------
+                  LEFT CONTENT
+              ------------------------------------------------- */}
+              <motion.div
+                initial={{ opacity: 0, x: -60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="lg:col-span-5 px-6 sm:px-10 lg:px-12 xl:px-14 py-8 sm:py-10 lg:py-9 flex flex-col justify-center"
+              >
 
-                {/* Heading — bold + light on two lines, like Elementary card */}
-                <div className="absolute bottom-20 sm:bottom-24 left-6 z-30 select-none">
-                  <h3 className="font-sans font-black text-white text-3xl sm:text-5xl leading-[0.9] tracking-tight">
+                {/* Eyebrow */}
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-10 sm:w-12 h-[3px] bg-[#F5C330]" />
+
+                  <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-slate-500">
+                    Early Years
+                  </span>
+                </div>
+
+                {/* Main heading */}
+                <h3 className="font-sans text-[#020618] leading-[0.9] tracking-[-0.04em]">
+                  <span className="block text-5xl sm:text-6xl lg:text-[60px] font-black">
                     ECD
-                    <span className="block font-light text-white/90 text-2xl sm:text-4xl mt-0.5">
-                      Section
-                    </span>
-                  </h3>
-                </div>
-
-                {/* Grade levels — separate, dark charcoal text, below heading */}
-                <div className="absolute bottom-6 left-6 z-30 space-y-0.5 select-none">
-                  <span className="text-[10px] sm:text-[11px] font-bold text-white uppercase tracking-widest block font-mono">
-                    Grade Levels
                   </span>
-                  <span className="text-xs sm:text-base text-white">
-                    Pre-Nursery - Kindergarten
-                  </span>
-                </div>
-              </div>
-            </motion.div>
 
-          </motion.div>
-        </div>
-      </div>
-
-      {/* 2. Elementary section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 my-16 sm:my-28 lg:my-44" id="elementary-level-card">
-        <div className="relative">
-
-          {/* Background depth layers — right side, lavender family */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="pointer-events-none absolute -top-6 right-0 w-[38%] h-[16%] bg-[#cbb8ef]/70 hidden sm:block"
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.12 }}
-            className="pointer-events-none absolute top-[16%] right-0 w-[38%] h-[82%] bg-[#d8c9f4]/60 hidden sm:block"
-          />
-
-          {/* Main front card — light lavender #e1d8f7 */}
-          <motion.div
-            whileHover={{ y: -10 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="bg-[#e1d8f7] p-5 sm:p-10 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-0 lg:min-h-[460px] w-full sm:w-[92%]"
-          >
-
-            {/* Left Column: Framed portrait photo + Grade Levels badge + heading */}
-            <motion.div
-              initial={{ opacity: 0, x: -120, scale: 0.92 }}
-              whileInView={{ opacity: 1, x: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 relative flex flex-col justify-end min-h-[300px] sm:min-h-[400px] lg:min-h-[440px] z-10 w-full"
-            >
-
-              {/* Image frame wrapper — light glass border, fits the lavender card */}
-              <div className="relative w-full h-[240px] sm:h-[320px]">
-
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                  whileHover={{ scale: 1.02 }}
-                  className="absolute inset-0 w-[82%] sm:w-[78%] h-full overflow-hidden bg-white/60 backdrop-blur-sm p-2 shadow-[0_18px_40px_rgba(31,20,10,0.15)] z-10 border border-white/60"
-                >
-                  <img
-                    src="/assets/slider/slide2.jpg"
-                    alt="School building"
-                    className="w-full h-full object-cover object-center"
-                  />
-                </motion.div>
-
-                {/* Grade Levels badge — dark glass, readable on light lavender */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  className="absolute right-0 sm:right-2 bottom-6 bg-white/70 backdrop-blur-md border border-white/20 px-4 py-3.5 shadow-lg z-20 select-none"
-                >
-                  <span className="text-[9px] sm:text-[11px] font-bold text-[#020816] uppercase tracking-widest block font-mono">
-                    Grade Levels
-                  </span>
-                  <span className="text-xs sm:text-sm font-bold text-[#020816]">
-                    Grade I - Grade V
-                  </span>
-                </motion.div>
-              </div>
-
-              {/* Heading — dark navy text on light lavender */}
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.55 }}
-                className="relative z-30 mt-6 select-none"
-              >
-                <h3 className="font-sans font-black text-[#020816] text-4xl sm:text-6xl lg:text-7xl leading-[0.85] tracking-tight">
-                  Elementary
-                  <span className="block font-sans font-light text-[#020816]/60 text-3xl sm:text-5xl mt-1">
-                    School
-                  </span>
-                </h3>
-              </motion.div>
-            </motion.div>
-
-            {/* Right Column: Narrative + button — slides in from the right */}
-            <motion.div
-              initial={{ opacity: 0, x: 120, scale: 0.92 }}
-              whileInView={{ opacity: 1, x: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 lg:pl-16 z-20 space-y-4 sm:space-y-6"
-            >
-              <p className="text-[#020816]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
-                At <strong className="text-[#020816] font-extrabold">IFS Elementary</strong>, we nurture the development of each child emotionally, academically, physically, socially, and artistically during their formative years.
-              </p>
-            </motion.div>
-
-          </motion.div>
-        </div>
-      </div>
-
-      {/* 3. Middle Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 my-16 sm:my-28 lg:my-44" id="alevel-level-card">
-        <div className="relative">
-
-          {/* Background depth layers behind the whole card — left side, mint-teal family */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="pointer-events-none absolute -top-4 left-2 sm:left-6 w-[70%] sm:w-[42%] h-[85%] bg-[#C6F1EB]/70 hidden sm:block"
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.12 }}
-            className="pointer-events-none absolute top-6 left-8 sm:left-14 w-[65%] sm:w-[38%] h-[75%] bg-[#ADEBE1]/60 hidden sm:block"
-          />
-
-          <motion.div
-            whileHover={{ y: -10 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="bg-[#91E5DB] p-5 sm:p-10 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-0 lg:min-h-[460px] w-full sm:w-[92%] ml-auto"
-          >
-
-            {/* Left Column: Narrative details and button — slides in from the left */}
-            <motion.div
-              initial={{ opacity: 0, x: -120, scale: 0.92 }}
-              whileInView={{ opacity: 1, x: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 z-20 space-y-4 sm:space-y-6 lg:pr-12"
-            >
-              <p className="text-[#020618]/85 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
-                At IFS <strong className="text-[#020816] font-extrabold"> Middle Section (Grades VI–VII) </strong>, students are encouraged to strengthen their academic skills, develop critical thinking, and build confidence as independent learners. Through engaging learning experiences, they are prepared to take on greater challenges and grow into responsible, curious, and capable individuals.
-              </p>
-            </motion.div>
-
-            {/* Right Column: Angled image block, heading at top, floating grade badge on corner */}
-            <motion.div
-              initial={{ opacity: 0, x: 120, scale: 0.92 }}
-              whileInView={{ opacity: 1, x: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 relative h-[300px] sm:h-[400px] lg:h-[460px] flex items-center justify-center w-full mt-4 lg:mt-0"
-            >
-              {/* Image with angled top edge instead of a plain rectangle */}
-              <div
-                className="absolute inset-0 top-0 lg:-top-6 xl:-top-10 bg-slate-950 overflow-hidden shadow-xl z-10 group rounded-sm"
-                style={{ clipPath: "polygon(0% 6%, 100% 0%, 100% 100%, 0% 100%)" }}
-              >
-                <img
-                  src="/assets/slider/slide6.jpg"
-                  alt="A-Level students"
-                  className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
-                />
-                {/* Mint-teal color-wash overlay, matches new card theme */}
-                <div className="absolute inset-0 bg-[#91E5DB]/45 mix-blend-color z-15" />
-                <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-transparent z-20" />
-
-                {/* Heading — moved to TOP of image (Junior's sits at the bottom) */}
-                <div className="absolute top-8 sm:top-10 left-6 z-30 select-none">
-                  <h3 className="font-sans font-black text-white text-3xl sm:text-5xl leading-[0.9] tracking-tight">
-                    Middle
-                    <span className="block font-light text-white/90 text-2xl sm:text-4xl mt-0.5">
-                      Section
-                    </span>
-                  </h3>
-                </div>
-              </div>
-
-              {/* Floating white "Grade Levels" badge overlapping the bottom-left corner */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.4 }}
-                className="absolute -bottom-4 left-4 sm:left-6 z-30 bg-white px-5 py-3 shadow-lg select-none"
-              >
-                <span className="text-[10px] sm:text-[11px] font-bold text-[#020816] uppercase tracking-widest block font-mono">
-                  Grade Levels
-                </span>
-                <span className="text-sm sm:text-base font-bold text-[#020816]">
-                  Grade VI - Grade VII
-                </span>
-              </motion.div>
-            </motion.div>
-
-          </motion.div>
-        </div>
-      </div>
-
-      {/* 4. Cambridge section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 my-16 sm:my-28 lg:my-44" id="senior-level-card">
-        <div className="relative">
-
-          {/* Background depth layers behind the card — right side, like reference */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="pointer-events-none absolute -top-6 right-0 w-[38%] h-[16%]  bg-[#BAE6FD]/50 hidden sm:block"
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.12 }}
-            className="pointer-events-none absolute top-[16%] right-0 w-[38%] h-[82%] bg-[#7DD3FC] hidden sm:block"
-          />
-
-          {/* Main front card */}
-          <motion.div
-            whileHover={{ y: -10 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="bg-[#BAE6FD] p-5 sm:p-10 lg:p-16 relative overflow-visible shadow-lg hover:shadow-2xl transition-shadow duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-0 lg:min-h-[460px] w-full sm:w-[92%]"
-          >
-
-            {/* Left Column: Image collage + heading */}
-            <div className="lg:col-span-6 relative flex flex-col justify-end min-h-[300px] sm:min-h-[400px] lg:min-h-[440px] z-10 w-full">
-
-              {/* Image stack wrapper */}
-              <div className="relative w-full h-[240px] sm:h-[320px]">
-
-                {/* Top polygon image — blue-tinted graduation photo */}
-                <motion.div
-                  initial={{ opacity: 0, y: -60 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.35, ease: "easeOut" }}
-                  whileHover={{ scale: 1.04 }}
-                  className="absolute left-[20%] sm:left-[24%] -top-6 w-[60%] sm:w-[56%] h-[85%] overflow-hidden shadow-[0_20px_45px_rgba(16,24,40,0.22)] z-10"
-                  style={{ clipPath: "polygon(10% 0%, 100% 4%, 88% 100%, 0% 90%)" }}
-                >
-                  <img
-                    src="/assets/slider/slide51.jpg"
-                    alt="Senior school graduates"
-                    className="w-full h-full object-cover object-center"
-                  />
-                  {/* Blue color-wash overlay to match reference tint */}
-                  <div className="absolute inset-0 bg-[#1d4ed8]/50 mix-blend-color" />
-                </motion.div>
-
-                {/* Tilted side photo — group graduation shot */}
-                <motion.div
-                  initial={{ opacity: 0, x: -50, rotate: -12 }}
-                  whileInView={{ opacity: 1, x: 0, rotate: -8 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
-                  whileHover={{ scale: 1.05, rotate: -4 }}
-                  className="absolute left-0 bottom-[8%] w-[34%] sm:w-[30%] aspect-[4/5]  overflow-hidden bg-white p-1 shadow-[0_16px_35px_rgba(16,24,40,0.20)] border border-white z-20"
-                >
-                  <img
-                    src="/assets/slider/559005353_1378177237650043_1854500200270735487_n.jpg"
-                    alt="Graduation ceremony group"
-                    className="w-full h-full object-cover object-top"
-                  />
-                </motion.div>
-              </div>
-
-              {/* Heading — sits directly under image stack */}
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.5 }}
-                className="relative z-30 mt-4 select-none"
-              >
-                <h3 className="font-sans font-black text-[#0f172a] text-4xl sm:text-6xl lg:text-7xl leading-[0.85] tracking-tight">
-                  Cambridge
-                  <span className="block font-sans font-light text-slate-500 text-3xl sm:text-5xl mt-1">
+                  <span className="block mt-1 text-3xl sm:text-4xl lg:text-[40px] font-light text-slate-500">
                     Section
                   </span>
                 </h3>
-                <div className="mt-5 space-y-0.5">
-                  <span className="text-[10px] sm:text-[11px] font-bold text-slate-600 uppercase tracking-widest block font-mono">
+
+                {/* Grade level */}
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] text-slate-400">
                     Grade Levels
                   </span>
-                  <span className="text-sm sm:text-base font-black text-slate-950">
-                    O Level - A Level
+
+                  <span className="hidden sm:block w-8 h-px bg-slate-300" />
+
+                  <span className="text-sm sm:text-base font-bold text-[#020618]">
+                    Pre-Nursery — Kindergarten
                   </span>
                 </div>
+
+                {/* Description */}
+                <p className="mt-4 text-sm sm:text-[15px] leading-6 sm:leading-7 text-slate-600 max-w-xl">
+                  At IFS, we see
+                  <strong className="text-[#020618] font-bold">
+                    {" "}Early Childhood Development (ECD)
+                  </strong>{" "}
+                  as a vital stage where children begin to explore the world,
+                  build meaningful relationships, and develop essential
+                  cognitive, social, emotional, and physical skills.
+                </p>
+
+                <p className="mt-3 text-sm leading-6 text-slate-500 max-w-xl">
+                  Through a nurturing, safe, and engaging learning environment,
+                  we encourage curiosity, creativity, confidence, and a strong
+                  foundation for lifelong learning.
+                </p>
+
+                {/* Development indicators */}
+                <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
+                      ♡
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-slate-700">
+                      Social & Emotional
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
+                      ○
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-slate-700">
+                      Language & Communication
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
+                      ✦
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-slate-700">
+                      Physical Development
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
+                      ◉
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-slate-700">
+                      Cognitive Growth
+                    </span>
+                  </div>
+
+                </div>
+
               </motion.div>
+
+
+              {/* -------------------------------------------------
+                  RIGHT IMAGE
+              ------------------------------------------------- */}
+              <motion.div
+                initial={{ opacity: 0, x: 60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.15,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="lg:col-span-7 relative min-h-[260px] sm:min-h-[340px] lg:min-h-0 bg-[#020618]"
+              >
+
+                <div className="absolute inset-0 overflow-hidden">
+
+                  <img
+                    src="/assets/slider/slide4.jpg"
+                    alt="IFS Early Childhood Development students"
+                    className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
+                  />
+
+                  {/* Dark image gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#020618]/90 via-[#020618]/10 to-transparent" />
+
+                  {/* Yellow corner */}
+                  <div
+                    className="absolute top-0 left-0 w-16 sm:w-24 h-16 sm:h-24 bg-[#FDE047]"
+                    style={{
+                      clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                    }}
+                  />
+
+                  {/* Image content */}
+                  <div className="absolute left-6 sm:left-10 lg:left-12 bottom-6 sm:bottom-8 lg:bottom-9 right-6">
+
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="w-8 sm:w-10 h-[2px] bg-[#FDE047]" />
+
+                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-white/80">
+                        IFS Early Years
+                      </span>
+                    </div>
+
+                    <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
+                      A strong beginning
+                    </h4>
+
+                    <p className="mt-2 text-sm text-white/70 max-w-md leading-6">
+                      Nurturing curiosity, creativity, confidence and the
+                      foundations for lifelong learning.
+                    </p>
+
+                  </div>
+
+                </div>
+
+                {/* Floating academic level */}
+                <div className="absolute right-4 sm:right-7 lg:right-8 top-4 sm:top-6 bg-white px-4 sm:px-5 py-2.5 shadow-xl">
+
+                  <span className="block text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                    Academic Level
+                  </span>
+
+                  <span className="block mt-1 text-xs sm:text-sm font-bold text-[#020618]">
+                    Pre-Nursery — KG
+                  </span>
+
+                </div>
+
+              </motion.div>
+
             </div>
 
-            {/* Right Column: Narrative details and button */}
-            <motion.div
-              initial={{ opacity: 0, x: 60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
-              className="lg:col-span-6 lg:pl-16 z-20 space-y-4 sm:space-y-6"
-            >
-              <p className="text-slate-800 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-md text-justify">
-                At IFS <strong className="text-slate-950 font-bold">O Level & A Level</strong> provides students with a balanced and enriching learning experience that combines academic excellence with a vibrant co-curricular program. Our aim is to develop confident, independent, and critical thinkers, equipping students with the knowledge, skills, and confidence they need to succeed in their examinations, university, and beyond.
-              </p>
 
-            </motion.div>
+            {/* -------------------------------------------------
+                INFORMATION STRIP
+            ------------------------------------------------- */}
+            <div className="border-t border-slate-200 bg-[#F8FAFC]">
 
-          </motion.div>
+              <div className="grid grid-cols-2 md:grid-cols-4">
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4 border-b md:border-b-0 md:border-r border-slate-200">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Focus
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#020618]">
+                    Whole Child
+                  </span>
+                </div>
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4 border-b md:border-b-0 md:border-r border-slate-200">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Learning
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#020618]">
+                    Play & Inquiry
+                  </span>
+                </div>
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4 border-r border-slate-200">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Development
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#020618]">
+                    Social & Cognitive
+                  </span>
+                </div>
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Pathway
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#020618]">
+                    Formal Schooling
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
         </div>
       </div>
+
+
+      {/* =========================================================
+          2. ELEMENTARY SECTION
+          Same design as the ECD card, lavender colour palette
+          #e1d8f7 (main) · #d8c9f4 (mid) · #cbb8ef (accent) · #020816 (text)
+          Border + info strip colors match the ECD card
+      ========================================================= */}
+      <div
+        className="relative w-screen max-w-none left-1/2 -translate-x-1/2 px-0 my-4 sm:my-6 lg:my-8 h-auto pt-30"
+        id="elementary-level-card"
+      >
+        <div className="relative">
+
+          {/* Decorative lavender background element */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="pointer-events-none absolute -right-3 sm:-right-7 top-8 sm:top-12 w-20 sm:w-28 h-24 sm:h-40 bg-[#cbb8ef]/70"
+          />
+
+          {/* Main Elementary layout */}
+          <div className="relative bg-white border border-slate-200 shadow-[0_20px_70px_rgba(15,23,42,0.08)] overflow-hidden">
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 lg:min-h-[460px]">
+
+              {/* -------------------------------------------------
+                  LEFT CONTENT
+              ------------------------------------------------- */}
+              <motion.div
+                initial={{ opacity: 0, x: 60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="lg:order-2 lg:col-span-5 px-6 sm:px-10 lg:px-12 xl:px-14 py-8 sm:py-10 lg:py-9 flex flex-col justify-center"
+              >
+
+                {/* Eyebrow */}
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-10 sm:w-12 h-[3px] bg-[#cbb8ef]" />
+
+                  <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-[#020816]/60">
+                    Primary Years
+                  </span>
+                </div>
+
+                {/* Main heading */}
+                <h3 className="font-sans text-[#020816] leading-[0.9] tracking-[-0.04em]">
+                  <span className="block text-5xl sm:text-6xl lg:text-[60px] font-black">
+                    Elementary
+                  </span>
+
+                  <span className="block mt-1 text-3xl sm:text-4xl lg:text-[40px] font-light text-[#020816]/60">
+                    School
+                  </span>
+                </h3>
+
+                {/* Grade level */}
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] text-[#020816]/50">
+                    Grade Levels
+                  </span>
+
+                  <span className="hidden sm:block w-8 h-px bg-[#020816]/25" />
+
+                  <span className="text-sm sm:text-base font-bold text-[#020816]">
+                    Grade I — Grade V
+                  </span>
+                </div>
+
+                {/* Description */}
+                <p className="mt-4 text-sm sm:text-[15px] leading-6 sm:leading-7 text-[#020816]/80 max-w-xl">
+                  At
+                  <strong className="text-[#020816] font-bold">
+                    {" "}IFS Elementary
+                  </strong>
+                  , we nurture the development of each child emotionally,
+                  academically, physically, socially, and artistically during
+                  their formative years.
+                </p>
+
+                <p className="mt-3 text-sm leading-6 text-[#020816]/65 max-w-xl">
+                  Through engaging lessons and a supportive classroom
+                  environment, students build strong foundations in learning,
+                  confidence, and character.
+                </p>
+
+                {/* Development indicators */}
+                <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+                      ♡
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Emotional Growth
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+                      ○
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Academic Skills
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+                      ✦
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Physical Development
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+                      ◉
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Social & Artistic
+                    </span>
+                  </div>
+
+                </div>
+
+              </motion.div>
+
+
+              {/* -------------------------------------------------
+                  RIGHT IMAGE
+              ------------------------------------------------- */}
+              <motion.div
+                initial={{ opacity: 0, x: -60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.15,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="lg:order-1 lg:col-span-7 relative min-h-[260px] sm:min-h-[340px] lg:min-h-0 bg-[#020816]"
+              >
+
+                <div className="absolute inset-0 overflow-hidden">
+
+                  <img
+                    src="/assets/slider/slide2.jpg"
+                    alt="IFS Elementary School"
+                    className="w-full h-full object-cover object-center transition-transform duration-1000 hover:scale-105"
+                  />
+
+                  {/* Dark image gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#020816]/90 via-[#020816]/10 to-transparent" />
+
+                  {/* Lavender corner */}
+                  <div
+                    className="absolute top-0 left-0 w-16 sm:w-24 h-16 sm:h-24 bg-[#cbb8ef]"
+                    style={{
+                      clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                    }}
+                  />
+
+                  {/* Image content */}
+                  <div className="absolute left-6 sm:left-10 lg:left-12 bottom-6 sm:bottom-8 lg:bottom-9 right-6">
+
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="w-8 sm:w-10 h-[2px] bg-[#cbb8ef]" />
+
+                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-white/80">
+                        IFS Elementary
+                      </span>
+                    </div>
+
+                    <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
+                      Growing with confidence
+                    </h4>
+
+                    <p className="mt-2 text-sm text-white/70 max-w-md leading-6">
+                      Nurturing every child emotionally, academically,
+                      physically, socially and artistically.
+                    </p>
+
+                  </div>
+
+                </div>
+
+                {/* Floating academic level */}
+                <div className="absolute right-4 sm:right-7 lg:right-8 top-4 sm:top-6 bg-white px-4 sm:px-5 py-2.5 shadow-xl">
+
+                  <span className="block text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-[#020816]/45">
+                    Academic Level
+                  </span>
+
+                  <span className="block mt-1 text-xs sm:text-sm font-bold text-[#020816]">
+                    Grade I — Grade V
+                  </span>
+
+                </div>
+
+              </motion.div>
+
+            </div>
+
+
+            {/* -------------------------------------------------
+                INFORMATION STRIP
+            ------------------------------------------------- */}
+            <div className="border-t border-slate-200 bg-[#F8FAFC]">
+
+              <div className="grid grid-cols-2 md:grid-cols-4">
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4 border-b md:border-b-0 md:border-r border-slate-200">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Focus
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#020816]">
+                    Whole Child
+                  </span>
+                </div>
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4 border-b md:border-b-0 md:border-r border-slate-200">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Learning
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#020816]">
+                    Inquiry & Practice
+                  </span>
+                </div>
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4 border-r border-slate-200">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Development
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#020816]">
+                    Academic & Social
+                  </span>
+                </div>
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Pathway
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#020816]">
+                    Middle School
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      {/* =========================================================
+          3. MIDDLE SECTION
+          Text on the LEFT, image on the RIGHT (same as ECD card)
+          teal palette: #91E5DB (accent) · #ADEBE1 · #C6F1EB · #020816 (text)
+      ========================================================= */}
+      <div
+        className="relative w-screen max-w-none left-1/2 -translate-x-1/2 px-0 my-4 sm:my-6 lg:my-8 h-auto pt-30"
+        id="alevel-level-card"
+      >
+        <div className="relative">
+
+          {/* Decorative teal background element (now on the LEFT edge) */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="pointer-events-none absolute -left-3 sm:-left-7 top-8 sm:top-12 w-20 sm:w-28 h-24 sm:h-40 bg-[#91E5DB]/70"
+          />
+
+          {/* Main Middle Section layout */}
+          <div className="relative bg-white border border-slate-200 shadow-[0_20px_70px_rgba(15,23,42,0.08)] overflow-hidden">
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 lg:min-h-[460px]">
+
+              {/* -------------------------------------------------
+                  LEFT CONTENT (TEXT)
+              ------------------------------------------------- */}
+              <motion.div
+                initial={{ opacity: 0, x: -60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="lg:order-1 lg:col-span-5 px-6 sm:px-10 lg:px-12 xl:px-14 py-8 sm:py-10 lg:py-9 flex flex-col justify-center"
+              >
+
+                {/* Eyebrow */}
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-10 sm:w-12 h-[3px] bg-[#91E5DB]" />
+
+                  <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-[#020816]/60">
+                    Middle Years
+                  </span>
+                </div>
+
+                {/* Main heading */}
+                <h3 className="font-sans text-[#020816] leading-[0.9] tracking-[-0.04em]">
+                  <span className="block text-5xl sm:text-6xl lg:text-[60px] font-black">
+                    Middle
+                  </span>
+
+                  <span className="block mt-1 text-3xl sm:text-4xl lg:text-[40px] font-light text-[#020816]/60">
+                    Section
+                  </span>
+                </h3>
+
+                {/* Grade level */}
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] text-[#020816]/50">
+                    Grade Levels
+                  </span>
+
+                  <span className="hidden sm:block w-8 h-px bg-[#020816]/25" />
+
+                  <span className="text-sm sm:text-base font-bold text-[#020816]">
+                    Grade VI — Grade VII
+                  </span>
+                </div>
+
+                {/* Description */}
+                <p className="mt-4 text-sm sm:text-[15px] leading-6 sm:leading-7 text-[#020816]/80 max-w-xl">
+                  At IFS
+                  <strong className="text-[#020816] font-bold">
+                    {" "}Middle Section (Grades VI–VII)
+                  </strong>
+                  , students are encouraged to strengthen their academic
+                  skills, develop critical thinking, and build confidence as
+                  independent learners.
+                </p>
+
+                <p className="mt-3 text-sm leading-6 text-[#020816]/65 max-w-xl">
+                  Through engaging learning experiences, they are prepared to
+                  take on greater challenges and grow into responsible,
+                  curious, and capable individuals.
+                </p>
+
+                {/* Development indicators */}
+                <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
+                      ♡
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Academic Skills
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
+                      ○
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Critical Thinking
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
+                      ✦
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Independent Learning
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
+                      ◉
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Responsible & Curious
+                    </span>
+                  </div>
+
+                </div>
+
+              </motion.div>
+
+
+              {/* -------------------------------------------------
+                  RIGHT IMAGE
+              ------------------------------------------------- */}
+              <motion.div
+                initial={{ opacity: 0, x: 60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.15,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="lg:order-2 lg:col-span-7 relative min-h-[260px] sm:min-h-[340px] lg:min-h-0 bg-[#020816]"
+              >
+
+                <div className="absolute inset-0 overflow-hidden">
+
+                  <img
+                    src="/assets/slider/slide6.jpg"
+                    alt="IFS Middle Section students"
+                    className="w-full h-full object-cover object-center transition-transform duration-1000 hover:scale-105"
+                  />
+
+                  {/* Dark image gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#020816]/90 via-[#020816]/10 to-transparent" />
+
+                  {/* Teal corner (top-left of image) */}
+                  <div
+                    className="absolute top-0 left-0 w-16 sm:w-24 h-16 sm:h-24 bg-[#91E5DB]"
+                    style={{
+                      clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                    }}
+                  />
+
+                  {/* Image content */}
+                  <div className="absolute left-6 sm:left-10 lg:left-12 bottom-6 sm:bottom-8 lg:bottom-9 right-6">
+
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="w-8 sm:w-10 h-[2px] bg-[#91E5DB]" />
+
+                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-white/80">
+                        IFS Middle Section
+                      </span>
+                    </div>
+
+                    <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
+                      Ready for greater challenges
+                    </h4>
+
+                    <p className="mt-2 text-sm text-white/70 max-w-md leading-6">
+                      Building critical thinkers and confident, independent
+                      learners.
+                    </p>
+
+                  </div>
+
+                </div>
+
+                {/* Floating academic level (top-right) */}
+                <div className="absolute right-4 sm:right-7 lg:right-8 top-4 sm:top-6 bg-white px-4 sm:px-5 py-2.5 shadow-xl">
+
+                  <span className="block text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-[#020816]/45">
+                    Academic Level
+                  </span>
+
+                  <span className="block mt-1 text-xs sm:text-sm font-bold text-[#020816]">
+                    Grade VI — Grade VII
+                  </span>
+
+                </div>
+
+              </motion.div>
+
+            </div>
+
+
+            {/* -------------------------------------------------
+                INFORMATION STRIP
+            ------------------------------------------------- */}
+            <div className="border-t border-slate-200 bg-[#F8FAFC]">
+
+              <div className="grid grid-cols-2 md:grid-cols-4">
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4 border-b md:border-b-0 md:border-r border-slate-200">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Focus
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#020816]">
+                    Critical Thinking
+                  </span>
+                </div>
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4 border-b md:border-b-0 md:border-r border-slate-200">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Learning
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#020816]">
+                    Independent Learning
+                  </span>
+                </div>
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4 border-r border-slate-200">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Development
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#020816]">
+                    Academic & Personal
+                  </span>
+                </div>
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Pathway
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#020816]">
+                    O Level
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* =========================================================
+          4. CAMBRIDGE SECTION
+          Same design as the ECD / Middle card, image on the LEFT, text on the RIGHT
+          sky-blue palette: #7DD3FC (accent) · #BAE6FD · #E0F2FE · #0f172a (text)
+      ========================================================= */}
+      <div
+        className="relative w-screen max-w-none left-1/2 -translate-x-1/2 px-0 my-4 sm:my-6 lg:my-8 h-auto pt-30"
+        id="senior-level-card"
+      >
+        <div className="relative">
+
+          {/* Decorative sky-blue background element (right edge) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="pointer-events-none absolute -right-3 sm:-right-7 top-8 sm:top-12 w-20 sm:w-28 h-24 sm:h-40 bg-[#7DD3FC]/70"
+          />
+
+          {/* Main Cambridge Section layout */}
+          <div className="relative bg-white border border-slate-200 shadow-[0_20px_70px_rgba(15,23,42,0.08)] overflow-hidden">
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 lg:min-h-[460px]">
+
+              {/* -------------------------------------------------
+                  LEFT IMAGE
+              ------------------------------------------------- */}
+              <motion.div
+                initial={{ opacity: 0, x: -60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.15,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="lg:order-1 lg:col-span-7 relative min-h-[260px] sm:min-h-[340px] lg:min-h-0 bg-[#0f172a]"
+              >
+
+                <div className="absolute inset-0 overflow-hidden">
+
+                  <img
+                    src="/assets/slider/slide51.jpg"
+                    alt="IFS Cambridge Section students"
+                    className="w-full h-full object-cover object-center transition-transform duration-1000 hover:scale-105"
+                  />
+
+                  {/* Dark image gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/90 via-[#0f172a]/10 to-transparent" />
+
+                  {/* Sky-blue corner */}
+                  <div
+                    className="absolute top-0 left-0 w-16 sm:w-24 h-16 sm:h-24 bg-[#7DD3FC]"
+                    style={{
+                      clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                    }}
+                  />
+
+                  {/* Image content */}
+                  <div className="absolute left-6 sm:left-10 lg:left-12 bottom-6 sm:bottom-8 lg:bottom-9 right-6">
+
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="w-8 sm:w-10 h-[2px] bg-[#7DD3FC]" />
+
+                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-white/80">
+                        IFS Cambridge Section
+                      </span>
+                    </div>
+
+                    <h4 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
+                      Ready for what comes next
+                    </h4>
+
+                    <p className="mt-2 text-sm text-white/70 max-w-md leading-6">
+                      Confident, independent thinkers prepared for
+                      examinations, university and beyond.
+                    </p>
+
+                  </div>
+
+                </div>
+
+                {/* Floating academic level */}
+                <div className="absolute right-4 sm:right-7 lg:right-8 top-4 sm:top-6 bg-white px-4 sm:px-5 py-2.5 shadow-xl">
+
+                  <span className="block text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-[#0f172a]/45">
+                    Academic Level
+                  </span>
+
+                  <span className="block mt-1 text-xs sm:text-sm font-bold text-[#0f172a]">
+                    O Level — A Level
+                  </span>
+
+                </div>
+
+              </motion.div>
+
+
+              {/* -------------------------------------------------
+                  RIGHT CONTENT (TEXT)
+              ------------------------------------------------- */}
+              <motion.div
+                initial={{ opacity: 0, x: 60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="lg:order-2 lg:col-span-5 px-6 sm:px-10 lg:px-12 xl:px-14 py-8 sm:py-10 lg:py-9 flex flex-col justify-center"
+              >
+
+                {/* Eyebrow */}
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-10 sm:w-12 h-[3px] bg-[#7DD3FC]" />
+
+                  <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-[#0f172a]/60">
+                    Senior Years
+                  </span>
+                </div>
+
+                {/* Main heading */}
+                <h3 className="font-sans text-[#0f172a] leading-[0.9] tracking-[-0.04em]">
+                  <span className="block text-5xl sm:text-6xl lg:text-[60px] font-black">
+                    Cambridge
+                  </span>
+
+                  <span className="block mt-1 text-3xl sm:text-4xl lg:text-[40px] font-light text-[#0f172a]/60">
+                    Section
+                  </span>
+                </h3>
+
+                {/* Grade level */}
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] text-[#0f172a]/50">
+                    Grade Levels
+                  </span>
+
+                  <span className="hidden sm:block w-8 h-px bg-[#0f172a]/25" />
+
+                  <span className="text-sm sm:text-base font-bold text-[#0f172a]">
+                    O Level — A Level
+                  </span>
+                </div>
+
+                {/* Description */}
+                <p className="mt-4 text-sm sm:text-[15px] leading-6 sm:leading-7 text-[#0f172a]/80 max-w-xl">
+                  At IFS
+                  <strong className="text-[#0f172a] font-bold">
+                    {" "}O Level & A Level
+                  </strong>
+                  {" "}provides students with a balanced and enriching learning
+                  experience that combines academic excellence with a vibrant
+                  co-curricular program.
+                </p>
+
+                <p className="mt-3 text-sm leading-6 text-[#0f172a]/65 max-w-xl">
+                  Our aim is to develop confident, independent, and critical
+                  thinkers, equipping students with the knowledge, skills, and
+                  confidence they need to succeed in their examinations,
+                  university, and beyond.
+                </p>
+
+                {/* Development indicators */}
+                <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#7DD3FC] flex items-center justify-center text-[#0f172a] text-sm">
+                      ♡
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#0f172a]/85">
+                      Academic Excellence
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#7DD3FC] flex items-center justify-center text-[#0f172a] text-sm">
+                      ○
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#0f172a]/85">
+                      Critical Thinking
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#7DD3FC] flex items-center justify-center text-[#0f172a] text-sm">
+                      ✦
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#0f172a]/85">
+                      Co-curricular Program
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#7DD3FC] flex items-center justify-center text-[#0f172a] text-sm">
+                      ◉
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#0f172a]/85">
+                      Confident & Independent
+                    </span>
+                  </div>
+
+                </div>
+
+              </motion.div>
+
+            </div>
+
+
+            {/* -------------------------------------------------
+                INFORMATION STRIP
+            ------------------------------------------------- */}
+            <div className="border-t border-slate-200 bg-[#F8FAFC]">
+
+              <div className="grid grid-cols-2 md:grid-cols-4">
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4 border-b md:border-b-0 md:border-r border-slate-200">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Focus
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#0f172a]">
+                    Exam Excellence
+                  </span>
+                </div>
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4 border-b md:border-b-0 md:border-r border-slate-200">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Learning
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#0f172a]">
+                    Independent Study
+                  </span>
+                </div>
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4 border-r border-slate-200">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Development
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#0f172a]">
+                    Academic & Co-curricular
+                  </span>
+                </div>
+
+                <div className="px-5 sm:px-7 lg:px-9 py-3.5 sm:py-4">
+                  <span className="block text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">
+                    Pathway
+                  </span>
+                  <span className="block mt-1 text-sm sm:text-base font-bold text-[#0f172a]">
+                    University
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      {/* use this div for spacing */}
+      <div className="pb-20"></div>
 
     </section>
   );
@@ -1488,7 +2143,7 @@ export default function AcademicsView({
               2. SCHOOL TIMINGS
           ============================================================ */}
           {activeTab === "timings" && (
-             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 animate-fadeIn" id="timings" data-section="timings">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 animate-fadeIn" id="timings" data-section="timings">
               <SectionHeading
                 eyebrow="Daily Hours"
                 heading="School Hours & "
@@ -1517,11 +2172,11 @@ export default function AcademicsView({
                       9:00 AM to 2:00 PM
                     </span>
                   </div>
-                </div> 
+                </div>
               </div>
 
               <div className="p-6 border  bg-slate border-l-4 border-[#F5C330]  text-xs text-slate leading-relaxed text-center">
-                               <strong>Parental Note:</strong> Parents must ensure that children arrive at school by
+                <strong>Parental Note:</strong> Parents must ensure that children arrive at school by
                 8:20 AM.
               </div>
             </div>
@@ -1543,7 +2198,7 @@ export default function AcademicsView({
                 {/* Term 1 Card */}
                 <div className="bg-white border border-slate-100 rounded-sm p-8 shadow-sm space-y-6 border-t-4 border-[#F5C330] hover:shadow-md transition-shadow">
                   <h3 className="font-bold text-[#0d1f3c] bg-slate-50 border border-slate-100 px-4 py-2.5 rounded-sm inline-block uppercase tracking-wider text-[10px] font-mono">
-                  January - May - Spring Session
+                    January - May - Spring Session
                   </h3>
 
                   <div className="space-y-4 text-xs sm:text-sm text-slate-600">
@@ -1587,3 +2242,4 @@ export default function AcademicsView({
     </>
   );
 }
+
