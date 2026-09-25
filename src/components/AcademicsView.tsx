@@ -788,46 +788,73 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                   foundation for lifelong learning.
                 </p>
 
-                {/* Development indicators */}
-                <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
+                 {/* Potential learning areas */}
+          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
 
-                  <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
-                      ♡
-                    </span>
-                    <span className="text-xs sm:text-sm font-semibold text-slate-700">
-                      Social & Emotional
-                    </span>
-                  </div>
+            <div className="flex items-center gap-3">
+              <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
+                ○
+              </span>
+              <span className="text-xs sm:text-sm font-semibold text-slate-700">
+                Language & Communication
+              </span>
+            </div>
 
-                  <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
-                      ○
-                    </span>
-                    <span className="text-xs sm:text-sm font-semibold text-slate-700">
-                      Language & Communication
-                    </span>
-                  </div>
+            <div className="flex items-center gap-3">
+              <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
+                ✎
+              </span>
+              <span className="text-xs sm:text-sm font-semibold text-slate-700">
+                Early Literacy
+              </span>
+            </div>
 
-                  <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
-                      ✦
-                    </span>
-                    <span className="text-xs sm:text-sm font-semibold text-slate-700">
-                      Physical Development
-                    </span>
-                  </div>
+            <div className="flex items-center gap-3">
+              <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
+                #
+              </span>
+              <span className="text-xs sm:text-sm font-semibold text-slate-700">
+                Early Numeracy
+              </span>
+            </div>
 
-                  <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
-                      ◉
-                    </span>
-                    <span className="text-xs sm:text-sm font-semibold text-slate-700">
-                      Cognitive Growth
-                    </span>
-                  </div>
+            <div className="flex items-center gap-3">
+              <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
+                ♡
+              </span>
+              <span className="text-xs sm:text-sm font-semibold text-slate-700">
+                Social & Emotional Development
+              </span>
+            </div>
 
-                </div>
+            <div className="flex items-center gap-3">
+              <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
+                ✿
+              </span>
+              <span className="text-xs sm:text-sm font-semibold text-slate-700">
+                Creative Arts
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
+                ✦
+              </span>
+              <span className="text-xs sm:text-sm font-semibold text-slate-700">
+                Physical Development
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <span className="w-7 h-7 flex-shrink-0 bg-[#FEF08A] flex items-center justify-center text-[#020618] text-sm">
+                ♻
+              </span>
+              <span className="text-xs sm:text-sm font-semibold text-slate-700">
+                Environmental Awareness
+              </span>
+            </div>
+
+          </div>
 
               </motion.div>
 
@@ -1050,46 +1077,109 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                   confidence, and character.
                 </p>
 
-                {/* Development indicators */}
-                <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
+                {/* Potential subjects */}
+<div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
 
-                  <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
-                      ♡
-                    </span>
-                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
-                      Emotional Growth
-                    </span>
-                  </div>
+  <div className="flex items-center gap-3">
+    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+      Aa
+    </span>
+    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+      English
+    </span>
+  </div>
 
-                  <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
-                      ○
-                    </span>
-                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
-                      Academic Skills
-                    </span>
-                  </div>
+  <div className="flex items-center gap-3">
+    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+      ∑
+    </span>
+    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+      Mathematics
+    </span>
+  </div>
 
-                  <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
-                      ✦
-                    </span>
-                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
-                      Physical Development
-                    </span>
-                  </div>
+  <div className="flex items-center gap-3">
+    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+      ⚛
+    </span>
+    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+      Science
+    </span>
+  </div>
 
-                  <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
-                      ◉
-                    </span>
-                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
-                      Social & Artistic
-                    </span>
-                  </div>
+  <div className="flex items-center gap-3">
+    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+      ا
+    </span>
+    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+      Urdu
+    </span>
+  </div>
 
-                </div>
+  <div className="flex items-center gap-3">
+    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+      س
+    </span>
+    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+      Sindhi
+    </span>
+  </div>
+
+  <div className="flex items-center gap-3">
+    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+      ☾
+    </span>
+    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+      Islamiat
+    </span>
+  </div>
+
+  <div className="flex items-center gap-3">
+    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+      ◎
+    </span>
+    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+      Social Studies / History & Geography
+    </span>
+  </div>
+
+  <div className="flex items-center gap-3">
+    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+      ⚙
+    </span>
+    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+      Robotics
+    </span>
+  </div>
+
+  <div className="flex items-center gap-3">
+    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+      ✎
+    </span>
+    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+      Art
+    </span>
+  </div>
+
+  <div className="flex items-center gap-3">
+    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+      ✦
+    </span>
+    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+      Physical Education
+    </span>
+  </div>
+
+  <div className="flex items-center gap-3">
+    <span className="w-7 h-7 flex-shrink-0 bg-[#cbb8ef] flex items-center justify-center text-[#020816] text-sm">
+      ◈
+    </span>
+    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+      Nazra
+    </span>
+  </div>
+
+</div>
 
               </motion.div>
 
@@ -1311,24 +1401,87 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                   curious, and capable individuals.
                 </p>
 
-                {/* Development indicators */}
+                {/* Potential subjects */}
                 <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
 
                   <div className="flex items-center gap-3">
                     <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
-                      ♡
+                      Aa
                     </span>
                     <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
-                      Academic Skills
+                      English
                     </span>
                   </div>
 
                   <div className="flex items-center gap-3">
                     <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
-                      ○
+                      ∑
                     </span>
                     <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
-                      Critical Thinking
+                      Mathematics
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
+                      ⚛
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Science
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
+                      ا
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Urdu
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
+                      س
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Sindhi
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
+                      ☾
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Islamiat
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
+                      ◎
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      History / Geography
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
+                      ⚙
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Robotics
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
+                      ✎
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
+                      Art
                     </span>
                   </div>
 
@@ -1337,16 +1490,16 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                       ✦
                     </span>
                     <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
-                      Independent Learning
+                      Physical Education
                     </span>
                   </div>
 
                   <div className="flex items-center gap-3">
                     <span className="w-7 h-7 flex-shrink-0 bg-[#91E5DB] flex items-center justify-center text-[#020816] text-sm">
-                      ◉
+                      ﴾ﷲ﴿
                     </span>
                     <span className="text-xs sm:text-sm font-semibold text-[#020816]/85">
-                      Responsible & Curious
+                      Quranic Arabic
                     </span>
                   </div>
 
