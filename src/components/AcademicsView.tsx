@@ -2164,14 +2164,14 @@ export default function AcademicsView({
                     <span className="font-bold text-slate-900 text-sm">Student Class Timings</span>
                     <span className="font-mono text-[#0d1f3c] font-bold flex items-center gap-1.5 text-xs">
                       <Clock className="w-4 h-4 text-[#F5C330]" />
-                      8:30 AM to 2:00 PM
+                      8:30 AM to 2:10 PM
                     </span>
                   </div>
                   <div className="p-5 grid grid-cols-2 items-center">
                     <span className="font-bold text-slate-900 text-sm">Administrative Office Hours</span>
                     <span className="font-mono text-slate-900 font-bold flex items-center gap-1.5 text-xs">
                       <Clock className="w-4 h-4 text-slate-400" />
-                      9:00 AM to 2:00 PM
+                      8:00 AM to 3:00 PM
                     </span>
                   </div>
                 </div>
