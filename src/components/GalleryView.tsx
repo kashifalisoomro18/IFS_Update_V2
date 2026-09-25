@@ -6,7 +6,6 @@
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { createPortal } from "react-dom";
 import {
   ChevronRight,
   ChevronLeft,
@@ -36,7 +35,7 @@ const GOLD = "#F5C330";
 const galleryItems = [
   { id: "1", src: "/ACADEMICS7.JPG", alt: "Student holding flag", title: "Graduation", category: "academics", size: "wide" },
   { id: "2", src: "/ACADEMICS1.JPG", alt: "Student reaching for a book on a tall shelf", title: "Finding the Right Book", category: "academics", size: "wide" },
- 
+
   { id: "5", src: "/IMG_2348.JPG", alt: "Teacher giving a speech at the podium", title: "Annual Address", category: "events", size: "wide" },
   { id: "6", src: "/pintober1 (1).jpeg", alt: "certificate distribution", title: "Pintober Event", category: "events", size: "wide" },
   { id: "8", src: "/ACADEMICS2.JPG", alt: "Teacher writing on the whiteboard", title: "Morning Lecture", category: "academics", size: "wide" },
@@ -75,7 +74,7 @@ const galleryItems = [
   { id: "22", src: "/ID4.JPG", alt: "Students at the annual fall festival", title: "Fall Festival", category: "events", size: "tall" },
   { id: "23", src: "/ID3.JPG", alt: "Student receiving an award on stage", title: "Honors Ceremony", category: "events", size: "md" },
   { id: "24", src: "/IMG_4097.JPG", alt: "Wide view of the school building facade", title: "Main Building", category: "campus", size: "wide" },
-   { id: "25", src: "/audi4.jpg", alt: "Students in auditorium for a session", title: "Auditorium Session", category: "campus", size: "md" },
+  { id: "25", src: "/audi4.jpg", alt: "Students in auditorium for a session", title: "Auditorium Session", category: "campus", size: "md" },
 ];
 
 const categories = [
