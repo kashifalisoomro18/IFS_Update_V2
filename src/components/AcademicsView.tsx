@@ -877,11 +877,10 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
                 <div className="absolute inset-0 overflow-hidden">
 
                   <img
-                    src="/assets/slider/slide4.jpg"
-                    alt="IFS Early Childhood Development students"
-                    className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
-                  />
-
+                        src="/kid4.jpg"
+                        alt="IFS Early Childhood Development students"
+                        className="w-full h-full object-center transition-transform duration-1000 hover:scale-105"
+                      />
                   {/* Dark image gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#020618]/90 via-[#020618]/10 to-transparent" />
 

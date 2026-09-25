@@ -77,7 +77,7 @@ const trips: Trip[] = [
   {
     label: "Community Service",
     icon: HeartHandshake,
-    photos: ["/g2.jpg", "/play1.jpg"],
+    photos: ["deafreach.jpg", "deafreach1.jpg", "deafreach2.jpg", "deafreach3.jpg", "deafreach4.jpg", "deafreach5.jpg", "deafreach6.jpg", "deafreach7.jpg", "deafreach8.jpg", "deafreach9.jpg", "deafreach10.jpg", "deafreach11.jpg", "deafreach12.jpg", "deafreach13.jpg"],
     desc: "Giving back to society."
   },
 ];
