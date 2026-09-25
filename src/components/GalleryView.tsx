@@ -4,6 +4,7 @@
  */
 
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 import {
@@ -33,10 +34,9 @@ const GOLD = "#F5C330";
    `size` controls the card's aspect ratio in the masonry grid.
 --------------------------------------------------------- */
 const galleryItems = [
-  { id: "1", src: "/ACADEMICS7.JPG", alt: "Student holding flag", title: "Graduation", category: "academics", size: "tall" },
+  { id: "1", src: "/ACADEMICS7.JPG", alt: "Student holding flag", title: "Graduation", category: "academics", size: "wide" },
   { id: "2", src: "/ACADEMICS1.JPG", alt: "Student reaching for a book on a tall shelf", title: "Finding the Right Book", category: "academics", size: "wide" },
-  { id: "3", src: "/IMG_2203.JPG", alt: "Student choosing a guitar from the music room wall", title: "Music Room", category: "cultural", size: "md" },
-  { id: "4", src: "/IMG_2210.JPG", alt: "Student viewing an art installation", title: "Gallery Walk", category: "cultural", size: "md" },
+ 
   { id: "5", src: "/IMG_2348.JPG", alt: "Teacher giving a speech at the podium", title: "Annual Address", category: "events", size: "wide" },
   { id: "6", src: "/pintober1 (1).jpeg", alt: "certificate distribution", title: "Pintober Event", category: "events", size: "wide" },
   { id: "8", src: "/ACADEMICS2.JPG", alt: "Teacher writing on the whiteboard", title: "Morning Lecture", category: "academics", size: "wide" },
@@ -61,19 +61,28 @@ const galleryItems = [
   { id: "19", src: "/play3.jpg", alt: "Basketball team celebrating a win", title: "Championship Match", category: "sports", size: "md" },
   { id: "20", src: "/play2.jpg", alt: "Football team huddled on the field", title: "Team Huddle", category: "sports", size: "wide" },
   { id: "21", src: "/playground5.jpg", alt: "Swimmer diving into the pool", title: "Swim Meet", category: "sports", size: "tall" },
-  { id: "cult-1", src: "https://picsum.photos/seed/culture-dance-20/800/900", alt: "Students performing a traditional dance", title: "Cultural Night", category: "cultural", size: "md" },
-  { id: "cult-2", src: "https://picsum.photos/seed/culture-art-21/800/650", alt: "Students painting a mural together", title: "Mural Project", category: "cultural", size: "wide" },
+  { id: "act-1", src: "/Activity-1.JPG", alt: "Student carefully shaping a clay pot by hand on a table", title: "Pottery & Clay Sculpting", category: "activities", size: "wide" },
+  { id: "act-2", src: "/Activity-2.JPG", alt: "Circular arrangement of student desks in the outdoor courtyard", title: "Open-Air Learning Arena", category: "activities", size: "md" },
+  { id: "act-3", src: "/Activity-3.JPG", alt: "Students working at open-air art desks during pottery workshop", title: "Outdoor Sculpting Session", category: "activities", size: "wide" },
+  { id: "act-4", src: "/Activity-4.JPG", alt: "Student focusing on crafting clay coils during art class", title: "Clay Coil Modeling", category: "activities", size: "tall" },
+  { id: "act-5", src: "/Activity-5.JPG", alt: "Art teacher demonstrating clay techniques to outdoor class", title: "Guided Art Instruction", category: "activities", size: "wide" },
+  { id: "act-6", src: "/Activity-6.JPG", alt: "Teacher guiding students as they roll and shape clay", title: "Hands-on Mentorship", category: "activities", size: "md" },
+  { id: "act-7", src: "/Activity-7.JPG", alt: "Students working attentively on individual clay projects outdoors", title: "Creative Expression Workshop", category: "activities", size: "wide" },
+  { id: "act-8", src: "/Activity-8.JPG", alt: "Student rolling clay coils using reference blueprint sheet", title: "Handcrafted Clay Designs", category: "activities", size: "tall" },
+  { id: "act-9", src: "/Activity-9.JPG", alt: "Students enjoying interactive clay crafting in the school garden", title: "Interactive Clay Crafting", category: "activities", size: "wide" },
+  { id: "act-10", src: "/Activity-10.JPG", alt: "Students wearing aprons crafting ceramic art outdoors", title: "Ceramics & Craft Studio", category: "activities", size: "md" },
+
   { id: "22", src: "/ID4.JPG", alt: "Students at the annual fall festival", title: "Fall Festival", category: "events", size: "tall" },
   { id: "23", src: "/ID3.JPG", alt: "Student receiving an award on stage", title: "Honors Ceremony", category: "events", size: "md" },
   { id: "24", src: "/IMG_4097.JPG", alt: "Wide view of the school building facade", title: "Main Building", category: "campus", size: "wide" },
-  { id: "25", src: "/audi4.jpg", alt: "Students in auditorium for a session", title: "Auditorium Session", category: "campus", size: "md" },
+   { id: "25", src: "/audi4.jpg", alt: "Students in auditorium for a session", title: "Auditorium Session", category: "campus", size: "md" },
 ];
 
 const categories = [
   { id: "all", label: "All Memories", icon: Images },
   { id: "academics", label: "Academics", icon: GraduationCap },
   { id: "sports", label: "Sports", icon: Trophy },
-  { id: "cultural", label: "Cultural", icon: Palette },
+  { id: "activities", label: "Activities", icon: Palette },
   { id: "campus", label: "Campus", icon: Building2 },
   { id: "events", label: "Events", icon: CalendarDays },
 ];
@@ -81,7 +90,7 @@ const categories = [
 const categoryMeta = {
   academics: { label: "Academics", color: SKY },
   sports: { label: "Sports", color: "#E24C4C" },
-  cultural: { label: "Cultural", color: "#F08A2B" },
+  activities: { label: "Activities", color: "#F08A2B" },
   campus: { label: "Campus", color: "#4FAE6E" },
   events: { label: "Events", color: "#8A63D2" },
 };

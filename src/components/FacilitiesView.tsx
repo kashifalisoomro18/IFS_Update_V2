@@ -551,9 +551,9 @@ export default function FacilitiesView() {
             <FacilityCard
               id="science"
               icon={Flame}
-              name="Science/ Laboratories"
-              description="Well-equipped Physics, Chemistry, and Biology labs with modern apparatus for hands-on experiments."
-              images={["/lab1.jpg", "/lab2.jpg", "/lab3.jpg", "/lab4.jpg"]}
+              name="Science / Computer labs"
+              description="Well-equipped labs ."
+              images={["/sci.jpg", "/sci1.jpg", "/sci2.jpg", "/scilab.jpg", "/lab1.jpg", "/lab2.jpg","lab5.JPG" ]}
               delay={0.2}
               isExpanded={expandedCard === "science"}
               onToggle={() => handleToggle("science")}
@@ -565,7 +565,7 @@ export default function FacilitiesView() {
               icon={BookOpen}
               name="Library"
               description="Quiet learning zone holding 2,000+ books, reference materials, and reading nooks."
-              images={["/g1.jpg", "/g3.jpg", "/g4.jpg"]}
+              images={["/library1.jpg", "/library2.jpg", "/library3.jpg", "/library4.jpg", "/library5.jpg", "/library6.jpg", "/library7.jpg", "/library8.jpg", "/library9.jpg"]}
               delay={0.1}
               isExpanded={expandedCard === "library"}
               onToggle={() => handleToggle("library")}
@@ -577,7 +577,7 @@ export default function FacilitiesView() {
               icon={Flame}
               name="Sports / Playground"
               description="Secured campus ground for football, cricket, basketball court in addition to an indoor sports room."
-              images={["/play.jpg", "/play2.jpg", "/play1.jpg", "/playground1.jpg", "/playground2.jpg", "/playground3.jpg", "/playground4.jpg", "/playground5.jpg"]}
+              images={["/ground1.jpg", "/ground2.jpg", "/ground3.jpg", "/ground4.jpg", "/ground5.jpg", "/ground6.jpg", "/ground7.jpg", "/ground8.jpg", "/ground9.jpg","/ground10.jpg", "/ground11.jpg", "/ground12.jpg", "/ground13.jpg", "/ground14.jpg", "/ground15.jpg", "/ground16.jpg"]}
               delay={0.2}
               isExpanded={expandedCard === "sports"}
               onToggle={() => handleToggle("sports")}
@@ -589,7 +589,7 @@ export default function FacilitiesView() {
               icon={Tv}
               name="Auditorium"
               description="Multipurpose auditorium for events, performances, seminars, and student activities."
-              images={["/audi1.jpg", "/audi2.jpg", "/audi3.jpg", "/audi4.jpg"]}
+              images={["/audi1.jpg", "/audi2.jpg", "/audi3.jpg", "/audi4.jpg","/audi5.jpg", "/audi6.jpg", "/audi7.jpg", "/audi8.jpg", "/audi9.jpg", "/audi10.jpg"]}
               delay={0.3}
               isExpanded={expandedCard === "auditorium"}
               onToggle={() => handleToggle("auditorium")}
@@ -601,7 +601,7 @@ export default function FacilitiesView() {
               icon={Coffee}
               name="Cafeteria"
               description="Hygienic, school-monitored cafeteria providing nutritious lunch items for students."
-              images={["/cafe1.jpg"]}
+              images={["/Cafeteria1.JPG", "/Cafeteria2.JPG", "/Cafeteria3.JPG", "/Cafeteria4.JPG"]}
               delay={0.4}
               isExpanded={expandedCard === "cafeteria"}
               onToggle={() => handleToggle("cafeteria")}
