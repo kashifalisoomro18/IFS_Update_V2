@@ -2068,7 +2068,7 @@ export default function HomeView({
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="/pintober1 (1).jpeg"
+                src="/Activity-3.JPG"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2087,7 +2087,7 @@ export default function HomeView({
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm rounded-sm cursor-pointer"
             >
               <img
-                src="/play1.jpg"
+                src="/defenceday6.jpg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2106,7 +2106,7 @@ export default function HomeView({
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="/scholarship.jpeg"
+                src="/Activity-13.jpg"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2125,7 +2125,7 @@ export default function HomeView({
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="/trip30.jpg"
+                src="/Activity-9.JPG"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2144,7 +2144,7 @@ export default function HomeView({
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="/playground5.jpg"
+                src="/Activity-10.JPG"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -2201,7 +2201,7 @@ export default function HomeView({
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
-                src="/IMG_4093.JPG"
+                src="/Activity-4.JPG"
                 alt="Alumni Portrait"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
