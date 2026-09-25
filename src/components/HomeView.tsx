@@ -453,6 +453,27 @@ export default function HomeView({
     }
   };
 
+  const handleAcademicsCardNav = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string
+  ) => {
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("academicsScrollTarget", sectionId);
+    }
+    if (setView) {
+      e.preventDefault();
+      setView("academics");
+      setAcademicsSubView?.("curriculum");
+      if (typeof window !== "undefined") {
+        window.location.hash = sectionId;
+        window.dispatchEvent(
+          new CustomEvent("app:navigate-anchor", { detail: { hash: sectionId } })
+        );
+        window.dispatchEvent(new HashChangeEvent("hashchange"));
+      }
+    }
+  };
+
   return (
     <div className="bg-white text-slate-900 font-sans" id="home-view-container" style={{ zoom: 0.95 }}>
 
@@ -1288,7 +1309,8 @@ export default function HomeView({
                   </p>
                   <div className="pt-2 sm:pt-4">
                     <a
-                      href="/academics#curriculum"
+                      href="/academics#ecd-section"
+                      onClick={(e) => handleAcademicsCardNav(e, "ecd-section")}
                       className="inline-flex items-center justify-center group relative overflow-hidden bg-white text-slate-800 font-semibold text-sm px-7 py-3 shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
                     >
                       {/* Left to Right Background */}
@@ -1446,7 +1468,8 @@ export default function HomeView({
                   </p>
                   <div className="pt-2 sm:pt-4">
                     <a
-                      href="/academics#curriculum"
+                      href="/academics#elementary-section"
+                      onClick={(e) => handleAcademicsCardNav(e, "elementary-section")}
                       className="inline-flex items-center justify-center group relative overflow-hidden bg-white text-slate-800 font-semibold text-sm px-7 py-3 shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
                     >
                       {/* Left to Right Background */}
@@ -1503,7 +1526,8 @@ export default function HomeView({
                   </p>
                   <div className="pt-2 sm:pt-4">
                     <a
-                      href="/academics#curriculum"
+                      href="/academics#middle-section"
+                      onClick={(e) => handleAcademicsCardNav(e, "middle-section")}
                       className="inline-flex items-center justify-center group relative overflow-hidden bg-white text-slate-800 font-semibold text-sm px-7 py-3 shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
                     >
                       {/* Left to Right Background */}
@@ -1678,7 +1702,8 @@ export default function HomeView({
                   </p>
                   <div className="pt-2 sm:pt-4">
                     <a
-                      href="/academics#curriculum"
+                      href="/academics#cambridge-section"
+                      onClick={(e) => handleAcademicsCardNav(e, "cambridge-section")}
                       className="inline-flex items-center justify-center group relative overflow-hidden bg-white text-slate-800 font-semibold text-sm px-7 py-3 shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer"
                     >
                       {/* Hover Background */}

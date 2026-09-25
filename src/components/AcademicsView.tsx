@@ -705,8 +705,8 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
           1. ECD SECTION  (compact height version)
       ========================================================= */}
       <div
-        className="relative w-screen max-w-none left-1/2 -translate-x-1/2 px-0 my-4 sm:my-6 lg:my-8 h-auto pt-20"
-        id="junior-level-card"
+        className="relative w-screen max-w-none left-1/2 -translate-x-1/2 px-0 my-4 sm:my-6 lg:my-8 h-auto pt-20 scroll-mt-24 sm:scroll-mt-32"
+        id="ecd-section"
       >
         <div className="relative">
 
@@ -967,8 +967,8 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
           Border + info strip colors match the ECD card
       ========================================================= */}
       <div
-        className="relative w-screen max-w-none left-1/2 -translate-x-1/2 px-0 my-4 sm:my-6 lg:my-8 h-auto pt-30"
-        id="elementary-level-card"
+        className="relative w-screen max-w-none left-1/2 -translate-x-1/2 px-0 my-4 sm:my-6 lg:my-8 h-auto pt-30 scroll-mt-24 sm:scroll-mt-32"
+        id="elementary-section"
       >
         <div className="relative">
 
@@ -1228,8 +1228,8 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
           teal palette: #91E5DB (accent) · #ADEBE1 · #C6F1EB · #020816 (text)
       ========================================================= */}
       <div
-        className="relative w-screen max-w-none left-1/2 -translate-x-1/2 px-0 my-4 sm:my-6 lg:my-8 h-auto pt-30"
-        id="alevel-level-card"
+        className="relative w-screen max-w-none left-1/2 -translate-x-1/2 px-0 my-4 sm:my-6 lg:my-8 h-auto pt-30 scroll-mt-24 sm:scroll-mt-32"
+        id="middle-section"
       >
         <div className="relative">
 
@@ -1489,8 +1489,8 @@ function SchoolLevelsShowcaseSection({ setSubView }: SchoolLevelsShowcaseSection
           sky-blue palette: #7DD3FC (accent) · #BAE6FD · #E0F2FE · #0f172a (text)
       ========================================================= */}
       <div
-        className="relative w-screen max-w-none left-1/2 -translate-x-1/2 px-0 my-4 sm:my-6 lg:my-8 h-auto pt-30"
-        id="senior-level-card"
+        className="relative w-screen max-w-none left-1/2 -translate-x-1/2 px-0 my-4 sm:my-6 lg:my-8 h-auto pt-30 scroll-mt-24 sm:scroll-mt-32"
+        id="cambridge-section"
       >
         <div className="relative">
 
@@ -1762,19 +1762,41 @@ export default function AcademicsView({
 }: AcademicsViewProps) {
   const [activeTab, setActiveTab] = useState<AcademicsSubView>(initialSubView);
 
-  const scrollToSection = (tab: string) => {
-    const targetEl =
-      document.getElementById(tab) ||
-      document.getElementById(`academics-${tab}`) ||
-      document.getElementById("academics-nav");
+  const scrollToTarget = (targetId: string) => {
+    if (typeof window === "undefined") return false;
 
-    if (targetEl) {
+    // Support canonical section IDs and aliases
+    const resolvedId =
+      targetId === "junior-level-card" || targetId === "ecd"
+        ? "ecd-section"
+        : targetId === "elementary-level-card" || targetId === "elementary"
+        ? "elementary-section"
+        : targetId === "alevel-level-card" || targetId === "middle"
+        ? "middle-section"
+        : targetId === "senior-level-card" || targetId === "cambridge"
+        ? "cambridge-section"
+        : targetId;
+
+    const isMainTab =
+      resolvedId === "curriculum" ||
+      resolvedId === "timings" ||
+      resolvedId === "calendar";
+
+    const el =
+      document.getElementById(resolvedId) ||
+      document.getElementById(`academics-${resolvedId}`) ||
+      (isMainTab ? document.getElementById("academics-nav") : null);
+
+    if (el) {
       const HEADER_HEIGHT = window.innerWidth < 768 ? 85 : 125;
-      const navEl = document.getElementById("academics-nav");
-      const scrollAnchor = navEl || targetEl;
-      const top = scrollAnchor.getBoundingClientRect().top + window.scrollY - HEADER_HEIGHT;
+      // If the target has an inner card box, align to that box for neat visual framing below the sticky header
+      const cardEl = el.querySelector(".bg-white") as HTMLElement | null;
+      const targetAnchor = cardEl || el;
+      const top = targetAnchor.getBoundingClientRect().top + window.scrollY - (HEADER_HEIGHT + 24);
       window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      return true;
     }
+    return false;
   };
 
   useEffect(() => {
@@ -1786,14 +1808,60 @@ export default function AcademicsView({
   useEffect(() => {
     const handleHash = (shouldScroll = true, explicitHash?: string) => {
       if (typeof window === "undefined") return;
-      const rawHash = (explicitHash || window.location.hash.replace("#", "")).toLowerCase();
+
+      const storedTarget = sessionStorage.getItem("academicsScrollTarget");
+      if (storedTarget) {
+        sessionStorage.removeItem("academicsScrollTarget");
+      }
+
+      const rawHash = (explicitHash || storedTarget || window.location.hash.replace("#", "")).toLowerCase();
+      if (!rawHash) return;
+
+      const SECTION_MAP: Record<string, { tab: AcademicsSubView; elementId: string }> = {
+        "ecd-section": { tab: "curriculum", elementId: "ecd-section" },
+        "junior-level-card": { tab: "curriculum", elementId: "ecd-section" },
+        "ecd": { tab: "curriculum", elementId: "ecd-section" },
+        "elementary-section": { tab: "curriculum", elementId: "elementary-section" },
+        "elementary-level-card": { tab: "curriculum", elementId: "elementary-section" },
+        "elementary": { tab: "curriculum", elementId: "elementary-section" },
+        "middle-section": { tab: "curriculum", elementId: "middle-section" },
+        "alevel-level-card": { tab: "curriculum", elementId: "middle-section" },
+        "middle": { tab: "curriculum", elementId: "middle-section" },
+        "cambridge-section": { tab: "curriculum", elementId: "cambridge-section" },
+        "senior-level-card": { tab: "curriculum", elementId: "cambridge-section" },
+        "cambridge": { tab: "curriculum", elementId: "cambridge-section" },
+      };
+
       let tab: AcademicsSubView | null = null;
-      if (rawHash === "curriculum" || rawHash === "overview" || rawHash === "academics-curriculum" || rawHash === "section-overview") {
+      let targetElementId: string | null = null;
+
+      if (SECTION_MAP[rawHash]) {
+        tab = SECTION_MAP[rawHash].tab;
+        targetElementId = SECTION_MAP[rawHash].elementId;
+      } else if (
+        rawHash === "curriculum" ||
+        rawHash === "overview" ||
+        rawHash === "academics-curriculum" ||
+        rawHash === "section-overview"
+      ) {
         tab = "curriculum";
-      } else if (rawHash === "timings" || rawHash === "daily-schedules" || rawHash === "academics-timings" || rawHash === "schedule" || rawHash === "schedules") {
+        targetElementId = "academics-nav";
+      } else if (
+        rawHash === "timings" ||
+        rawHash === "daily-schedules" ||
+        rawHash === "academics-timings" ||
+        rawHash === "schedule" ||
+        rawHash === "schedules"
+      ) {
         tab = "timings";
-      } else if (rawHash === "calendar" || rawHash === "academic-calendar" || rawHash === "academics-calendar") {
+        targetElementId = "academics-nav";
+      } else if (
+        rawHash === "calendar" ||
+        rawHash === "academic-calendar" ||
+        rawHash === "academics-calendar"
+      ) {
         tab = "calendar";
+        targetElementId = "academics-nav";
       }
 
       if (tab) {
@@ -1801,14 +1869,17 @@ export default function AcademicsView({
         if (externalSetSubView) {
           externalSetSubView(tab);
         }
-        if (shouldScroll) {
-          // Double tick to handle immediate scroll as well as post-animation layout
-          setTimeout(() => {
-            scrollToSection(tab);
-          }, 50);
-          setTimeout(() => {
-            scrollToSection(tab);
-          }, 180);
+
+        if (shouldScroll && targetElementId) {
+          const target = targetElementId;
+          const attemptScroll = () => scrollToTarget(target);
+
+          // Staggered triggers ensure reliable scrolling through React rendering and image hydration
+          requestAnimationFrame(attemptScroll);
+          setTimeout(attemptScroll, 60);
+          setTimeout(attemptScroll, 180);
+          setTimeout(attemptScroll, 350);
+          setTimeout(attemptScroll, 600);
         }
       }
     };
