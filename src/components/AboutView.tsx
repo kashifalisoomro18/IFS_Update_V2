@@ -1220,13 +1220,13 @@ export default function AboutView({ subView = "who-we-are", setSubView, setView 
                   letterSpacing: "0.18em",
                   textTransform: "uppercase"
                 }}>
-                  From the Principal's Desk
+                  From the Director Desk
                 </span>
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0d1f3c] leading-tight">
                 A Message from<br />
-                <span className="text-[#F5C330]">Our Principal</span>
+                <span className="text-[#F5C330]">Our Director </span>
               </h2>
 
               {/* Themed left-border quote block */}

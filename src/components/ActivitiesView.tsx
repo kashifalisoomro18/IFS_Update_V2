@@ -31,6 +31,14 @@ import {
 const NAVY = "#0d1f3c";
 const GOLD = "#F5C330";
 const SKY = "#60BADC";
+const FALLBACK_IMAGE = "/building-image1.jpg";
+
+const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const target = e.currentTarget;
+  if (!target.src.includes(FALLBACK_IMAGE)) {
+    target.src = FALLBACK_IMAGE;
+  }
+};
 
 /* ============================================================
    DATA FOR EDUCATIONAL TRIP
@@ -77,7 +85,7 @@ const trips: Trip[] = [
   {
     label: "Community Service",
     icon: HeartHandshake,
-    photos: ["deafreach.jpg", "deafreach1.jpg", "deafreach2.jpg", "deafreach3.jpg", "deafreach4.jpg", "deafreach5.jpg", "deafreach6.jpg", "deafreach7.jpg", "deafreach8.jpg", "deafreach9.jpg", "deafreach10.jpg", "deafreach11.jpg", "deafreach12.jpg", "deafreach13.jpg"],
+    photos: ["/deafreach.jpg", "/deafreach1.jpg", "/deafreach2.jpg", "/deafreach3.jpg", "/deafreach4.jpg", "/deafreach5.jpg", "/deafreach6.jpg", "/deafreach7.jpg", "/deafreach8.jpg", "/deafreach9.jpg", "/deafreach10.jpg", "/deafreach11.jpg", "/deafreach12.jpg", "/deafreach13.jpg"],
     desc: "Giving back to society."
   },
 ];
@@ -560,6 +568,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                   alt="Full size view"
                   className="max-w-full max-h-[80vh] object-contain  shadow-2xl"
                   onClick={(e) => e.stopPropagation()}
+                  onError={handleImageError}
                 />
               </AnimatePresence>
 
@@ -900,7 +909,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
 
                     <div className="flex-1 order-1 lg:order-2 min-h-[400px] lg:min-h-full relative">
                       <div className="house-image-wrapper">
-                        <img src="/Peridot.png" alt="House of Peridots" />
+                        <img src="/Peridot.png" alt="House of Peridots" onError={handleImageError} />
                         <div className="house-image-overlay" />
                       </div>
                     </div>
@@ -986,7 +995,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                     </div>
                     <div className="flex-1 order-1 lg:order-1 min-h-[400px] lg:min-h-full relative">
                       <div className="house-image-wrapper">
-                        <img src="/Celestite.png" alt="House of Celestites" />
+                        <img src="/Celestite.png" alt="House of Celestites" onError={handleImageError} />
                         <div className="house-image-overlay" />
                         {/* <div className="absolute bottom-8 left-8">
                         <span className="px-6 py-2 rounded-full text-white text-sm font-bold uppercase tracking-widest backdrop-blur-md" style={{ background: "#2563eb99" }}>
@@ -1077,7 +1086,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                     </div>
                     <div className="flex-1 order-1 lg:order-2 min-h-[400px] lg:min-h-full relative">
                       <div className="house-image-wrapper">
-                        <img src="/Garnet.jpg" alt="House of Garnets" />
+                        <img src="/Garnet.jpg" alt="House of Garnets" onError={handleImageError} />
                         <div className="house-image-overlay" />
                         {/*<div className="absolute bottom-8 left-8">
                         <span className="px-6 py-2 rounded-full text-white text-sm font-bold uppercase tracking-widest backdrop-blur-md" style={{ background: "#dc262699" }}>
@@ -1168,7 +1177,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                     </div>
                     <div className="flex-1 order-1 lg:order-1 min-h-[400px] lg:min-h-full relative">
                       <div className="house-image-wrapper">
-                        <img src="/Amethyst.png" alt="House of Amethysts" />
+                        <img src="/Amethyst.png" alt="House of Amethysts" onError={handleImageError} />
                         <div className="house-image-overlay" />
                         {/*<div className="absolute bottom-8 left-8">
                         <span className="px-6 py-2 rounded-full text-white text-sm font-bold uppercase tracking-widest backdrop-blur-md" style={{ background: "#7c3aed99" }}>
@@ -1264,7 +1273,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                         transition={{ duration: 0.5, delay: idx * 0.1 }}
                         onClick={() => { setLightboxTrip(trip); setLightboxPhotoIndex(0); }}
                       >
-                        <img src={trip.photos[0]} alt={trip.label} />
+                        <img src={trip.photos[0]} alt={trip.label} onError={handleImageError} />
 
                         <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5  flex items-center gap-1.5 z-10">
                           <ImageIcon className="w-3.5 h-3.5" />
@@ -1516,6 +1525,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
             src="/playground4.jpg"
             alt="Playground"
             className="w-full h-full object-cover"
+            onError={handleImageError}
           />
           <div className="absolute inset-0 bg-[#0d1f3c]/80 mix-blend-multiply" />
         </motion.div>

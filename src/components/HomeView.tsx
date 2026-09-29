@@ -295,7 +295,7 @@ export default function HomeView({
   const [direction, setDirection] = useState(1);
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -307,9 +307,33 @@ export default function HomeView({
     const onPause = () => setIsPlaying(false);
     video.addEventListener("play", onPlay);
     video.addEventListener("pause", onPause);
+
+    let observer: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== "undefined") {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const playPromise = video.play();
+              if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+              }
+            } else {
+              video.pause();
+            }
+          });
+        },
+        { rootMargin: "200px" }
+      );
+      observer.observe(video);
+    }
+
     return () => {
       video.removeEventListener("play", onPlay);
       video.removeEventListener("pause", onPause);
+      if (observer) {
+        observer.disconnect();
+      }
     };
   }, []);
 
@@ -330,10 +354,11 @@ export default function HomeView({
     if (isPlaying) {
       videoRef.current.pause();
     } else {
-      videoRef.current.play();
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
     }
-
-    setIsPlaying(!isPlaying);
   };
 
   // 6 Carousel Images as requested (2 more than original, and tall height 700px)
@@ -837,7 +862,8 @@ export default function HomeView({
                 <video
                   ref={videoRef}
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                  autoPlay
+                  poster="/assets/videos/poster.jpg"
+                  preload="none"
                   muted
                   loop
                   playsInline
@@ -2064,7 +2090,7 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.05 }}
-              onClick={() => setSelectedImage("/pintober1 (1).jpeg")}
+              onClick={() => setSelectedImage("/Activity-3.JPG")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
@@ -2083,7 +2109,7 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              onClick={() => setSelectedImage("/play1.jpg")}
+              onClick={() => setSelectedImage("/defenceday6.jpg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm rounded-sm cursor-pointer"
             >
               <img
@@ -2102,7 +2128,7 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              onClick={() => setSelectedImage("/scholarship.jpeg")}
+              onClick={() => setSelectedImage("/Activity-13.jpg")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
@@ -2121,7 +2147,7 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              onClick={() => setSelectedImage("/trip30.jpg")}
+              onClick={() => setSelectedImage("/Activity-9.JPG")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
@@ -2140,7 +2166,7 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.25 }}
-              onClick={() => setSelectedImage("/playground5.jpg")}
+              onClick={() => setSelectedImage("/Activity-10.JPG")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
@@ -2197,7 +2223,7 @@ export default function HomeView({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              onClick={() => setSelectedImage("/IMG_4093.JPG")}
+              onClick={() => setSelectedImage("/Activity-4.JPG")}
               className="aspect-[4/5] bg-slate-200 relative overflow-hidden group shadow-sm  cursor-pointer"
             >
               <img
