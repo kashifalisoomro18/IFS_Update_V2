@@ -215,8 +215,8 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
 
   const overallStats = [
     { icon: Gem, value: 4, suffix: "", label: "HOUSES" },
-    { icon: Calendar, value: 130, suffix: "+", label: "EVENTS / YEAR" },
-    { icon: Users, value: 1100, suffix: "+", label: "STUDENTS INVOLVED" },
+    { icon: Calendar, value: 20, suffix: "+", label: "EVENTS / YEAR" },
+    { icon: Users, value: 280, suffix: "+", label: "STUDENTS INVOLVED" },
     { icon: Map, value: 25, suffix: "+", label: "TRIPS / YEAR" },
   ];
 
@@ -872,7 +872,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                         </div>
                         <div>
                           <Calendar className="w-6 h-6 mb-2" style={{ color: "#016B4F" }} />
-                          <p className="text-2xl font-black text-[#020816] mb-1"><AnimatedCounter value={34} suffix="" /></p>
+                          <p className="text-2xl font-black text-[#020816] mb-1"><AnimatedCounter value={20} suffix="" /></p>
                           <p className="text-xs font-bold uppercase text-[#016B4F] tracking-wider">Events</p>
                         </div>
                         <div>
@@ -959,7 +959,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                         </div>
                         <div>
                           <Calendar className="w-6 h-6 mb-2" style={{ color: "#0F4C81" }} />
-                          <p className="text-2xl font-black text-[#020816] mb-1"><AnimatedCounter value={29} suffix="" /></p>
+                          <p className="text-2xl font-black text-[#020816] mb-1"><AnimatedCounter value={20} suffix="" /></p>
                           <p className="text-xs font-bold uppercase text-[#0F4C81] tracking-wider">Events</p>
                         </div>
                         <div>
@@ -1050,7 +1050,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                         </div>
                         <div>
                           <Calendar className="w-6 h-6 mb-2" style={{ color: "7B0D17" }} />
-                          <p className="text-2xl font-black text-[#020816] mb-1"><AnimatedCounter value={36} suffix="" /></p>
+                          <p className="text-2xl font-black text-[#020816] mb-1"><AnimatedCounter value={20} suffix="" /></p>
                           <p className="text-xs font-bold uppercase text-[#7B0D17] tracking-wider">Events</p>
                         </div>
                         <div>
@@ -1141,7 +1141,7 @@ export default function ActivitiesView({ setView }: { setView?: (view: MainView)
                         </div>
                         <div>
                           <Calendar className="w-6 h-6 mb-2" style={{ color: "#4B2E63" }} />
-                          <p className="text-2xl font-black text-[#020816] mb-1"><AnimatedCounter value={31} suffix="" /></p>
+                          <p className="text-2xl font-black text-[#020816] mb-1"><AnimatedCounter value={20} suffix="" /></p>
                           <p className="text-xs font-bold uppercase text-[#4B2E63] tracking-wider">Events</p>
                         </div>
                         <div>
